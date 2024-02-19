@@ -1,9 +1,10 @@
 import { View, Text, TouchableOpacity } from 'react-native'
 import React, { useState } from 'react'
 import { useNavigation } from '@react-navigation/native'
-import { themeColors } from '../theme';
+import { theme } from '../theme';
 
 export default function HomeScreen() {
+  const themeColors = theme('purple');
   const navigation = useNavigation();
 
   const goToRegister = () => {
@@ -14,7 +15,7 @@ export default function HomeScreen() {
   return (
     <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
       <Text style={{color: 'black', fontSize: 45, fontWeight: 700}}>FitTech 
-        <Text style={{color: 'grey', fontSize: 45, fontWeight: 700}}>Solution</Text>
+        <Text style={{color: themeColors.text, fontSize: 45, fontWeight: 700}}>Solution</Text>
         </Text>
       <TouchableOpacity 
         style={{backgroundColor: themeColors.bgColor(1), borderRadius: 30,

@@ -7,5 +7,6 @@ export default function App() {
 }
 
 //TODO instruction (guide out how to use the first time)
-//logo screen
+//gender selection in register
+//logo animated loading screen
 //probably different modes of users (for example advanced, intermediate, beginners, seniors)
