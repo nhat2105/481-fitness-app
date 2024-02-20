@@ -4,6 +4,7 @@ import { theme } from '../theme'
 import { useNavigation } from '@react-navigation/native'
 import * as Icon from 'react-native-feather'
 
+
 function Register_1_Screen() { 
     const themeColors = theme('purple');
     const navigation = useNavigation();

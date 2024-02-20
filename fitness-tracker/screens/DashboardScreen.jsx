@@ -2,6 +2,7 @@ import { View, Text, TouchableOpacity, Image, StatusBar, ScrollView} from 'react
 import React, { useState } from 'react'
 import * as Icon from 'react-native-feather'
 import { theme } from '../theme';
+import { useNavigation } from '@react-navigation/native';
 import heart_status from "../assets/components/Heart-Rate-Status.png"
 import calories_pie from "../assets/components/Calories-Pie.png"
 import walking_bar from "../assets/components/walking-bar.png"
@@ -12,6 +13,7 @@ import real_time from "../assets/components/Real-Time-Updates-Progress.png"
 export default function DashboardScreen() {
     const themeColors = theme('purple');
     const themeBlue = theme('blue');
+    const navigation = useNavigation();
     const [notif, SetNotif] = useState(false);
 
     const turnOnNotification= () =>{
@@ -24,6 +26,10 @@ export default function DashboardScreen() {
 
     const viewMenu = () =>{
 
+    }
+
+    const goToSleepTracker = () =>{
+        navigation.navigate('SleepTracker');
     }
 
   return (
@@ -59,7 +65,7 @@ export default function DashboardScreen() {
                 </TouchableOpacity>
             </View>
             <View style={{backgroundColor: themeColors.bgColor(1), justifyContent: 'center', display: 'flex', marginTop: 20,
-                alignItems: 'center', borderRadius: 30, marginLeft: 20, marginRight: 20, flexDirection: 'row'}}>
+                alignItems: 'center', borderRadius: 15, marginLeft: 20, marginRight: 20, flexDirection: 'row'}}>
                 <View>
                     <Text style={{color: 'white', fontSize: 18, fontWeight: 700}}>BMI (Body Mass Index): 20</Text>
                     <Text style={{color: 'white', fontSize: 18, fontWeight: 300}}>You have a normal weight</Text>
@@ -87,9 +93,9 @@ export default function DashboardScreen() {
                     <View style={{flexDirection: 'row'}}>
                         <Image source={walking_bar} marginLeft={15} marginTop={20} marginBottom={20} />
                         <View>
-                            <Text style={{marginLeft: 5, color: 'black', fontSize: 18, fontWeight: 600, marginTop: 4}}>Steps walked</Text>
-                            <Text style={{marginLeft: 5,color: themeColors.text, fontSize: 20, fontWeight: 700, marginTop: 5}}>3,322 steps</Text>
-                            <Text style={{marginLeft: 5, color: theme('gray').text, fontSize: 18, fontWeight: 700, marginTop: 5, marginRight: 15}}>Real-time updates</Text>
+                            <Text style={{marginLeft: 15, color: 'black', fontSize: 18, fontWeight: 600, marginTop: 4}}>Steps walked</Text>
+                            <Text style={{marginLeft: 15, color: themeColors.text, fontSize: 20, fontWeight: 700, marginTop: 5}}>3,322 steps</Text>
+                            <Text style={{marginLeft: 15, color: theme('gray').text, fontSize: 18, fontWeight: 700, marginTop: 5, marginRight: 10}}>Real-time updates</Text>
                             <View style={{display:'flex', flexDirection: 'row'}}>
                                 <Image source={real_time} marginTop={30}/>
                                 <View marginTop={10} marginLeft={15}>
@@ -111,19 +117,20 @@ export default function DashboardScreen() {
                
                 <View style ={{position: 'absolute', right: 30}}>
                     <TouchableOpacity className="Calories-Burnt" style={{backgroundColor: 'white', borderRadius: 20}} >
-                        <Text style={{marginLeft: 10, color: 'black', fontSize: 18, fontWeight: 600, marginTop: 4, right: 5}}>
+                        <Text style={{alignSelf: 'center', color: 'black', fontSize: 18, fontWeight: 600, marginTop: 4}}>
                             Calories
                         </Text>
-                        <Text style={{marginLeft: 5, marginRight: 10, color: themeColors.text, fontSize: 20, fontWeight: 700, marginTop: 5}}>
+                        <Text style={{alignSelf: 'center', color: themeColors.text, fontSize: 20, fontWeight: 700, marginTop: 5}}>
                             760 kCal
                         </Text>
-                        <Image source={calories_pie} />
+                        <Image source={calories_pie} style={{alignSelf: 'center', marginTop: 5}}/>
                     </TouchableOpacity>
-                    <TouchableOpacity className="Slept-Hours" style={{backgroundColor: 'white', borderRadius: 20, marginTop: 20}} >
-                        <Text style={{marginLeft: 10, color: 'black', fontSize: 18, fontWeight: 600, marginTop: 4, right: 5}}>
+                    <TouchableOpacity className="Slept-Hours"  onPress={goToSleepTracker}
+                    style={{backgroundColor: 'white', borderRadius: 20, marginTop: 20}} >
+                        <Text style={{alignSelf: 'center', color: 'black', fontSize: 18, fontWeight: 600, marginTop: 4}}>
                             Sleep
                         </Text>
-                        <Text style={{marginLeft: 5, marginRight: 10, color: themeColors.text, fontSize: 20, fontWeight: 700, marginTop: 5}}>
+                        <Text style={{alignSelf: 'center', color: themeColors.text, fontSize: 20, fontWeight: 700, marginTop: 7}}>
                             7h 20m
                         </Text>
                         <Image source={sleep_graph} />
