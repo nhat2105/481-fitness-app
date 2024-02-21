@@ -1,12 +1,12 @@
 import { View, Text, ScrollView, TouchableOpacity, Image } from 'react-native'
 import React from 'react'
-import { theme } from '../theme'
+import { theme } from '../../theme'
 import * as Icon from 'react-native-feather'
 import { useNavigation } from '@react-navigation/native'
-import chart from "../assets/components/sleeptracker_graph.png"
-import sleepInputDisplay from "../assets/components/Banner.png"
-import bedIcon from "../assets/components/Icon-Bed.png"
-import alarmIcon from "../assets/components/Icon-Alaarm.png"
+import chart from "../../assets/components/sleeptracker_graph.png"
+import sleepInputDisplay from "../../assets/components/Banner.png"
+import bedIcon from "../../assets/components/Icon-Bed.png"
+import alarmIcon from "../../assets/components/Icon-Alaarm.png"
 
 export default function SleepTrackerScreen() {
   const themeColors = theme('purple');

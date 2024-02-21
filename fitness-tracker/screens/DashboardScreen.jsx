@@ -69,6 +69,18 @@ export default function DashboardScreen() {
                 <View>
                     <Text style={{color: 'white', fontSize: 18, fontWeight: 700}}>BMI (Body Mass Index): 20</Text>
                     <Text style={{color: 'white', fontSize: 18, fontWeight: 300}}>You have a normal weight</Text>
+                    <View style={{display: 'flex', flexDirection: 'row', marginBottom: 20}} >
+                        <TouchableOpacity onPress={() => navigation.navigate("SetWeight")}
+                        style={{backgroundColor: 'white', borderRadius: 5, marginTop: 10}} >
+                            <Text style={{alignSelf:'center', color: themeColors.text, marginLeft: 20, marginRight: 20,
+                            fontSize: 16, fontWeight: 700}} >Update Weight</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={() => navigation.navigate("MealPlanner")}
+                        style={{backgroundColor: 'white', borderRadius: 5, marginTop: 10, marginLeft: 20}} >
+                            <Text style={{alignSelf: 'center', color: themeColors.text, marginLeft: 20, marginRight: 20,
+                            fontSize: 16, fontWeight: 700}}>View Meals Plans</Text>
+                        </TouchableOpacity>
+                    </View>
                 </View>
             </View>
 

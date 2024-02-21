@@ -1,8 +1,8 @@
 import { View, Text, ScrollView, TouchableOpacity, Image, TextInput} from 'react-native'
 import React from 'react'
-import { theme } from '../theme'
+import { theme } from '../../theme'
 import * as Icon from 'react-native-feather'
-import banner from "../assets/components/sleepsetter-banner.png"
+import banner from "../../assets/components/sleepsetter-banner.png"
 import { useNavigation } from '@react-navigation/native'
 
 export default function SetSleepTrackerScreen() {
