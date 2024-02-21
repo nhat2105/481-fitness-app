@@ -8,6 +8,8 @@ import DashboardScreen from './screens/DashboardScreen';
 import SetSleepTrackerScreen from './screens/sleepTracker/SetSleepTrackerScreen';
 import SetWeightScreen from './screens/weightControl/SetWeightScreen';
 import MealPlannerScreen from './screens/weightControl/MealPlannerScreen';
+import SetMealScreen from './screens/weightControl/SetMealScreen';
+import MealScheduleScreen from './screens/weightControl/MealScheduleScreen';
 
 export default function Navigation(){
     return (
@@ -21,6 +23,8 @@ export default function Navigation(){
             <Stack.Screen name = "SetSleepTracker" options={{presentation: 'modal'}} component={SetSleepTrackerScreen} />
             <Stack.Screen name = "SetWeight" component={SetWeightScreen} />
             <Stack.Screen name = "MealPlanner" component={MealPlannerScreen} />
+            <Stack.Screen name = "MealSchedule" component={MealScheduleScreen} />
+            <Stack.Screen name = "SetMeal" component={SetMealScreen} />
         </Stack.Navigator>
        </NavigationContainer>
     )
