@@ -5,22 +5,15 @@ import * as Icon from 'react-native-feather'
 import { useNavigation } from '@react-navigation/native'
 import nutrition_graph from "../../assets/components/meal-graph.png"
 import FoodCard from '../../components/FoodCard'
+import Header from '../../components/Header'
 
 export default function MealPlannerScreen() {
-  const navigation = useNavigation()
-  const themeBlue = theme('blue')
+  const navigation = useNavigation();
   const themeColors = theme("purple")
 
   return (
     <View style={{display: 'flex'}} >
-        <View style={{display: 'flex', flexDirection: 'row'}} >
-          <TouchableOpacity onPress={()=>navigation.goBack()} 
-                style={{ marginTop: 50, marginRight: 30, backgroundColor: 'white', padding: 2, marginLeft: 30,
-                borderRadius: 9999, boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.1)'}}>
-                <Icon.ArrowLeft strokeWidth={3} stroke={themeColors.text}/>
-            </TouchableOpacity>
-          <Text style={{color: themeColors.text, fontSize: 25, marginLeft: 42, fontWeight: 600, marginTop: 45 }} >Meal Planner</Text>
-        </View>
+        <Header title={"Meal Planner"} />
 
         <Text style={{color: 'black', fontSize: 22, fontWeight: 700, marginTop: 20, marginLeft: 30}}> Meal Nutritions</Text>
         <Image source={nutrition_graph} style={{alignSelf: 'center'}} />

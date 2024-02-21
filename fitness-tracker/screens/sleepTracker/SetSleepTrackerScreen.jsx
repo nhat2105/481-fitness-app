@@ -4,6 +4,7 @@ import { theme } from '../../theme'
 import * as Icon from 'react-native-feather'
 import banner from "../../assets/components/sleepsetter-banner.png"
 import { useNavigation } from '@react-navigation/native'
+import Header from '../../components/Header'
 
 export default function SetSleepTrackerScreen() {
     const navigation = useNavigation();
@@ -13,14 +14,7 @@ export default function SetSleepTrackerScreen() {
   return (
     <View style={{ borderRadius: 20, width:'100%', 
       backgroundColor: 'white', alignSelf:'center'}} >
-       <View style={{display: 'flex', flexDirection: 'row'}} >
-          <TouchableOpacity onPress={()=>navigation.goBack()} 
-                style={{ marginTop: 50, marginRight: 30, backgroundColor: 'white', padding: 2, marginLeft: 30,
-                borderRadius: 9999, boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.1)'}}>
-                <Icon.ArrowLeft strokeWidth={3} stroke={themeColors.bgColor(1)} />
-            </TouchableOpacity>
-          <Text style={{color: themeBlue.text, fontSize: 25, marginLeft: 42, fontWeight: 600, marginTop: 45 }} >Sleep Setter</Text>
-        </View>
+       <Header title={"Sleep Setter"} color={'blue'}/>
         <View>
           <Image source={banner} style={{alignSelf: 'center', marginTop: 15, zIndex: 0}} />
           <Text style ={{position: 'absolute', zIndex: 1, fontSize: 18, fontWeight: 600, color: 'black', 

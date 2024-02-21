@@ -7,6 +7,7 @@ import chart from "../../assets/components/sleeptracker_graph.png"
 import sleepInputDisplay from "../../assets/components/Banner.png"
 import bedIcon from "../../assets/components/Icon-Bed.png"
 import alarmIcon from "../../assets/components/Icon-Alaarm.png"
+import Header from '../../components/Header'
 
 export default function SleepTrackerScreen() {
   const themeColors = theme('purple');
@@ -20,14 +21,7 @@ export default function SleepTrackerScreen() {
   return (
     <View style={{flex: 1, justifyContent: 'center'}}>
       <ScrollView>
-        <View style={{display: 'flex', flexDirection: 'row'}} >
-          <TouchableOpacity onPress={()=>navigation.goBack()} 
-                style={{ marginTop: 50, marginRight: 30, backgroundColor: 'white', padding: 2, marginLeft: 30,
-                borderRadius: 9999, boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.1)'}}>
-                <Icon.ArrowLeft strokeWidth={3} stroke={themeColors.bgColor(1)} />
-            </TouchableOpacity>
-          <Text style={{color: themeBlue.text, fontSize: 25, marginLeft: 42, fontWeight: 600, marginTop: 45 }} >Sleep Tracker</Text>
-        </View>
+        <Header color={'blue'} title={"Sleep Tracker"} />
         <Image source={chart} style={{marginTop: 20, alignSelf: 'center'}} />
         <View>
           <Image source={sleepInputDisplay} style={{marginTop: 20, alignSelf: 'center', zIndex: 0, width: '100%'}}/>

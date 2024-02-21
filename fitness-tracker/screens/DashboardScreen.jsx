@@ -83,14 +83,25 @@ export default function DashboardScreen() {
                     </View>
                 </View>
             </View>
-
-            <TouchableOpacity style={{backgroundColor: themeColors.bgColor(1), justifyContent: 'center', display: 'flex', marginTop: 20,
-                alignItems: 'center', borderRadius: 30, marginLeft: 20, marginRight: 20, flexDirection: 'row'}}>
-                <View style={{justifyContent: 'center', alignItems:'center'}}>
-                    <Text style={{color: 'white', fontSize: 18, marginTop: 10, fontWeight: 700, height: 40}}>Check Your Workout Schedule</Text>
-                </View>
-            </TouchableOpacity>
-
+            <View style={{display: 'flex', flexDirection: 'row'}}>
+                <TouchableOpacity style={{backgroundColor: themeColors.bgColor(1), justifyContent: 'center', display: 'flex', marginTop: 20,
+                    alignItems: 'center', borderRadius: 30, width: 170, height: 55,
+                    marginLeft: 20, marginRight: 20, flexDirection: 'row'}}>
+                    <View style={{justifyContent: 'center', alignItems:'center'}}>
+                        <Text style={{color: 'white', fontSize: 18, marginTop: 3, marginLeft: 2,
+                          marginRight: 5, fontWeight: 700}}>Workout Schedule</Text>
+                    </View>
+                </TouchableOpacity>
+                
+                <TouchableOpacity onPress={() => navigation.navigate("PhotoComparer")}
+                    style={{backgroundColor: themeColors.bgColor(1), justifyContent: 'center', display: 'flex', marginTop: 20,
+                    alignItems: 'center', borderRadius: 30, marginRight: 10, width: 170, height: 55,
+                    flexDirection: 'row'}}>
+                    <View style={{justifyContent: 'center', alignItems:'center'}}>
+                        <Text style={{color: 'white', fontSize: 18, marginTop: 3, fontWeight: 700}}>Photo Comparer</Text>
+                    </View>
+                </TouchableOpacity>
+            </View>
             <View className= 'ActivityStatus' style={{marginTop: 20}}>
                 <Text style={{color: 'black', fontSize: 25, fontWeight: 700, marginLeft: 30}}>Activity Status</Text>
                 <View>
@@ -101,7 +112,8 @@ export default function DashboardScreen() {
 
             <View className="Activity-Card" style={{display: 'flex', flexDirection: 'row'}}>
                 {/**Shall have a chart later */}
-                <TouchableOpacity className="Steps-Walked" style={{backgroundColor: 'white', borderRadius: 40, marginLeft: 30}}>
+                <TouchableOpacity onPress={() => navigation.navigate("StepsReport")}
+                className="Steps-Walked" style={{backgroundColor: 'white', borderRadius: 40, marginLeft: 30}}>
                     <View style={{flexDirection: 'row'}}>
                         <Image source={walking_bar} marginLeft={15} marginTop={20} marginBottom={20} />
                         <View>
@@ -128,7 +140,8 @@ export default function DashboardScreen() {
                 </TouchableOpacity>
                
                 <View style ={{position: 'absolute', right: 30}}>
-                    <TouchableOpacity className="Calories-Burnt" style={{backgroundColor: 'white', borderRadius: 20}} >
+                    <TouchableOpacity onPress={() => navigation.navigate("CaloriesReport")}
+                        className="Calories-Burnt" style={{backgroundColor: 'white', borderRadius: 20}} >
                         <Text style={{alignSelf: 'center', color: 'black', fontSize: 18, fontWeight: 600, marginTop: 4}}>
                             Calories
                         </Text>

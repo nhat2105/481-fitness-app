@@ -1,38 +1,20 @@
 import { View, Text, Image, TouchableOpacity, ScrollView } from 'react-native'
 import React from 'react'
 import { theme } from '../../theme'
-import * as Icon from 'react-native-feather'
-
 import { useNavigation } from '@react-navigation/native'
-import coffee from "../../assets/components/coffee.png"
-import salad from "../../assets/components/salad.png"
-import oatmeal from "../../assets/components/oatmeal.png"
-import orange from "../../assets/components/orange.png"
-import pancake from "../../assets/components/pancake.png"
-import steak from "../../assets/components/steak.png"
-import milk from "../../assets/components/milk.png"
-import salmon from "../../assets/components/salmon.png"
-import pie from "../../assets/components/apple-pie.png"
 import BackButton from '../../components/BackButton'
 import FoodCard from '../../components/FoodCard'
+import Header from '../../components/Header'
 
 
 export default function MealScheduleScreen() {
   const navigation = useNavigation()
-  const themeBlue = theme('blue')
   const themeColors = theme("purple")
 
   return (
     <View style={{display: 'flex'}}>
       <ScrollView>
-        <View style={{display: 'flex', flexDirection: 'row'}} >
-          <TouchableOpacity onPress={()=>navigation.goBack()} 
-                style={{ marginTop: 50, marginRight: 30, backgroundColor: 'white', padding: 2, marginLeft: 30,
-                borderRadius: 9999, boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.1)'}}>
-                <Icon.ArrowLeft strokeWidth={3} stroke={themeColors.text}/>
-            </TouchableOpacity>
-          <Text style={{color: themeColors.text, fontSize: 25, marginLeft: 42, fontWeight: 600, marginTop: 45 }} >Meal Schedule</Text>
-        </View>
+        <Header title={"Meal Schedule"} />
 
         <Text style={{color: themeColors.text, fontSize: 22, fontWeight: 500, margin: 20, alignSelf: 'center' }}> Today Meals</Text>
         <View style={{display: 'flex', flexDirection: 'row', justifyContent:'space-between'}} >

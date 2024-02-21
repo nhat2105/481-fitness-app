@@ -10,6 +10,12 @@ import SetWeightScreen from './screens/weightControl/SetWeightScreen';
 import MealPlannerScreen from './screens/weightControl/MealPlannerScreen';
 import SetMealScreen from './screens/weightControl/SetMealScreen';
 import MealScheduleScreen from './screens/weightControl/MealScheduleScreen';
+import StepsWalkedScreen from './screens/progressTracker/StepsWalkedScreen';
+import CaloriesReportScreen from './screens/progressTracker/CaloriesReportScreen';
+import PhotoComparerScreen from './screens/progressTracker/PhotoComparerScreen';
+import AddPhotoScreen from './screens/progressTracker/AddPhotoScreen';
+import ComparePhotoScreen from './screens/progressTracker/ComparePhotoScreen';
+import PhotoResultScreen from './screens/progressTracker/PhotoResultScreen';
 
 export default function Navigation(){
     return (
@@ -25,6 +31,12 @@ export default function Navigation(){
             <Stack.Screen name = "MealPlanner" component={MealPlannerScreen} />
             <Stack.Screen name = "MealSchedule" component={MealScheduleScreen} />
             <Stack.Screen name = "SetMeal" component={SetMealScreen} />
+            <Stack.Screen name = "StepsReport" component={StepsWalkedScreen} />
+            <Stack.Screen name = "CaloriesReport" component={CaloriesReportScreen} />
+            <Stack.Screen name = "PhotoComparer" component={PhotoComparerScreen} />
+            <Stack.Screen name = "AddPhoto" component={AddPhotoScreen} />
+            <Stack.Screen name = "ComparePhotos" component={ComparePhotoScreen} />
+            <Stack.Screen name = "PhotoResult" component={PhotoResultScreen} />
         </Stack.Navigator>
        </NavigationContainer>
     )
