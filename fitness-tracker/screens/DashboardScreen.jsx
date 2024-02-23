@@ -67,26 +67,27 @@ export default function DashboardScreen() {
             <View style={{backgroundColor: themeColors.bgColor(1), justifyContent: 'center', display: 'flex', marginTop: 20,
                 alignItems: 'center', borderRadius: 15, marginLeft: 20, marginRight: 20, flexDirection: 'row'}}>
                 <View>
-                    <Text style={{color: 'white', fontSize: 18, fontWeight: 700}}>BMI (Body Mass Index): 20</Text>
-                    <Text style={{color: 'white', fontSize: 18, fontWeight: 300}}>You have a normal weight</Text>
+                    <Text style={{color: 'white', fontSize: 18, fontWeight: 700, alignSelf: 'center'}}>BMI (Body Mass Index): 20</Text>
+                    <Text style={{color: 'white', fontSize: 18, fontWeight: 300, alignSelf: 'center'}}>You have a normal weight</Text>
                     <View style={{display: 'flex', flexDirection: 'row', marginBottom: 20}} >
                         <TouchableOpacity onPress={() => navigation.navigate("SetWeight")}
                         style={{backgroundColor: 'white', borderRadius: 5, marginTop: 10}} >
-                            <Text style={{alignSelf:'center', color: themeColors.text, marginLeft: 20, marginRight: 20,
+                            <Text style={{alignSelf:'center', color: themeColors.text, marginLeft: 10, marginRight: 10,
                             fontSize: 16, fontWeight: 700}} >Update Weight</Text>
                         </TouchableOpacity>
                         <TouchableOpacity onPress={() => navigation.navigate("MealPlanner")}
                         style={{backgroundColor: 'white', borderRadius: 5, marginTop: 10, marginLeft: 20}} >
-                            <Text style={{alignSelf: 'center', color: themeColors.text, marginLeft: 20, marginRight: 20,
+                            <Text style={{alignSelf: 'center', color: themeColors.text, marginLeft: 10, marginRight: 10,
                             fontSize: 16, fontWeight: 700}}>View Meals Plans</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
             </View>
-            <View style={{display: 'flex', flexDirection: 'row'}}>
-                <TouchableOpacity style={{backgroundColor: themeColors.bgColor(1), justifyContent: 'center', display: 'flex', marginTop: 20,
+            <View style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between'}}>
+                <TouchableOpacity onPress={()=> navigation.navigate("WorkoutTracker")}
+                style={{backgroundColor: themeColors.bgColor(1), justifyContent: 'center', display: 'flex', marginTop: 20,
                     alignItems: 'center', borderRadius: 30, width: 170, height: 55,
-                    marginLeft: 20, marginRight: 20, flexDirection: 'row'}}>
+                    marginLeft: 20, marginRight: 5, flexDirection: 'row'}}>
                     <View style={{justifyContent: 'center', alignItems:'center'}}>
                         <Text style={{color: 'white', fontSize: 18, marginTop: 3, marginLeft: 2,
                           marginRight: 5, fontWeight: 700}}>Workout Schedule</Text>
@@ -95,7 +96,7 @@ export default function DashboardScreen() {
                 
                 <TouchableOpacity onPress={() => navigation.navigate("PhotoComparer")}
                     style={{backgroundColor: themeColors.bgColor(1), justifyContent: 'center', display: 'flex', marginTop: 20,
-                    alignItems: 'center', borderRadius: 30, marginRight: 10, width: 170, height: 55,
+                    alignItems: 'center', borderRadius: 30, marginRight: 20, width: 170, height: 55,
                     flexDirection: 'row'}}>
                     <View style={{justifyContent: 'center', alignItems:'center'}}>
                         <Text style={{color: 'white', fontSize: 18, marginTop: 3, fontWeight: 700}}>Photo Comparer</Text>
@@ -119,7 +120,7 @@ export default function DashboardScreen() {
                         <View>
                             <Text style={{marginLeft: 15, color: 'black', fontSize: 18, fontWeight: 600, marginTop: 4}}>Steps walked</Text>
                             <Text style={{marginLeft: 15, color: themeColors.text, fontSize: 20, fontWeight: 700, marginTop: 5}}>3,322 steps</Text>
-                            <Text style={{marginLeft: 15, color: theme('gray').text, fontSize: 18, fontWeight: 700, marginTop: 5, marginRight: 10}}>Real-time updates</Text>
+                            <Text style={{marginLeft: 15, color: theme('gray').text, fontSize: 15, fontWeight: 700, marginTop: 5, marginRight: 10}}>Real-time updates</Text>
                             <View style={{display:'flex', flexDirection: 'row'}}>
                                 <Image source={real_time} marginTop={30}/>
                                 <View marginTop={10} marginLeft={15}>

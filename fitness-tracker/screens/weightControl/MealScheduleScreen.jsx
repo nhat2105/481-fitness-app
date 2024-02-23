@@ -63,7 +63,7 @@ export default function MealScheduleScreen() {
           </TouchableOpacity>
         </View>
         {/**Meal Component */}
-        <FoodCard action={"Remove"} food={"Chicken Steak"} />
+        <FoodCard action={"Remove"} food={"Steak"} />
         <FoodCard action={"Remove"} food={"Oatmeal"} />
 
         <BackButton text={"Set"} />

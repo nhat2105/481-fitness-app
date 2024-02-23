@@ -3,7 +3,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack'
 const Stack = createNativeStackNavigator();
 import HomeScreen from './screens/HomeScreen'
 import SleepTrackerScreen from './screens/sleepTracker/SleepTrackerScreen';
-import {Register_1_Screen, Register_2_Screen} from './screens/RegisterScreen';
+import {Register_1_Screen, Register_2_Screen, Register_3_Screen} from './screens/RegisterScreen';
 import DashboardScreen from './screens/DashboardScreen';
 import SetSleepTrackerScreen from './screens/sleepTracker/SetSleepTrackerScreen';
 import SetWeightScreen from './screens/weightControl/SetWeightScreen';
@@ -16,6 +16,7 @@ import PhotoComparerScreen from './screens/progressTracker/PhotoComparerScreen';
 import AddPhotoScreen from './screens/progressTracker/AddPhotoScreen';
 import ComparePhotoScreen from './screens/progressTracker/ComparePhotoScreen';
 import PhotoResultScreen from './screens/progressTracker/PhotoResultScreen';
+import WorkoutTrackerScreen from './screens/workoutTracker/WorkoutTrackerScreen';
 
 export default function Navigation(){
     return (
@@ -25,6 +26,7 @@ export default function Navigation(){
             <Stack.Screen name = "SleepTracker" component={SleepTrackerScreen} />
             <Stack.Screen name = "Register_1" component={Register_1_Screen} />
             <Stack.Screen name = "Register_2" component={Register_2_Screen} />
+            <Stack.Screen name = "Register_3" component={Register_3_Screen} />
             <Stack.Screen name = "Dashboard" component={DashboardScreen} />
             <Stack.Screen name = "SetSleepTracker" options={{presentation: 'modal'}} component={SetSleepTrackerScreen} />
             <Stack.Screen name = "SetWeight" component={SetWeightScreen} />
@@ -37,6 +39,7 @@ export default function Navigation(){
             <Stack.Screen name = "AddPhoto" component={AddPhotoScreen} />
             <Stack.Screen name = "ComparePhotos" component={ComparePhotoScreen} />
             <Stack.Screen name = "PhotoResult" component={PhotoResultScreen} />
+            <Stack.Screen name = "WorkoutTracker" component={WorkoutTrackerScreen} />
         </Stack.Navigator>
        </NavigationContainer>
     )

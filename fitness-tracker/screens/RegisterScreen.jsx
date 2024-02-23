@@ -38,7 +38,40 @@ function Register_1_Screen() {
   )
 }
 
-function Register_2_Screen(){
+function Register_2_Screen() { 
+    const themeColors = theme('purple');
+    const navigation = useNavigation();
+    const goToRegister3= () => {
+        navigation.navigate('Register_3');
+    }
+
+  const GoalButton = ({text}) => {
+    return (
+        <TouchableOpacity onPress={goToRegister3}
+            style={{backgroundColor: "white", borderRadius: 30, height: 50, marginTop: 40, width: 225}}>
+            <Text style={{fontSize: 35, fontWeight: 700, color: themeColors.text, textAlign: "center"}}>{text}</Text>
+        </TouchableOpacity>
+    );
+  }
+
+  return (
+    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: themeColors.bgColor(1)}}>
+      <Text style ={{fontSize: 34, fontWeight: 600, color: 'white', textAlign: "center", marginLeft: 20, marginRight: 20}}>
+        Choose the option that best describes your fitness level
+      </Text>
+      <GoalButton text={"Stay Active"} />
+      <GoalButton text={"Lose Weight"} />
+      <GoalButton text={"Gain Muscle"} />
+      <TouchableOpacity onPress={()=>navigation.goBack()} 
+            style={{ marginTop: 40, marginLeft: 4, backgroundColor: 'white', padding: 2,
+            borderRadius: 9999, boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.1)'}}>
+            <Icon.ArrowLeft strokeWidth={3} stroke={themeColors.bgColor(1)} />
+        </TouchableOpacity>
+    </View>
+  )
+}
+
+function Register_3_Screen(){
     const navigation = useNavigation();
     const themeColors = theme('purple');
     const [name, setName] = useState("");
@@ -93,4 +126,6 @@ function Register_2_Screen(){
 
 }
 
-export {Register_1_Screen, Register_2_Screen}
+
+
+export {Register_1_Screen, Register_2_Screen, Register_3_Screen}
