@@ -9,7 +9,7 @@ const palette = {
     },
     blue: {
         text: '#92A3FD',
-        bgColor: opacity => `rgba(146, 163, 253, 1)`
+        bgColor: opacity => `rgba(146, 163, 253, ${opacity})`
     }
 };
 

@@ -17,6 +17,8 @@ import AddPhotoScreen from './screens/progressTracker/AddPhotoScreen';
 import ComparePhotoScreen from './screens/progressTracker/ComparePhotoScreen';
 import PhotoResultScreen from './screens/progressTracker/PhotoResultScreen';
 import WorkoutTrackerScreen from './screens/workoutTracker/WorkoutTrackerScreen';
+import ActivityDescription from './screens/workoutTracker/ActivityDescriptionScreen';
+import ActivityInstructionScreen from './screens/workoutTracker/ActivityInstructionScreen';
 
 export default function Navigation(){
     return (
@@ -40,6 +42,8 @@ export default function Navigation(){
             <Stack.Screen name = "ComparePhotos" component={ComparePhotoScreen} />
             <Stack.Screen name = "PhotoResult" component={PhotoResultScreen} />
             <Stack.Screen name = "WorkoutTracker" component={WorkoutTrackerScreen} />
+            <Stack.Screen name = "ActivityDescription" component={ActivityDescription} />
+            <Stack.Screen name = "ActivityInstruction" component={ActivityInstructionScreen} />
         </Stack.Navigator>
        </NavigationContainer>
     )

@@ -57,7 +57,7 @@ function Register_2_Screen() {
   return (
     <View style={{flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: themeColors.bgColor(1)}}>
       <Text style ={{fontSize: 34, fontWeight: 600, color: 'white', textAlign: "center", marginLeft: 20, marginRight: 20}}>
-        Choose the option that best describes your fitness level
+        Choose the option that best describes your goal
       </Text>
       <GoalButton text={"Stay Active"} />
       <GoalButton text={"Lose Weight"} />
