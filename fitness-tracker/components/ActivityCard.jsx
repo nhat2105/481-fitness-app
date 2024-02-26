@@ -8,7 +8,7 @@ export default function ActivityCard({title, text}) {
     const navigation = useNavigation()
   return (
     <View style={{marginRight: 20, marginLeft: 20}} >
-      <TouchableOpacity onPress={()=> navigation.navigate("ActivityInstruction")}
+      <TouchableOpacity onPress={()=> navigation.navigate("ActivityInstruction", {text: title})}
         style={{flexDirection: 'row', justifyContent: 'space-between', borderRadius: 10,
          marginTop: 20, backgroundColor:'lightgrey'}}>
         <Image source={pic}/>
