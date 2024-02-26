@@ -4,10 +4,12 @@ import Header from '../../components/Header'
 import graph from "../../assets/components/workout_graph.png"
 import { theme } from '../../theme'
 import WorkoutCard from '../../components/WorkoutCard'
+import { useNavigation } from '@react-navigation/native'
 
 
 export default function WorkoutTrackerScreen() {
     themeBlue = theme('blue')
+    const navigation = useNavigation()
 
   return (
     <View style={{backgroundColor: 'white'}}>
@@ -15,7 +17,8 @@ export default function WorkoutTrackerScreen() {
         <Header title={"Workout Tracker"} color={"blue"}/>
         <Image source={graph} style={{alignSelf: 'center', marginTop: 30}} />
         <View style ={{backgroundColor: themeBlue.bgColor(1), borderTopLeftRadius: 15,  borderTopEndRadius: 15, marginTop: 30}}>
-          <TouchableOpacity style={{backgroundColor: 'white', marginTop: 30, borderRadius: 15,
+          <TouchableOpacity onPress={() => navigation.navigate("WorkoutSchedule")}
+          style={{backgroundColor: 'white', marginTop: 30, borderRadius: 15,
           marginRight: 20, marginLeft: 20}} >
               <Text style={{fontSize: 18, fontWeight: 700, color: themeBlue.text, alignSelf: 'center', marginTop: 5, marginBottom: 5,
                   }}>View Workout Schedule</Text>
