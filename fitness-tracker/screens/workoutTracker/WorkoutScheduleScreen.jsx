@@ -40,7 +40,7 @@ export default function WorkoutScheduleScreen() {
                         {  activities.map((a, i) =>{
                             if (i == index){
                                 return (
-                                    <TouchableOpacity style={{borderRadius: 15, marginLeft: 100, marginRight: 100,
+                                    <TouchableOpacity key={i} style={{borderRadius: 15, marginLeft: 100, marginRight: 100,
                                     backgroundColor: themeColors.bgColor(0.7)}}>
                                         <Text style={{marginTop: 10, fontWeight: 500, color: 'white', 
                                             alignSelf: 'center', fontSize: 17, marginBottom: 10}} >{a}</Text>

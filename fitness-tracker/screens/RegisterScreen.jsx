@@ -84,11 +84,11 @@ function Register_3_Screen(){
         navigation.navigate('Dashboard');
     }
 
-    const InputField = ({input}) =>{
+    const InputField = ({input, placeholder}) =>{
         return(
             <View>
                 <Text style ={{fontSize: 34, fontWeight: 600, color: 'white', textAlign: "center", marginLeft: 20, marginRight: 20}}>{input}</Text>
-                <TextInput type={input} 
+                <TextInput type={input} placeholderTextColor={'lightgrey'} placeholder={placeholder}
                     style={{height: 40, width: 200, borderColor: 'white',
                     margin: 12, borderWidth: 3, padding: 10, borderRadius: 10}}/>
             </View>
@@ -98,11 +98,11 @@ function Register_3_Screen(){
 
     return(
         <View style={{flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: themeColors.bgColor(1)}}>
-            <InputField input={"Name"}/>
+            <InputField input={"Name"} placeholder={"i.e. John Doe"}/>
             {/**option to choose between cm and inch*/}
-            <InputField input={"Height"}/> 
+            <InputField input={"Height (cm)"} placeholder={"i.e. 163"}/> 
              {/**option to choose between kg and pounds*/}
-            <InputField input={"Weight"}/>
+            <InputField input={"Weight (kg)"} placeholder={"i.e. 50"}/>
 
             <View className='buttons' style={{display: 'flex', flexDirection: 'row'}}>
                 <TouchableOpacity onPress={()=>navigation.goBack()} 

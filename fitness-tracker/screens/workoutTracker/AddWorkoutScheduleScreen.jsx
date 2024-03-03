@@ -19,13 +19,23 @@ export default function AddWorkoutScheduleScreen() {
       
       <Text style={{marginTop: 20, fontWeight: 800, fontSize: 20}}>Time</Text>
       <View style={{display: 'flex', flexDirection: 'row', justifyContent: 'center'}} >
-        <TextInput type='text' 
+        <TextInput type='text' placeholder='i.e 10' placeholderTextColor={"grey"}
           style={{height: 40, width: 80, borderColor: themeColors.bgColor(1), alignSelf:'center',
           margin: 12, borderWidth: 3, padding: 10, borderRadius: 10}}/>
           <Text style ={{fontSize: 20, fontWeight: 900, color: themeColors.text, textAlign: "center", marginTop: 20}}>:</Text>
-          <TextInput type='text' 
+          <TextInput type='text' placeholder='i.e 58' placeholderTextColor={"grey"}
             style={{height: 40, width: 80, borderColor: themeColors.bgColor(1), alignSelf:'center',
             margin: 12, borderWidth: 3, padding: 10, borderRadius: 10}}/>
+      </View>
+      <View style={{display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems : 'center'}}>
+        <TouchableOpacity style={{backgroundColor: themeColors.bgColor(0.8), borderRadius: 9999, marginTop: 15, marginBottom: 15}}>
+          <Text style={{fontSize: 20, marginTop: 5, marginBottom: 5, marginLeft: 5, marginRight: 5, color: "white"}}>AM</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={{ 
+          backgroundColor: themeColors.bgColor(0.8), borderRadius: 9999, 
+          marginTop: 15, marginBottom: 15, marginLeft: 15}}>
+          <Text style={{fontSize: 20, marginTop: 5, marginBottom: 5, marginLeft: 5, marginRight: 5, color: "white"}}>PM</Text>
+        </TouchableOpacity>
       </View>
 
       <Text style={{marginTop: 20, fontWeight: 800, fontSize: 20}}>Details Workout</Text>
