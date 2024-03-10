@@ -3,26 +3,13 @@ import React from 'react'
 import Header from '../../components/Header'
 import video from "../../assets/components/video_instruction.png"
 import { theme } from '../../theme';
-import step_outline from "../../assets/components/step_outline.png"
 import { useNavigation } from '@react-navigation/native';
+import StepCard from '../../components/StepCard';
 
 export default function ActivityInstructionScreen({route}) {
   const {text} = route.params;
   const themeColors = theme("purple")
   const navigation = useNavigation();
-
-  const StepCard = ({stepNum, description, title}) =>{
-    return(
-      <View style={{display: 'flex', flexDirection: "row", marginLeft: 30, marginTop: 20, marginRight: 80}}>
-        <Text style={{color: themeColors.text, fontWeight: 900, marginRight: 10, fontSize: 18}}>{stepNum}</Text>
-        <Image source={step_outline} />
-        <View marginLeft={10}>
-          <Text style={{fontSize: 17, fontWeight: 700}}>{title}</Text>
-          <Text style={{fontSize: 16, fontWeight: 500, color: 'grey', marginRight: 10}}>{description}</Text>
-        </View>
-      </View>
-    )
-  }
 
   return (
     <View>
@@ -69,8 +56,7 @@ export default function ActivityInstructionScreen({route}) {
          style={{marginLeft: 20, marginRight: 20, marginTop: 20, marginBottom: 30, 
           backgroundColor: themeColors.bgColor(1), borderRadius: 15}}>
           <Text style={{fontSize: 20, fontWeight: 700, alignSelf: 'center', marginTop: 5, marginBottom: 5, color: 'white'}}>Start Timer</Text>
-        </TouchableOpacity>
-        
+        </TouchableOpacity>     
 
       </ScrollView>
     </View>

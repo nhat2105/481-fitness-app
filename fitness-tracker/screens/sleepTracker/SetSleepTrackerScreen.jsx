@@ -1,7 +1,6 @@
 import { View, Text, ScrollView, TouchableOpacity, Image, TextInput} from 'react-native'
 import React from 'react'
 import { theme } from '../../theme'
-import * as Icon from 'react-native-feather'
 import banner from "../../assets/components/sleepsetter-banner.png"
 import { useNavigation } from '@react-navigation/native'
 import Header from '../../components/Header'
@@ -9,6 +8,8 @@ import Header from '../../components/Header'
 export default function SetSleepTrackerScreen() {
     const navigation = useNavigation();
     const themeBlue = theme('blue');
+    let sleepTime = "9:30 pm";
+    let alarmTime = "5:00 am"
 
   return (
     <View style={{ borderRadius: 20, width:'100%', 
@@ -31,6 +32,7 @@ export default function SetSleepTrackerScreen() {
         </Text>
           <View style={{display: 'flex', flexDirection: 'row', justifyContent: 'center'}} >
             <TextInput type='text' placeholder='10' placeholderTextColor={"grey"}
+                //onChangeText()
                 style={{height: 40, width: 80, borderColor: themeBlue.bgColor(1), alignSelf:'center',
               margin: 12, borderWidth: 3, padding: 10, borderRadius: 10}}/>
               <Text style ={{fontSize: 20, fontWeight: 900, color: themeBlue.text, textAlign: "center", marginTop: 20}}>:</Text>

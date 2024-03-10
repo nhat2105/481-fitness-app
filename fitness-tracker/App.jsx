@@ -7,9 +7,9 @@ export default function App() {
 }
 
 //TODO
-//gender selection in register
-//probably different modes of users (for example advanced, intermediate, beginners, seniors) 
+//probably different modes of users (for example advanced, intermediate, beginners) 
 
 //Extra
 //logo animated loading screen
 //instruction (guide first-time users to navigate the options)
+//sleep tracker + meal planner

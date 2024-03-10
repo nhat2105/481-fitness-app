@@ -10,7 +10,6 @@ import alarmIcon from "../../assets/components/Icon-Alaarm.png"
 import Header from '../../components/Header'
 
 export default function SleepTrackerScreen() {
-  const themeColors = theme('purple');
   const themeBlue = theme('blue');
   const navigation = useNavigation();
 
@@ -71,8 +70,13 @@ export default function SleepTrackerScreen() {
           </View>
         </View>
 
-        
-
+        <TouchableOpacity onPress={()=>navigation.navigate("SleepSchedule")}
+          style={{backgroundColor: themeBlue.bgColor(1), justifyContent: 'center', marginTop: 30,
+            alignItems: 'center', borderRadius: 20, marginLeft: 20, marginRight: 20, marginBottom: 20}}>
+          <Text style={{color: 'white', fontSize: 18, marginTop: 10, fontWeight: 700, height: 40, alignSelf: "center"}}>
+            View Full Schedule
+          </Text>
+        </TouchableOpacity>
 
       </ScrollView>
     </View>

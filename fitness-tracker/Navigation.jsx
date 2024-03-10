@@ -22,6 +22,8 @@ import ActivityInstructionScreen from './screens/workoutTracker/ActivityInstruct
 import DoneWorkoutScreen from './screens/workoutTracker/DoneWorkoutScreen';
 import AddWorkoutScheduleScreen from './screens/workoutTracker/AddWorkoutScheduleScreen';
 import WorkoutScheduleScreen from './screens/workoutTracker/WorkoutScheduleScreen';
+import SleepScheduleScreen from './screens/sleepTracker/SleepScheduleScreen';
+import AddPhotoInstructionScreen from './screens/progressTracker/AddPhotoInstructionScreen';
 
 export default function Navigation(){
     return (
@@ -50,6 +52,8 @@ export default function Navigation(){
             <Stack.Screen name = "DoneWorkout" component={DoneWorkoutScreen} />
             <Stack.Screen name = "AddWorkoutSchedule" component={AddWorkoutScheduleScreen} />
             <Stack.Screen name = "WorkoutSchedule" component={WorkoutScheduleScreen} />
+            <Stack.Screen name = "SleepSchedule" component={SleepScheduleScreen} />
+            <Stack.Screen name = "PhotoInstruction" component={AddPhotoInstructionScreen} />
         </Stack.Navigator>
        </NavigationContainer>
     )
