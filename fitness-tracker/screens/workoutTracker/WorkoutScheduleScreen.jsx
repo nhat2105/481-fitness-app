@@ -35,7 +35,7 @@ export default function WorkoutScheduleScreen() {
             </ScrollView>
             { time.map((t, index) =>{
                 return (
-                    <View>
+                    <View key={index}>
                         <Text style={{marginLeft: 20, marginTop: 20, fontWeight: 600, fontSize: 17}} >{t}</Text>
                         {  activities.map((a, i) =>{
                             if (i == index){

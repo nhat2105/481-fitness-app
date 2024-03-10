@@ -8,7 +8,7 @@ export default function DoneWorkoutScreen() {
     <View style={{ marginTop: 100}}>
       <Image source={poster} style= {{alignSelf: 'center'}} />
       <Text style={{marginTop: 20, fontWeight: 900, fontSize: 20, marginLeft: 20, marginRight: 20, alignSelf: 'center'}}>
-        Congratulations, You Have Finished Your Workout!
+        Congratulations, You Have Finished The Exercise!
       </Text>
       <BackButton text={"Done"}  />
     </View>

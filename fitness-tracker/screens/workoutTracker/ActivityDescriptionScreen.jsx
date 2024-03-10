@@ -1,5 +1,5 @@
 import { View, Text, Image, TouchableOpacity, ScrollView} from 'react-native'
-import React from 'react'
+import React, {useState} from 'react'
 import Header from '../../components/Header'
 import banner from "../../assets/components/workout_banner.png"
 import { theme } from '../../theme'
@@ -12,6 +12,29 @@ import ActivityCard from '../../components/ActivityCard'
 export default function ActivityDescription({route}) {
     const themeColors = theme("blue")
     const {text} = route.params;
+
+    const [exercises1, setExercises1] = useState([
+        { id: 0, title: 'Warm Up', text: '5:00' },
+        { id: 1, title: 'Jumping Jacks', text: '12x' },
+        { id: 2, title: 'Skippings', text: '15x' },
+        { id: 3, title: 'Squats', text: '20x' },
+        { id: 4, title: 'Arm Raises', text: '0:53' },
+        { id: 5, title: 'Rest & Drinks', text: '2:00' },
+    ]);
+
+    const [exercises2, setExercises2] = useState([
+        { id: 0, title: 'Incline Push-Ups', text: '12x' },
+        { id: 1, title: 'Push-Ups', text: '15x' },
+    ]);
+
+    const removeExercise2 = (exerciseId) => {
+        setExercises2(exercises2.filter(exercise => exercise.id !== exerciseId));
+    };
+
+    const removeExercise1 = (exerciseId) => {
+        setExercises1(exercises1.filter(exercise => exercise.id !== exerciseId));
+    };
+
     const EquipmentCard = ({id, text}) =>{
         let imageSource;
 
@@ -87,17 +110,16 @@ export default function ActivityDescription({route}) {
         </View>
         <View marginBottom={40}>
             <Text style={{fontSize: 16, fontWeight: 700, marginLeft: 20, color: 'black', marginTop: 15, marginBottom: 5,}}>Set 1</Text>
-            <ActivityCard text={"5:00"} title={"Warm Up"} />
-            <ActivityCard text={"12x"} title={"Jumping Jacks"} />
-            <ActivityCard text={"15x"} title={"Skippings"} />
-            <ActivityCard text={"20x"} title={"Squats"} />
-            <ActivityCard text={"0:53"} title={"Arm Raises"} />
-            <ActivityCard text={"2:00"} title={"Rest & Drinks"} />
+            {exercises1.map(exercise => (
+                <ActivityCard key={exercise.id} title={exercise.title} text={exercise.text} onDelete={() => removeExercise1(exercise.id)} />
+            ))}
+            
         </View>
         <View marginBottom={40}>
             <Text style={{fontSize: 16, fontWeight: 700, marginLeft: 20, color: 'black', marginTop: 15, marginBottom: 5,}}>Set 2</Text>
-            <ActivityCard text={"12x"} title={"Incline Push-Ups"} />
-            <ActivityCard text={"15x"} title={"Push-Ups"} />
+            {exercises2.map(exercise => (
+                <ActivityCard key={exercise.id} title={exercise.title} text={exercise.text} onDelete={() => removeExercise2(exercise.id)} />
+            ))}
         </View>
 
         <TouchableOpacity style={{backgroundColor: themeColors.bgColor(1), borderRadius: 15,
