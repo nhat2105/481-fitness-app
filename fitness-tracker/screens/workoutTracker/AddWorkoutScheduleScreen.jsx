@@ -19,11 +19,11 @@ export default function AddWorkoutScheduleScreen() {
       
       <Text style={{marginTop: 20, fontWeight: 800, fontSize: 20}}>Time</Text>
       <View style={{display: 'flex', flexDirection: 'row', justifyContent: 'center'}} >
-        <TextInput type='text' placeholder='i.e 10' placeholderTextColor={"grey"}
+        <TextInput type='text' placeholder='10' placeholderTextColor={"grey"}
           style={{height: 40, width: 80, borderColor: themeColors.bgColor(1), alignSelf:'center',
           margin: 12, borderWidth: 3, padding: 10, borderRadius: 10}}/>
           <Text style ={{fontSize: 20, fontWeight: 900, color: themeColors.text, textAlign: "center", marginTop: 20}}>:</Text>
-          <TextInput type='text' placeholder='i.e 58' placeholderTextColor={"grey"}
+          <TextInput type='text' placeholder='30' placeholderTextColor={"grey"}
             style={{height: 40, width: 80, borderColor: themeColors.bgColor(1), alignSelf:'center',
             margin: 12, borderWidth: 3, padding: 10, borderRadius: 10}}/>
       </View>

@@ -35,7 +35,7 @@ export default function SleepTrackerScreen() {
             style={{backgroundColor: themeBlue.bgColor(1), justifyContent: 'center', display: 'flex', marginTop: 20,
             alignItems: 'center', borderRadius: 20, marginLeft: 20, marginRight: 20, flexDirection: 'row'}}>
           <View style={{justifyContent: 'center', alignItems:'center'}}>
-            <Text style={{color: 'white', fontSize: 18, marginTop: 10, fontWeight: 700, height: 40}}>Check Your Sleep Schedule</Text>
+            <Text style={{color: 'white', fontSize: 18, marginTop: 10, fontWeight: 700, height: 40}}>Set Your Sleep Schedule</Text>
           </View>
         </TouchableOpacity>
 

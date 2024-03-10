@@ -74,21 +74,31 @@ function Register_2_Screen() {
 function Register_3_Screen(){
     const navigation = useNavigation();
     const themeColors = theme('purple');
-    const [name, setName] = useState("");
-    const [gender, setGender] = useState("");
-    const [weight, setWeight] = useState("");
-    const [height, setHeight] = useState("");
-
+    let name = ""; 
+    let weight = "";
+    //const [gender, setGender] = useState("");
+    let height = "";
 
     const goToDashboard= () => {
-        navigation.navigate('Dashboard');
+        navigation.navigate('Dashboard', {name: name, height: height, weight: weight});
     }
 
+    function handleInputChange({code, text}){
+        if (code === "Name"){
+            name = text;
+        } else if (code === "Height (cm)"){
+           height = text;
+        } else {
+            weight = text;
+        }
+    }
+    
     const InputField = ({input, placeholder}) =>{
         return(
             <View>
                 <Text style ={{fontSize: 34, fontWeight: 600, color: 'white', textAlign: "center", marginLeft: 20, marginRight: 20}}>{input}</Text>
                 <TextInput type={input} placeholderTextColor={'lightgrey'} placeholder={placeholder}
+                    onChangeText={(text) => handleInputChange({code: input, text: text})}
                     style={{height: 40, width: 200, borderColor: 'white',
                     margin: 12, borderWidth: 3, padding: 10, borderRadius: 10}}/>
             </View>
@@ -99,9 +109,9 @@ function Register_3_Screen(){
     return(
         <View style={{flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: themeColors.bgColor(1)}}>
             <InputField input={"Name"} placeholder={"i.e. John Doe"}/>
-            {/**option to choose between cm and inch*/}
+            
             <InputField input={"Height (cm)"} placeholder={"i.e. 163"}/> 
-             {/**option to choose between kg and pounds*/}
+             
             <InputField input={"Weight (kg)"} placeholder={"i.e. 50"}/>
 
             <View className='buttons' style={{display: 'flex', flexDirection: 'row'}}>

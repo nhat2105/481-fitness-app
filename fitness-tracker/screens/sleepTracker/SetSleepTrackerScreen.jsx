@@ -8,7 +8,6 @@ import Header from '../../components/Header'
 
 export default function SetSleepTrackerScreen() {
     const navigation = useNavigation();
-    const themeColors = theme('purple');
     const themeBlue = theme('blue');
 
   return (
@@ -31,11 +30,11 @@ export default function SetSleepTrackerScreen() {
           Bedtime
         </Text>
           <View style={{display: 'flex', flexDirection: 'row', justifyContent: 'center'}} >
-            <TextInput type='text' placeholder='i.e 10' placeholderTextColor={"grey"}
+            <TextInput type='text' placeholder='10' placeholderTextColor={"grey"}
                 style={{height: 40, width: 80, borderColor: themeBlue.bgColor(1), alignSelf:'center',
               margin: 12, borderWidth: 3, padding: 10, borderRadius: 10}}/>
               <Text style ={{fontSize: 20, fontWeight: 900, color: themeBlue.text, textAlign: "center", marginTop: 20}}>:</Text>
-              <TextInput type='text' placeholder='i.e 10' placeholderTextColor={"grey"}
+              <TextInput type='text' placeholder='30' placeholderTextColor={"grey"}
                 style={{height: 40, width: 80, borderColor: themeBlue.bgColor(1), alignSelf:'center',
               margin: 12, borderWidth: 3, padding: 10, borderRadius: 10}}/>
             </View>
@@ -55,11 +54,11 @@ export default function SetSleepTrackerScreen() {
           Alarm
         </Text>
           <View style={{display: 'flex', flexDirection: 'row', justifyContent: 'center'}} >
-            <TextInput type='text' placeholder='i.e 10' placeholderTextColor={"grey"}
+            <TextInput type='text' placeholder='8' placeholderTextColor={"grey"}
                 style={{height: 40, width: 80, borderColor: themeBlue.bgColor(1), alignSelf:'center',
               margin: 12, borderWidth: 3, padding: 10, borderRadius: 10}}/>
               <Text style ={{fontSize: 20, fontWeight: 900, color: themeBlue.text, textAlign: "center", marginTop: 20}}>:</Text>
-              <TextInput type='text' placeholder='i.e 10' placeholderTextColor={"grey"}
+              <TextInput type='text' placeholder='00' placeholderTextColor={"grey"}
                 style={{height: 40, width: 80, borderColor: themeBlue.bgColor(1), alignSelf:'center',
               margin: 12, borderWidth: 3, padding: 10, borderRadius: 10}}/>
           </View>
@@ -79,6 +78,13 @@ export default function SetSleepTrackerScreen() {
         style={{backgroundColor: themeBlue.bgColor(1), justifyContent: 'center', marginTop: 20,
           alignItems: 'center', borderRadius: 20, marginLeft: 20, marginRight: 20}}>
         <Text style={{color: 'white', fontSize: 18, marginTop: 10, fontWeight: 700, height: 40, alignSelf: "center"}}>Set</Text>
+      </TouchableOpacity>
+
+      <Text style={{fontSize: 20, alignSelf: 'center', fontWeight: 700, marginTop: 10}}>Or</Text>
+      <TouchableOpacity onPress={()=>navigation.goBack()}
+        style={{backgroundColor: themeBlue.bgColor(1), justifyContent: 'center', marginTop: 20,
+          alignItems: 'center', borderRadius: 20, marginLeft: 20, marginRight: 20}}>
+        <Text style={{color: 'white', fontSize: 18, marginTop: 10, fontWeight: 700, height: 40, alignSelf: "center"}}>Sync with Alarm</Text>
       </TouchableOpacity>
     </View>
   )

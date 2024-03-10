@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, Image, StatusBar, ScrollView} from 'react-native'
+import { View, Text, TouchableOpacity, Image, ScrollView} from 'react-native'
 import React, { useState } from 'react'
 import * as Icon from 'react-native-feather'
 import { theme } from '../theme';
@@ -10,11 +10,17 @@ import sleep_graph from "../assets/components/Sleep-Graph.png"
 import workout_graph from "../assets/components/workout_graph.png"
 import real_time from "../assets/components/Real-Time-Updates-Progress.png"
 
-export default function DashboardScreen() {
+export default function DashboardScreen({route}) {
+    let {name, weight, height} = route.params;
+    var BMI = Number(Number(weight)/(Number(height) * Number(height)) * 10000).toFixed(1);;
+    let bmiStatus = ("You have a normal weight status");
+    if (BMI >= 25) bmiStatus = ("You have an overweight status");
+    else if (BMI < 18.5) bmiStatus = ("You have an underweight status");
+
     const themeColors = theme('purple');
-    const themeBlue = theme('blue');
     const navigation = useNavigation();
     const [notif, SetNotif] = useState(false);
+
 
     const turnOnNotification= () =>{
         SetNotif(true);
@@ -38,7 +44,7 @@ export default function DashboardScreen() {
             <View style={{display: 'flex', flexDirection: 'row', marginLeft: 30}}>
                 <View>
                     <Text style={{color: themeColors.text, fontSize: 20, fontWeight: 400, marginTop: 20}}>Welcome Back,</Text>
-                    <Text style={{color: 'black', fontSize: 25, fontWeight: 700}}>Taylor Swift</Text>
+                    <Text style={{color: 'black', fontSize: 25, fontWeight: 700}}>{name}</Text>
                 </View>
                 {!notif && (
                     <TouchableOpacity onPress={turnOnNotification}
@@ -67,10 +73,10 @@ export default function DashboardScreen() {
             <View style={{backgroundColor: themeColors.bgColor(1), justifyContent: 'center', display: 'flex', marginTop: 20,
                 alignItems: 'center', borderRadius: 15, marginLeft: 20, marginRight: 20, flexDirection: 'row'}}>
                 <View>
-                    <Text style={{color: 'white', fontSize: 18, fontWeight: 700, alignSelf: 'center'}}>BMI (Body Mass Index): 20</Text>
-                    <Text style={{color: 'white', fontSize: 18, fontWeight: 300, alignSelf: 'center'}}>You have a normal weight</Text>
+                    <Text style={{color: 'white', fontSize: 18, fontWeight: 700, alignSelf: 'center'}}>BMI (Body Mass Index):  {BMI}</Text>
+                    <Text style={{color: 'white', fontSize: 18, fontWeight: 300, alignSelf: 'center'}}>{bmiStatus}</Text>
                     <View style={{display: 'flex', flexDirection: 'row', marginBottom: 20}} >
-                        <TouchableOpacity onPress={() => navigation.navigate("SetWeight")}
+                        <TouchableOpacity onPress={() => navigation.navigate("SetWeight", {weight: weight, name: name, height: height})}
                         style={{backgroundColor: 'white', borderRadius: 5, marginTop: 10}} >
                             <Text style={{alignSelf:'center', color: themeColors.text, marginLeft: 10, marginRight: 10,
                             fontSize: 16, fontWeight: 700}} >Update Weight</Text>

@@ -5,7 +5,9 @@ import { theme } from '../../theme'
 import { useNavigation } from '@react-navigation/native'
 import Header from '../../components/Header'
 
-export default function SetWeightScreen() {
+export default function SetWeightScreen({route}) {
+    let {weight, name, height} = route.params;
+    const onUpdateWeight = route.params;
     const themeBlue = theme('blue');
     const navigation = useNavigation();
 
@@ -20,7 +22,7 @@ export default function SetWeightScreen() {
             Current Weight
           </Text>
             <View style={{display: 'flex', flexDirection: 'row', justifyContent: 'center'}} >
-              <TextInput type='text' 
+              <TextInput type='text' onChangeText={(text) => weight = text}
                   style={{height: 40, width: 80, borderColor: themeBlue.bgColor(1), alignSelf:'center',
                 margin: 12, borderWidth: 3, padding: 10, borderRadius: 10}}/>
               <Text style={{fontSize: 18, fontWeight: 600, color: 'black', textAlign: "center", marginTop: 20}}>kgs</Text>
@@ -38,7 +40,9 @@ export default function SetWeightScreen() {
             </View>
           </View>
 
-          <TouchableOpacity onPress={()=>navigation.goBack()}
+          <TouchableOpacity onPress={()=> {
+            navigation.navigate("Dashboard", {weight: weight, height: height, name: name});
+          }}
           style={{backgroundColor: themeBlue.bgColor(1), justifyContent: 'center', marginTop: 20,
             alignItems: 'center', borderRadius: 20, marginLeft: 20, marginRight: 20}}>
           <Text style={{color: 'white', fontSize: 18, marginTop: 10, fontWeight: 700, height: 40, alignSelf: "center"}}>Set</Text>
