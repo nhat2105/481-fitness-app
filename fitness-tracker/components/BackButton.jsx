@@ -3,9 +3,12 @@ import { useNavigation } from '@react-navigation/native'
 import { theme } from '../theme'
 import React from 'react'
 
-export default function BackButton({text}) {
-    const themeColors = theme('purple')
+export default function BackButton({text, color}) {
+   
+    let themeColors = theme('purple')
+    if (color === "blue")themeColors = theme("blue");
     const navigation = useNavigation()
+    
   return (
     <View>
       <TouchableOpacity onPress={()=>navigation.goBack()}

@@ -4,6 +4,7 @@ import poster from "../../assets/components/WorkoutDone.png"
 import BackButton from '../../components/BackButton'
 
 export default function DoneWorkoutScreen() {
+  //After done is clicked, also add it to the finished history screen
   return (
     <View style={{ marginTop: 100}}>
       <Image source={poster} style= {{alignSelf: 'center'}} />

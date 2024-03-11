@@ -31,7 +31,8 @@ export default function DashboardScreen({route}) {
     }
 
     const viewMenu = () =>{
-
+        //temporarily make it workout history
+        navigation.navigate("WorkoutHistory")
     }
 
     const goToSleepTracker = () =>{
