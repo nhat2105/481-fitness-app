@@ -1,17 +1,19 @@
 import { View, Text, Image, TouchableOpacity, ScrollView } from 'react-native'
-import React from 'react'
+import React, {useState} from 'react'
 import Header from '../../components/Header'
 import reminder from "../../assets/components/photo_reminder.png"
 import banner from "../../assets/components/photo_banner.png"
 import { theme } from '../../theme'
-import sample1 from "../../assets/components/photo_sample1.png"
-import sample3 from "../../assets/components/photo_sample3.png"
-import sample2 from "../../assets/components/photo_sample2.png"
 import { useNavigation } from '@react-navigation/native'
+import ProgressPhoto from '../../components/ProgressPhoto'
 
-export default function PhotoComparerScreen() {
+export default function PhotoComparerScreen({route}) {
+
     const themeColors = theme('purple')
     const navigation = useNavigation()
+    const gal = route.params;
+    const [gallery, setGallery] = useState(gal);
+    console.log(gallery)
 
   return (
     <View>
@@ -37,19 +39,14 @@ export default function PhotoComparerScreen() {
 
         {/**Gallery display */}
         <Text style={{fontSize: 20, fontWeight: 800, marginLeft: 30, marginTop: 20, marginBottom: 30}}>Gallery</Text>
-        <View style={{display: 'flex', flexDirection: 'row', 
-        marginLeft: 30, marginRight: 30, justifyContent:'space-between' }}>
-            <Image source={sample1} />
-            <Image source={sample2} />
-            <Image source={sample3} />
-        </View> 
-        <View style={{display: 'flex', flexDirection: 'row', marginTop: 10,
-        marginLeft: 65, marginRight: 65, justifyContent:'space-between' }}>
-          <Text style ={{color: theme.text, fontSize: 15, fontWeight: 600}}>May</Text>
-          <Text style ={{color: theme.text, fontSize: 15, fontWeight: 600}}>June</Text>
-          <Text style ={{color: theme.text, fontSize: 15, fontWeight: 600}}>July</Text>
-        </View> 
-        <TouchableOpacity onPress={() => navigation.navigate("AddPhoto")}
+
+        <ScrollView horizontal style={{display: 'flex', flexDirection: 'row', marginLeft: 30}}>
+          {gallery.map((g, index) => 
+            <ProgressPhoto month={g.month} source={g.image} key={index} def={g.def} />
+          )}
+        </ScrollView> 
+
+        <TouchableOpacity onPress={() => navigation.navigate("AddPhoto", gallery)}
             style={{backgroundColor: themeColors.bgColor(1), borderRadius: 12, marginLeft: 35, marginRight: 35, marginTop: 30}}>
             <Text style={{fontSize: 20, fontWeight: 700, marginTop: 5, marginBottom: 5,
                 color: 'white', alignSelf: 'center'}}>Add Photo</Text>

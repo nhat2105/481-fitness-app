@@ -1,17 +1,17 @@
 import { View, Text, TouchableOpacity, Image} from 'react-native'
 import React, { useState } from 'react'
 import Header from '../../components/Header'
-import BackButton from '../../components/BackButton'
 import { theme } from '../../theme'
-import { ChevronDown, Upload } from 'react-native-feather'
+import { Upload } from 'react-native-feather'
 import { useNavigation } from '@react-navigation/native'
 import * as ImagePicker from "expo-image-picker" 
 import { Picker }  from '@react-native-picker/picker'
 
-export default function AddPhotoScreen() {
+export default function AddPhotoScreen({route}) {
   const themeColors = theme('purple')
   const navigation = useNavigation();
   const [image, setImage] = useState();
+  let gallery = route.params
 
   const [selectedMonth, setSelectedMonth] = useState(null);
 
@@ -42,6 +42,17 @@ export default function AddPhotoScreen() {
       }
     } catch (error) {
       
+    }
+  }
+
+  const updateGallery = () =>{
+    const index = gallery.findIndex(({ month }) => month === selectedMonth)
+    if (index >= 0) {
+      gallery[index].image = image;
+      gallery[index].def = 'false';
+    } 
+    else {
+      gallery.push({image: image, month: selectedMonth, def: 'false'})
     }
   }
 
@@ -82,7 +93,14 @@ export default function AddPhotoScreen() {
             ))}
         </Picker>
       </View>
-      <BackButton text={"Done"} />
+      <TouchableOpacity onPress= {()=> 
+       { updateGallery();
+         navigation.navigate("PhotoComparer", {gallery: gallery});
+        }}
+        style={{backgroundColor: themeColors.bgColor(1), justifyContent: 'center', marginTop: 40,
+          alignItems: 'center', borderRadius: 20, marginLeft: 20, marginRight: 20, marginBottom: 50}}>
+        <Text style={{color: 'white', fontSize: 18, marginTop: 10, fontWeight: 700, height: 40, alignSelf: "center"}}>Done</Text>
+      </TouchableOpacity>
       {/* Try to add month and photo into photo gallery */}
     </View>
   )

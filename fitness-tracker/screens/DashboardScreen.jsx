@@ -9,8 +9,29 @@ import walking_bar from "../assets/components/walking-bar.png"
 import sleep_graph from "../assets/components/Sleep-Graph.png"
 import workout_graph from "../assets/components/workout_graph.png"
 import real_time from "../assets/components/Real-Time-Updates-Progress.png"
+import sample1 from "../assets/components/photo_sample1.png"
+import sample3 from "../assets/components/photo_sample3.png"
+import sample2 from "../assets/components/photo_sample2.png"
 
 export default function DashboardScreen({route}) {
+    let gallery = [
+        { 
+            image: sample1,
+            month: "May",
+            def: "true"
+        },
+        { 
+            image: sample2,
+            month: "June",
+            def: "true"
+        },
+        { 
+            image: sample3,
+            month: "July",
+            def: "true"
+        },
+    ]
+
     let {name, weight, height} = route.params;
     var BMI = Number(Number(weight)/(Number(height) * Number(height)) * 10000).toFixed(1);;
     let bmiStatus = ("You have a normal weight status");
@@ -101,7 +122,7 @@ export default function DashboardScreen({route}) {
                     </View>
                 </TouchableOpacity>
                 
-                <TouchableOpacity onPress={() => navigation.navigate("PhotoComparer")}
+                <TouchableOpacity onPress={() => navigation.navigate("PhotoComparer", gallery)}
                     style={{backgroundColor: themeColors.bgColor(1), justifyContent: 'center', display: 'flex', marginTop: 20,
                     alignItems: 'center', borderRadius: 30, marginRight: 20, width: 170, height: 55,
                     flexDirection: 'row'}}>
