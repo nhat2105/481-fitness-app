@@ -3,9 +3,9 @@ import React from 'react'
 import pic from "../assets/components/Workout-Pic.png"
 import { ChevronRight } from 'react-native-feather'
 import { useNavigation } from '@react-navigation/native'
-import { GestureHandlerRootView } from "react-native-gesture-handler"
-import Swipable from "react-native-gesture-handler/Swipeable"
+import Swipeable from "react-native-gesture-handler/Swipeable"
 import { theme } from '../theme'
+import { GestureHandlerRootView } from 'react-native-gesture-handler'
 
 export default function ActivityCard({title, text, onDelete}) {
     const themeColors = theme("blue")
@@ -25,21 +25,21 @@ export default function ActivityCard({title, text, onDelete}) {
       )
     }
   return (
-    <GestureHandlerRootView>
-    <Swipable renderLeftActions={showDelete}>
-      <View style={{marginRight: 20, marginLeft: 20}} >
-        <TouchableOpacity onPress={()=> navigation.navigate("ActivityInstruction", {text: title})}
-          style={{flexDirection: 'row', justifyContent: 'space-between', borderRadius: 10,
-          marginTop: 20, backgroundColor:'lightgrey'}}>
-          <Image source={pic}/>
-          <View marginTop={5} >
-              <Text style={{fontSize: 16, fontWeight: 700, alignSelf: 'center' }}>{title}</Text>
-              <Text alignSelf="center" fontWeight={600}>{text}</Text>
-          </View>
-          <ChevronRight stroke={"grey"} strokeWidth={3} marginTop={9}/>
-        </TouchableOpacity>
-      </View>
-    </Swipable>
+    <GestureHandlerRootView style={{flex: 1}}>
+      <Swipeable renderLeftActions={showDelete}>
+        <View style={{marginRight: 20, marginLeft: 20}} >
+          <TouchableOpacity onPress={()=> navigation.navigate("ActivityInstruction", {text: title})}
+            style={{flexDirection: 'row', justifyContent: 'space-between', borderRadius: 10,
+            marginTop: 20, backgroundColor:'lightgrey'}}>
+            <Image source={pic}/>
+            <View marginTop={5} >
+                <Text style={{fontSize: 16, fontWeight: 700, alignSelf: 'center' }}>{title}</Text>
+                <Text alignSelf="center" fontWeight={600}>{text}</Text>
+            </View>
+            <ChevronRight stroke={"grey"} strokeWidth={3} marginTop={9}/>
+          </TouchableOpacity>
+        </View>
+      </Swipeable>
     </GestureHandlerRootView>
   )
 }
