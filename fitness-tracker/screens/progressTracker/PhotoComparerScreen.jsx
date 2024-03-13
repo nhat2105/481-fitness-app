@@ -8,12 +8,10 @@ import { useNavigation } from '@react-navigation/native'
 import ProgressPhoto from '../../components/ProgressPhoto'
 
 export default function PhotoComparerScreen({route}) {
-
     const themeColors = theme('purple')
     const navigation = useNavigation()
     const gal = route.params;
     const [gallery, setGallery] = useState(gal);
-    console.log(gallery)
 
   return (
     <View>
@@ -31,7 +29,7 @@ export default function PhotoComparerScreen({route}) {
             </View>
         </View>
         
-        <TouchableOpacity onPress={() => navigation.navigate("ComparePhotos")}
+        <TouchableOpacity onPress={() => navigation.navigate("ComparePhotos", gallery)}
         style={{backgroundColor: themeColors.bgColor(1), borderRadius: 12, marginLeft: 35, marginRight: 35, marginTop: 30}}>
             <Text style={{fontSize: 20, fontWeight: 700, marginTop: 5, marginBottom: 5,
                 color: 'white', alignSelf: 'center'}}>Compare Photos</Text>
