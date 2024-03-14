@@ -8,7 +8,7 @@ export default function WorkoutScheduleScreen({route}) {
     const themeColors = theme("purple")
     const navigation = useNavigation()
 
-    const firstTime = route.params
+    let firstTime = route.params;
 
     const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
     const time = ["6:00 AM", "7:00 AM", "8:00 AM", "9:00 AM", "10:00 AM", "11:00 AM", "12:00 PM"]
@@ -29,8 +29,8 @@ export default function WorkoutScheduleScreen({route}) {
   return (
     <View>
         <ScrollView>
-            {firstTime === false && <Header title={"Your Schedule"} />}
-            {firstTime === true && <Header title={"Recommend Plan"} />}
+            {firstTime == false && <Header title={"Your Schedule"} />}
+            {firstTime == true && <Header title={"Recommend Plan"} />}
             <ScrollView horizontal={true} style={{flexDirection: 'row'}}>
                 { days.map((day, index) =>
                     {return (<DayCard day={day} startDate={20} index={index} key={index} />)})
@@ -56,13 +56,22 @@ export default function WorkoutScheduleScreen({route}) {
                     </View>)
                 })
             }
-
+            { firstTime == false && 
             <TouchableOpacity onPress={() => navigation.navigate("AddWorkoutSchedule")}
                 style={{borderRadius: 9999, backgroundColor: themeColors.bgColor(1), marginTop: 20,
                 marginLeft: 20, marginRight: 20}}>
                 <Text style={{marginTop: 5, marginBottom: 5, alignSelf: 'center', fontSize: 18, fontWeight: 700, color: 'white'}}>
                     Add to Schedule</Text>
-            </TouchableOpacity>
+            </TouchableOpacity>}
+
+            { firstTime == true && 
+            <TouchableOpacity onPress={() => {firstTime = false;
+                navigation.navigate("WorkoutTracker", firstTime)}}
+                style={{borderRadius: 9999, backgroundColor: themeColors.bgColor(1), marginTop: 20,
+                marginLeft: 20, marginRight: 20}}>
+                <Text style={{marginTop: 5, marginBottom: 5, alignSelf: 'center', fontSize: 18, fontWeight: 700, color: 'white'}}>
+                    Confirm Schedule</Text>
+            </TouchableOpacity>}
       </ScrollView>
     </View>
   )
