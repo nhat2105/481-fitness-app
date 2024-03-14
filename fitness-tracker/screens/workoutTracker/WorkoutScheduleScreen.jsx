@@ -4,9 +4,11 @@ import Header from '../../components/Header'
 import { theme } from '../../theme'
 import { useNavigation } from '@react-navigation/native'
 
-export default function WorkoutScheduleScreen() {
+export default function WorkoutScheduleScreen({route}) {
     const themeColors = theme("purple")
     const navigation = useNavigation()
+
+    const firstTime = route.params
 
     const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
     const time = ["6:00 AM", "7:00 AM", "8:00 AM", "9:00 AM", "10:00 AM", "11:00 AM", "12:00 PM"]
@@ -27,7 +29,8 @@ export default function WorkoutScheduleScreen() {
   return (
     <View>
         <ScrollView>
-            <Header title={"Your Schedule"} />
+            {firstTime === false && <Header title={"Your Schedule"} />}
+            {firstTime === true && <Header title={"Recommend Plan"} />}
             <ScrollView horizontal={true} style={{flexDirection: 'row'}}>
                 { days.map((day, index) =>
                     {return (<DayCard day={day} startDate={20} index={index} key={index} />)})

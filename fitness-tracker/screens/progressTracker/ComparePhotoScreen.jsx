@@ -1,10 +1,9 @@
 import { View, Text, TouchableOpacity } from 'react-native'
 import React, { useState } from 'react'
 import Header from '../../components/Header'
-import { Calendar, ChevronRight } from 'react-native-feather'
+import { Calendar } from 'react-native-feather'
 import { theme } from '../../theme'
 import { useNavigation } from '@react-navigation/native'
-import * as ImagePicker from "expo-image-picker" 
 import { Picker }  from '@react-native-picker/picker'
 
 export default function ComparePhotoScreen({route}) {

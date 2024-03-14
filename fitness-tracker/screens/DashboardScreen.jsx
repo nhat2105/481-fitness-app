@@ -14,6 +14,8 @@ import sample3 from "../assets/components/photo_sample3.png"
 import sample2 from "../assets/components/photo_sample2.png"
 
 export default function DashboardScreen({route}) {
+    var firstTime = true;
+
     let gallery = [
         { 
             image: sample1,
@@ -112,7 +114,7 @@ export default function DashboardScreen({route}) {
                 </View>
             </View>
             <View style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between'}}>
-                <TouchableOpacity onPress={()=> navigation.navigate("WorkoutTracker")}
+                <TouchableOpacity onPress={()=> navigation.navigate("WorkoutTracker", firstTime)}
                 style={{backgroundColor: themeColors.bgColor(1), justifyContent: 'center', display: 'flex', marginTop: 20,
                     alignItems: 'center', borderRadius: 30, width: 170, height: 55,
                     marginLeft: 20, marginRight: 5, flexDirection: 'row'}}>
