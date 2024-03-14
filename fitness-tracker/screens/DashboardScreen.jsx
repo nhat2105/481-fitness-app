@@ -61,7 +61,6 @@ export default function DashboardScreen({route}) {
     const goToSleepTracker = () =>{
         navigation.navigate('SleepTracker');
     }
-
   return (
     <View style={{ justifyContent: 'center', flex: 1}}>
         <ScrollView>
@@ -114,7 +113,9 @@ export default function DashboardScreen({route}) {
                 </View>
             </View>
             <View style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between'}}>
-                <TouchableOpacity onPress={()=> navigation.navigate("WorkoutTracker", firstTime)}
+                <TouchableOpacity onPress={()=> {
+                navigation.navigate("WorkoutTracker", firstTime)
+                firstTime = false;}}
                 style={{backgroundColor: themeColors.bgColor(1), justifyContent: 'center', display: 'flex', marginTop: 20,
                     alignItems: 'center', borderRadius: 30, width: 170, height: 55,
                     marginLeft: 20, marginRight: 5, flexDirection: 'row'}}>
@@ -123,7 +124,6 @@ export default function DashboardScreen({route}) {
                           marginRight: 5, fontWeight: 700}}>Workout Schedule</Text>
                     </View>
                 </TouchableOpacity>
-                
                 <TouchableOpacity onPress={() => navigation.navigate("PhotoComparer", gallery)}
                     style={{backgroundColor: themeColors.bgColor(1), justifyContent: 'center', display: 'flex', marginTop: 20,
                     alignItems: 'center', borderRadius: 30, marginRight: 20, width: 170, height: 55,

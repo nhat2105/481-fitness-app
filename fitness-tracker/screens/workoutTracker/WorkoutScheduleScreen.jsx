@@ -1,5 +1,5 @@
 import { View, Text, ScrollView, TouchableOpacity } from 'react-native'
-import React from 'react'
+import React, { useState } from 'react'
 import Header from '../../components/Header'
 import { theme } from '../../theme'
 import { useNavigation } from '@react-navigation/native'
@@ -9,17 +9,19 @@ export default function WorkoutScheduleScreen({route}) {
     const navigation = useNavigation()
 
     let firstTime = route.params;
-
+    
+    let chosenDay = 0;
     const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
     const time = ["6:00 AM", "7:00 AM", "8:00 AM", "9:00 AM", "10:00 AM", "11:00 AM", "12:00 PM"]
     const activities = ["Abs Workout", "Lowerbody Workout", "Upperbody Workout"]
 
     const DayCard = ({day, startDate, index}) => {
         return(
-           <TouchableOpacity activeOpacity={0.3}
+           
+           <TouchableOpacity activeOpacity={0.3} onPress={() => {chosenDay = index} }
             style={{borderRadius: 15, width: 100, height: 80, marginLeft: 20, marginTop: 30,
             shadowColor: themeColors.bgColor(0.6), 
-            backgroundColor: 'white', alignItems: 'center'}}>
+            backgroundColor: "white", alignItems: 'center'}}>
                 <Text style={{fontSize: 16, fontWeight: 600, marginTop: 20}}>{day}</Text>
                 <Text style={{color: themeColors.text, fontWeight: 500, marginBottom: 20}}>{startDate + index}</Text>
            </TouchableOpacity>

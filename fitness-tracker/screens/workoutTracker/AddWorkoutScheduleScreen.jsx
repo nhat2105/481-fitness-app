@@ -7,6 +7,8 @@ import BackButton from '../../components/BackButton'
 
 export default function AddWorkoutScheduleScreen() {
   const themeColors = theme("purple")
+  let chosen = 0;
+
   return (
     <View marginLeft={20}>
       <Header title={"Add Schedule"} />
@@ -28,7 +30,8 @@ export default function AddWorkoutScheduleScreen() {
             margin: 12, borderWidth: 3, padding: 10, borderRadius: 10}}/>
       </View>
       <View style={{display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems : 'center'}}>
-        <TouchableOpacity style={{backgroundColor: themeColors.bgColor(0.8), borderRadius: 9999, marginTop: 15, marginBottom: 15}}>
+        <TouchableOpacity 
+          style={{backgroundColor: themeColors.bgColor(0.8), borderRadius: 9999, marginTop: 15, marginBottom: 15}}>
           <Text style={{fontSize: 20, marginTop: 5, marginBottom: 5, marginLeft: 5, marginRight: 5, color: "white"}}>AM</Text>
         </TouchableOpacity>
         <TouchableOpacity style={{ 
