@@ -63,10 +63,10 @@ export default function AddWorkoutScheduleScreen() {
           style={{ height: 40, width: 80, borderColor: themeColors.bgColor(1), alignSelf: 'center', margin: 12, borderWidth: 3, padding: 10, borderRadius: 10 }} />
       </View>
       <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
-        <TouchableOpacity onPress={() => handlePeriodSelect("AM")} style={{ backgroundColor: selectedPeriod === "AM" ? themeColors.bgColor(0.8) : themeColors.bgColor(0.6), borderRadius: 9999, marginTop: 15, marginBottom: 15 }}>
+        <TouchableOpacity onPress={() => handlePeriodSelect("AM")} style={{ backgroundColor: selectedPeriod === "AM" ? themeColors.bgColor(1) : themeColors.bgColor(0.3), borderRadius: 9999, marginTop: 15, marginBottom: 15 }}>
           <Text style={{ fontSize: 20, marginTop: 5, marginBottom: 5, marginLeft: 5, marginRight: 5, color: "white" }}>AM</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => handlePeriodSelect("PM")} style={{ backgroundColor: selectedPeriod === "PM" ? themeColors.bgColor(0.8) : themeColors.bgColor(0.6), borderRadius: 9999, marginTop: 15, marginBottom: 15, marginLeft: 15 }}>
+        <TouchableOpacity onPress={() => handlePeriodSelect("PM")} style={{ backgroundColor: selectedPeriod === "PM" ? themeColors.bgColor(1) : themeColors.bgColor(0.3), borderRadius: 9999, marginTop: 15, marginBottom: 15, marginLeft: 15 }}>
           <Text style={{ fontSize: 20, marginTop: 5, marginBottom: 5, marginLeft: 5, marginRight: 5, color: "white" }}>PM</Text>
         </TouchableOpacity>
       </View>

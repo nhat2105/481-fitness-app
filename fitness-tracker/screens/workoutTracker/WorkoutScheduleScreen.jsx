@@ -10,10 +10,10 @@ export default function WorkoutScheduleScreen({route}) {
     const navigation = useNavigation()
 
     const [reverse, setReverse] = useState(false)
-
     const [firstTime, setFirstTime] = useState(route.params);
-    
-    let chosenDay = 0;
+    const [chosenDay, setChosenDay] = useState(0);
+
+    //let chosenDay = 0;
     const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
     const time = ["6:00 AM", "7:00 AM", "8:00 AM", "9:00 AM", "10:00 AM", "11:00 AM", "12:00 PM"]
 
@@ -41,10 +41,12 @@ export default function WorkoutScheduleScreen({route}) {
 
     // Function to check if a specific time slot is available
     const isTimeSlotAvailable = (timeIndex, dayIndex) => {//day index can be chosen day
-        if (!schedule[timeIndex][dayIndex])console.log("Available")
+        if (!schedule[timeIndex][dayIndex]){//console.log("Available")
+        }
         else {
-            console.log("BRUH NO NOT AVAILABLE")
-            console.log("Activity here: ", schedule[timeIndex][dayIndex])
+           // console.log("BRUH NO NOT AVAILABLE")
+           // console.log("Activity here: ", schedule[timeIndex][dayIndex])
+            setReverse(true)
         }
         return !schedule[timeIndex][dayIndex];
     };
@@ -62,13 +64,12 @@ export default function WorkoutScheduleScreen({route}) {
 
     const DayCard = ({day, startDate, index}) => {
         return(
-                <TouchableOpacity activeOpacity={0.3} onPress={() => {chosenDay = index} }
-                    style={{borderRadius: 15, width: 100, height: 80, marginLeft: 20, marginTop: 30,
-                    shadowColor: themeColors.bgColor(0.6), 
-                    backgroundColor: "white", alignItems: 'center'}}>
-                        <Text style={{fontSize: 16, fontWeight: 600, marginTop: 20}}>{day}</Text>
-                        <Text style={{color: themeColors.text, fontWeight: 500, marginBottom: 20}}>{startDate + index}</Text>
-                </TouchableOpacity>
+            <TouchableOpacity activeOpacity={0.3} onPress={() => {setChosenDay(index)} }
+                style={{borderRadius: 15, width: 100, height: 80, marginLeft: 20, marginTop: 30,
+                backgroundColor: chosenDay===index? themeColors.bgColor(0.4) : "white", alignItems: 'center'}}>
+                    <Text style={{fontSize: 16, fontWeight: 600, marginTop: 20}}>{day}</Text>
+                    <Text style={{color: chosenDay===index? "black": themeColors.text, fontWeight: 500, marginBottom: 20}}>{startDate + index}</Text>
+            </TouchableOpacity>
         )
     }
 
@@ -86,10 +87,10 @@ export default function WorkoutScheduleScreen({route}) {
                 <Text style={{ marginLeft: 20, marginTop: 50, fontWeight: 600, fontSize: 17 }}>{time[timeIndex]}</Text>
                 {timeSlot[chosenDay] && (
                     <Draggable shouldReverse={reverse} onReverse={() => {x: 0; y: 0}}
-                    x={0} y={0} key={timeIndex} style={{ marginTop: 10 }} 
+                        key={timeIndex} style={{ marginTop: 10 }} 
                         onDragRelease={({ nativeEvent }) => {
                             const { pageY } = nativeEvent;
-                            console.log ("Current range: " + pageY/50);
+                            //console.log ("Current range: " + pageY/50);
                             const range = pageY/50; // based on height of timeslot
                             let newTimeIndex;
                             if (range <= 6.2)newTimeIndex = 0;
@@ -98,23 +99,24 @@ export default function WorkoutScheduleScreen({route}) {
                             else if (range > 8.95 && range <= 10.33 )newTimeIndex = 3;
                             else if (range > 10.33 && range <= 11.4)newTimeIndex = 4;
                             else if (range > 11.4 && range <= 13.74)newTimeIndex = 5;
-                            else if (range > 13.74 && range <= 14.8)newTimeIndex = 6;
+                            else if (range > 13.74)newTimeIndex = 6;
                             //console.log("Time now: ", time[newTimeIndex])
 
                             if (isTimeSlotAvailable(newTimeIndex, chosenDay)) {
                                 handleDropActivity(newTimeIndex, chosenDay, timeSlot[chosenDay], timeIndex);
                             } else {
                                 setReverse(true)
-                                console.log("Reached")
                             }  
                         }}
                     >
-                <TouchableOpacity style={{ borderRadius: 15, marginLeft: 100, marginRight: 100, marginTop: 50,
-                 backgroundColor: themeColors.bgColor(0.7)}}>
-                    <Text style={{marginTop: 10, fontWeight: 500, color: 'white', alignSelf: 'center', fontSize: 17, marginBottom: 10}}>
-                        {timeSlot[chosenDay]}
-                    </Text>
-                </TouchableOpacity>
+                <View style={{marginTop: 45}}>
+                    <TouchableOpacity style={{ borderRadius: 15, marginLeft: 100, marginRight: 100,
+                    backgroundColor: themeColors.bgColor(0.7)}}>
+                        <Text style={{marginTop: 10, fontWeight: 500, color: 'white', alignSelf: 'center', fontSize: 17, marginBottom: 10}}>
+                            {timeSlot[chosenDay]}
+                        </Text>
+                    </TouchableOpacity>
+                </View>
             </Draggable>
         )}
     </View>
@@ -126,7 +128,7 @@ export default function WorkoutScheduleScreen({route}) {
                     }} style={{ borderRadius: 9999, backgroundColor: themeColors.bgColor(1), marginTop: 20, marginLeft: 20, marginRight: 20 }}>
                         <Text style={{ marginTop: 5, marginBottom: 5, alignSelf: 'center', fontSize: 18, fontWeight: 700, color: 'white' }}>Confirm Schedule</Text>
                     </TouchableOpacity> :
-                    <TouchableOpacity onPress={() => navigation.navigate("AddWorkoutSchedule")} style={{ borderRadius: 9999, backgroundColor: themeColors.bgColor(1), marginTop: 20, marginLeft: 20, marginRight: 20 }}>
+                    <TouchableOpacity onPress={() => navigation.navigate("AddWorkoutSchedule", chosenDay)} style={{ borderRadius: 9999, backgroundColor: themeColors.bgColor(1), marginTop: 20, marginLeft: 20, marginRight: 20 }}>
                         <Text style={{ marginTop: 5, marginBottom: 5, alignSelf: 'center', fontSize: 18, fontWeight: 700, color: 'white' }}>Add to Schedule</Text>
                     </TouchableOpacity>}
       </ScrollView>

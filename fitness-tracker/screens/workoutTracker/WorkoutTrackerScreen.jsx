@@ -66,8 +66,6 @@ export default function WorkoutTrackerScreen({route}) {
         </View> 
         
         }
-
-
       </ScrollView>
     </View>
   )
