@@ -4,7 +4,6 @@ import Header from '../../components/Header'
 import graph from "../../assets/components/workout_graph.png"
 import { theme } from '../../theme'
 import WorkoutCard from '../../components/WorkoutCard'
-import BackButton from '../../components/BackButton'
 import { useNavigation } from '@react-navigation/native'
 
 
@@ -44,7 +43,6 @@ export default function WorkoutTrackerScreen({route}) {
         }
 
         {firstTime === false && 
-
         <View style ={{backgroundColor: themeBlue.bgColor(1), borderTopLeftRadius: 15,  borderTopEndRadius: 15, marginTop: 30}}>
           
           <TouchableOpacity onPress={() => navigation.navigate("WorkoutSchedule", firstTime)}
