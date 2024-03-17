@@ -1,5 +1,5 @@
 import { View, Text, ScrollView, TouchableOpacity } from 'react-native'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Header from '../../components/Header'
 import { theme } from '../../theme'
 import { useNavigation } from '@react-navigation/native'
@@ -7,18 +7,21 @@ import Draggable from 'react-native-draggable'
 
 export default function WorkoutScheduleScreen({route}) {
     const themeColors = theme("purple")
-    const navigation = useNavigation()
-
+    const navigation = useNavigation();
     const [reverse, setReverse] = useState(false)
     const [firstTime, setFirstTime] = useState(route.params);
     const [chosenDay, setChosenDay] = useState(0);
 
-    //let chosenDay = 0;
+    let {name, height, weight} = route.params;
+
     const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
     const time = ["6:00 AM", "7:00 AM", "8:00 AM", "9:00 AM", "10:00 AM", "11:00 AM", "12:00 PM"]
+    const {sched} = route.params
 
     // State to store the schedule
     const [schedule, setSchedule] = useState(() => {
+        if (sched)return sched;
+        //console.log("Sched received in schedule: ", sched)
         const initialSchedule = [];
         for (let i = 0; i < time.length; i++) {
             const timeSlot = [];
@@ -38,6 +41,14 @@ export default function WorkoutScheduleScreen({route}) {
         }
         return initialSchedule;
     });
+
+    //console.log("WHAT AM I RECEIVING IS: ", route.params)
+    useEffect(() => {
+        // Update local state when the 'schedule' prop changes
+        if (route.params && route.params.schedule) {
+            setSchedule(route.params.schedule);
+        }
+    }, [route.params]);
 
     // Function to check if a specific time slot is available
     const isTimeSlotAvailable = (timeIndex, dayIndex) => {//day index can be chosen day
@@ -73,10 +84,15 @@ export default function WorkoutScheduleScreen({route}) {
         )
     }
 
+    const saveSchedule = () => {
+        navigation.navigate("WorkoutTracker", {firstTime: false, schedule: schedule})
+    }
+
   return (
     <View>
         <ScrollView>
-            {firstTime ? <Header title={"Recommend Plan"} /> : <Header title={"Your Schedule"} />}
+            {firstTime ? <Header title={"Recommend Plan"} action={saveSchedule} /> : 
+            <Header title={"Your Schedule"} action={saveSchedule}/>}
             <ScrollView horizontal={true} style={{flexDirection: 'row'}}>
                 { days.map((day, index) =>
                     {return (<DayCard day={day} startDate={20} index={index} key={index} />)})
@@ -124,11 +140,14 @@ export default function WorkoutScheduleScreen({route}) {
             {firstTime ?
                     <TouchableOpacity onPress={() => {
                         setFirstTime(false);
-                        navigation.navigate("WorkoutTracker", false);
+                        navigation.navigate("WorkoutTracker", {firstTime: false, schedule: schedule, name: name, height: height, weight: weight});
                     }} style={{ borderRadius: 9999, backgroundColor: themeColors.bgColor(1), marginTop: 20, marginLeft: 20, marginRight: 20 }}>
                         <Text style={{ marginTop: 5, marginBottom: 5, alignSelf: 'center', fontSize: 18, fontWeight: 700, color: 'white' }}>Confirm Schedule</Text>
                     </TouchableOpacity> :
-                    <TouchableOpacity onPress={() => navigation.navigate("AddWorkoutSchedule", chosenDay)} style={{ borderRadius: 9999, backgroundColor: themeColors.bgColor(1), marginTop: 20, marginLeft: 20, marginRight: 20 }}>
+                    <TouchableOpacity onPress={() => 
+                        {   let dayString = days[chosenDay] + ", March " + (20 + chosenDay) + ", 2024"
+                            navigation.navigate("AddWorkoutSchedule", dayString, schedule)}} 
+                        style={{ borderRadius: 9999, backgroundColor: themeColors.bgColor(1), marginTop: 20, marginLeft: 20, marginRight: 20 }}>
                         <Text style={{ marginTop: 5, marginBottom: 5, alignSelf: 'center', fontSize: 18, fontWeight: 700, color: 'white' }}>Add to Schedule</Text>
                     </TouchableOpacity>}
       </ScrollView>

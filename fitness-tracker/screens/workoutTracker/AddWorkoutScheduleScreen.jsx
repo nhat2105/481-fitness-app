@@ -5,8 +5,9 @@ import BackButton from '../../components/BackButton';
 import { Calendar, ChevronRight, Heart, Menu } from 'react-native-feather';
 import { theme } from '../../theme';
 import { useNavigation } from '@react-navigation/native';
-
-export default function AddWorkoutScheduleScreen() {
+ 
+export default function AddWorkoutScheduleScreen({route}) {
+  const dayString = route.params;
   const themeColors = theme("purple");
   const navigation = useNavigation();
   const [selectedWorkout, setSelectedWorkout] = useState("");
@@ -50,7 +51,7 @@ export default function AddWorkoutScheduleScreen() {
       <TouchableOpacity style={{ flexDirection: 'row', marginTop: 20, marginRight: 20, borderRadius: 15, backgroundColor: 'white' }}>
         <Calendar stroke={"lightgrey"} strokeWidth={3} style={{ marginLeft: 20, marginTop: 5, marginBottom: 5 }} />
         <Text style={{ alignSelf: 'center', marginTop: 5, marginBottom: 5, marginLeft: 10, fontSize: 17, fontWeight: 700 }}>
-          Monday, Feb 26
+          {dayString}
         </Text>
       </TouchableOpacity>
 

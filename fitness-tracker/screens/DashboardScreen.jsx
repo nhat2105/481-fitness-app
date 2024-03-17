@@ -1,5 +1,5 @@
 import { View, Text, TouchableOpacity, Image, ScrollView} from 'react-native'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import * as Icon from 'react-native-feather'
 import { theme } from '../theme';
 import { useNavigation } from '@react-navigation/native';
@@ -14,7 +14,18 @@ import sample3 from "../assets/components/photo_sample3.png"
 import sample2 from "../assets/components/photo_sample2.png"
 
 export default function DashboardScreen({route}) {
-    var firstTime = true;
+    let [firstTime, setFirstTime] = useState(route.params === false ? false: true)
+    let { sched }  = route.params; 
+    //console.log("Dashboard", sched);
+    let [schedule, setSchedule] = useState(sched);
+
+    useEffect(() => {
+        // Update local state when the 'schedule' prop changes
+        if (route.params && route.params.sched) {
+            setSchedule(route.params.sched);
+        }
+    }, [route.params]);
+
 
     let gallery = [
         { 
@@ -114,8 +125,9 @@ export default function DashboardScreen({route}) {
             </View>
             <View style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between'}}>
                 <TouchableOpacity onPress={()=> {
-                navigation.navigate("WorkoutTracker", firstTime)
-                firstTime = false;}}
+                   // console.log("CHECKING WHAT I'M PASSING FROM DASHBOARD: ", schedule)
+                navigation.navigate("WorkoutTracker", {firstTime: firstTime, schedule: schedule})
+                setFirstTime(false);}}
                 style={{backgroundColor: themeColors.bgColor(1), justifyContent: 'center', display: 'flex', marginTop: 20,
                     alignItems: 'center', borderRadius: 30, width: 170, height: 55,
                     marginLeft: 20, marginRight: 5, flexDirection: 'row'}}>

@@ -1,5 +1,5 @@
 import { View, Text, Image, TouchableOpacity, ScrollView } from 'react-native'
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Header from '../../components/Header'
 import graph from "../../assets/components/workout_graph.png"
 import { theme } from '../../theme'
@@ -8,20 +8,38 @@ import { useNavigation } from '@react-navigation/native'
 
 
 export default function WorkoutTrackerScreen({route}) {
-    const firstTime = route.params;
-
+    let {firstTime, schedule, height, weight, name} = route.params;
     themeBlue = theme('blue')
+    console.log("NO USE STATE ON WORKOUT TRACKER: ", schedule)
+   
+    useEffect(() => {
+      // Update local state when the 'schedule' prop changes
+      if (route.params && route.params.schedule) {
+          schedule = (route.params.schedule);
+      }
+  }, [route.params]);
+
     const navigation = useNavigation()
+    const saveSchedule = () => {
+      //console.log("GOD HELP ME WHAT IS WRONG?")
+      //console.log(schedule)
+      //console.log("WHAT I AM TRYING TO SEND BACK IS: ", schedule)
+      navigation.navigate("Dashboard", {firstTime: false, name: name, height: height, weight: weight, sched: schedule})
+    }
+    
   return (
     <View style={{backgroundColor: 'white'}}>
       <ScrollView>
-        <Header title={"Workout Tracker"} color={"blue"}/>
+        <Header title={"Workout Tracker"} color={"blue"} action={saveSchedule}/>
         <Image source={graph} style={{alignSelf: 'center', marginTop: 30}} />
         
         {firstTime === true && 
         <View style ={{backgroundColor: themeBlue.bgColor(1), borderTopLeftRadius: 15,  borderTopEndRadius: 15, marginTop: 30}}>
           
-        <TouchableOpacity onPress={() => navigation.navigate("WorkoutSchedule", firstTime)}
+        <TouchableOpacity onPress={() => {
+           //console.log("WHAT I AM TRYING TO SEND FORTH IS: ", schedule)
+          navigation.navigate("WorkoutSchedule", {sched: schedule, height: height, weight: weight, name: name})
+        }}
         style={{backgroundColor: 'white', marginTop: 30, borderRadius: 15,
         marginRight: 20, marginLeft: 20}} >
             <Text style={{fontSize: 18, fontWeight: 700, color: themeBlue.text, alignSelf: 'center', marginTop: 5, marginBottom: 5,
@@ -44,8 +62,10 @@ export default function WorkoutTrackerScreen({route}) {
 
         {firstTime === false && 
         <View style ={{backgroundColor: themeBlue.bgColor(1), borderTopLeftRadius: 15,  borderTopEndRadius: 15, marginTop: 30}}>
-          
-          <TouchableOpacity onPress={() => navigation.navigate("WorkoutSchedule", firstTime)}
+          <TouchableOpacity onPress={() => {
+            //console.log("WHAT I AM TRYING TO SEND FORTH IS: ", schedule)
+            navigation.navigate("WorkoutSchedule", {firstTime: firstTime, sched: schedule,
+          height: height, weight: weight, name: name})}}
           style={{backgroundColor: 'white', marginTop: 30, borderRadius: 15,
           marginRight: 20, marginLeft: 20}} >
               <Text style={{fontSize: 18, fontWeight: 700, color: themeBlue.text, alignSelf: 'center', marginTop: 5, marginBottom: 5,

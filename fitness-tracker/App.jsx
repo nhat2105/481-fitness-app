@@ -6,9 +6,6 @@ export default function App() {
   );
 }
 
-//TODO
-//probably different modes of users (for example advanced, intermediate, beginners) 
-
 //Extra
 //logo animated loading screen
 //instruction (guide first-time users to navigate the options)
