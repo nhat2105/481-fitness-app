@@ -27,12 +27,31 @@ export default function ActivityDescription({route}) {
         { id: 1, title: 'Push-Ups', text: '15x' },
     ]);
 
+    const [showUndo1, setShowUndo1] = useState(false);
+    const [showUndo2, setShowUndo2] = useState(false);
+    const [backupScreen1, setBackupScreen1] = useState([])
+    const [backupScreen2, setBackupScreen2] = useState([])
+
     const removeExercise2 = (exerciseId) => {
+        setBackupScreen2(exercises2);
         setExercises2(exercises2.filter(exercise => exercise.id !== exerciseId));
+        setShowUndo2(true);
     };
 
+    const undo1 = () => {
+        setExercises1(backupScreen1)
+        setShowUndo1(false)
+    }
+
+    const undo2 = () => {
+        setExercises2(backupScreen2)
+        setShowUndo2(false)
+    }
+
     const removeExercise1 = (exerciseId) => {
+        setBackupScreen1(exercises1);
         setExercises1(exercises1.filter(exercise => exercise.id !== exerciseId));
+        setShowUndo1(true);
     };
 
     const EquipmentCard = ({id, text}) =>{
@@ -109,14 +128,32 @@ export default function ActivityDescription({route}) {
                 marginTop: 15, marginBottom: 5,}}>2 sets</Text>   
         </View>
         <View marginBottom={40}>
-            <Text style={{fontSize: 16, fontWeight: 700, marginLeft: 20, color: 'black', marginTop: 15, marginBottom: 5,}}>Set 1</Text>
+            <View style={{flexDirection: 'row',  marginTop: 15}}>
+                <Text style={{fontSize: 16, fontWeight: 700, marginLeft: 20, color: 'black', marginBottom: 5,}}>
+                    Set 1
+                </Text>
+                {showUndo1 && <TouchableOpacity onPress={undo1}
+                style={{position: 'absolute', right: 35, backgroundColor: themeColors.bgColor(1), borderRadius: 5}}>
+                    <Text style={{fontSize: 14, fontWeight: 600, marginLeft: 5, marginRight: 5,
+                    marginBottom: 3, marginTop: 3}}>Undo</Text>
+                </TouchableOpacity>}
+            </View>
             {exercises1.map(exercise => (
                 <ActivityCard key={exercise.id} title={exercise.title} text={exercise.text} onDelete={() => removeExercise1(exercise.id)} />
             ))}
             
         </View>
         <View marginBottom={40}>
-            <Text style={{fontSize: 16, fontWeight: 700, marginLeft: 20, color: 'black', marginTop: 15, marginBottom: 5,}}>Set 2</Text>
+            <View style={{flexDirection: 'row',  marginTop: 15}}>
+                <Text style={{fontSize: 16, fontWeight: 700, marginLeft: 20, color: 'black', marginBottom: 5,}}>
+                    Set 2
+                </Text>
+                {showUndo2 && <TouchableOpacity onPress={undo2}
+                style={{position: 'absolute', right: 35, backgroundColor: themeColors.bgColor(1), borderRadius: 5}}>
+                    <Text style={{fontSize: 14, fontWeight: 600, marginLeft: 5, marginRight: 5,
+                    marginBottom: 3, marginTop: 3}}>Undo</Text>
+                </TouchableOpacity>}
+            </View>
             {exercises2.map(exercise => (
                 <ActivityCard key={exercise.id} title={exercise.title} text={exercise.text} onDelete={() => removeExercise2(exercise.id)} />
             ))}
