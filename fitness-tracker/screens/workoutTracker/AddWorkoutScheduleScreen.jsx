@@ -50,15 +50,13 @@ export default function AddWorkoutScheduleScreen({route}) {
     return !schedule[timeIndex][dayIndex];
   };
 
-  
-
   const updateSchedule = ({activity, timeIndex, difficulty}) =>{
     if (isTimeSlotAvailable(timeIndex, chosenDay)) {
       const updatedSchedule = [...schedule];
       updatedSchedule[timeIndex][chosenDay] = activity;
       setSchedule(updatedSchedule); 
     } else {
-      console.log("Not available in schedule")
+      setErrorMsg("Occupied, please choose another time slot")
     }
   }
 
@@ -123,7 +121,8 @@ export default function AddWorkoutScheduleScreen({route}) {
           } else{
             if (!selectedWorkout)setErrorMsg("Please choose a workout routine")
             else if (chosenTime < 0)setErrorMsg("Please choose a time slot ")
-            else setErrorMsg("Please choose a level of difficulty")
+            else if (!selectedDifficulty)setErrorMsg("Please choose a level of difficulty")
+            else setErrorMsg("Occupied, please choose another time slot")
           }
         }}
           style={{backgroundColor: themeColors.bgColor(1), justifyContent: 'center', marginTop: 30,
