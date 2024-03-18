@@ -16,7 +16,7 @@ import sample2 from "../assets/components/photo_sample2.png"
 export default function DashboardScreen({route}) {
     let [firstTime, setFirstTime] = useState(route.params === false ? false: true)
     let { sched }  = route.params; 
-    //console.log("Dashboard", sched);
+    //console.log("First time: ", firstTime);
     let [schedule, setSchedule] = useState(sched);
 
     useEffect(() => {

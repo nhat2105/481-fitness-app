@@ -9,9 +9,8 @@ export default function WorkoutScheduleScreen({route}) {
     const themeColors = theme("purple")
     const navigation = useNavigation();
     const [reverse, setReverse] = useState(false)
-    const [firstTime, setFirstTime] = useState(route.params);
+    const [firstTime, setFirstTime] = useState(route.params.firstTime);
     const [chosenDay, setChosenDay] = useState(0);
-
     let {name, height, weight} = route.params;
 
     const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]

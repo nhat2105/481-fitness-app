@@ -9,8 +9,9 @@ import { useNavigation } from '@react-navigation/native'
 
 export default function WorkoutTrackerScreen({route}) {
     let {firstTime, schedule, height, weight, name} = route.params;
+    //console.log("First time in workout tracker: ", firstTime);
     themeBlue = theme('blue')
-    console.log("NO USE STATE ON WORKOUT TRACKER: ", schedule)
+    //console.log("NO USE STATE ON WORKOUT TRACKER: ", schedule)
    
     useEffect(() => {
       // Update local state when the 'schedule' prop changes
@@ -38,7 +39,7 @@ export default function WorkoutTrackerScreen({route}) {
           
         <TouchableOpacity onPress={() => {
            //console.log("WHAT I AM TRYING TO SEND FORTH IS: ", schedule)
-          navigation.navigate("WorkoutSchedule", {sched: schedule, height: height, weight: weight, name: name})
+          navigation.navigate("WorkoutSchedule", {sched: schedule, height: height, weight: weight, name: name, firstTime: true})
         }}
         style={{backgroundColor: 'white', marginTop: 30, borderRadius: 15,
         marginRight: 20, marginLeft: 20}} >
