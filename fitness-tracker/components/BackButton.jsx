@@ -3,7 +3,7 @@ import { useNavigation } from '@react-navigation/native'
 import { theme } from '../theme'
 import React from 'react'
 
-export default function BackButton({text, color}) {
+export default function BackButton({text, color, action}) {
    
     let themeColors = theme('purple')
     if (color === "blue")themeColors = theme("blue");

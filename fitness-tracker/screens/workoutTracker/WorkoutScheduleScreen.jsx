@@ -145,7 +145,7 @@ export default function WorkoutScheduleScreen({route}) {
                     </TouchableOpacity> :
                     <TouchableOpacity onPress={() => 
                         {   let dayString = days[chosenDay] + ", March " + (20 + chosenDay) + ", 2024"
-                            navigation.navigate("AddWorkoutSchedule", dayString, schedule)}} 
+                            navigation.navigate("AddWorkoutSchedule", {dayString: dayString, chosenDay: chosenDay, schedule: schedule, name: name, weight: weight, height: height})}} 
                         style={{ borderRadius: 9999, backgroundColor: themeColors.bgColor(1), marginTop: 20, marginLeft: 20, marginRight: 20 }}>
                         <Text style={{ marginTop: 5, marginBottom: 5, alignSelf: 'center', fontSize: 18, fontWeight: 700, color: 'white' }}>Add to Schedule</Text>
                     </TouchableOpacity>}
