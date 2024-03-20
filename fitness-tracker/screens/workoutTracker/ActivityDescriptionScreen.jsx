@@ -8,23 +8,32 @@ import rope from "../../assets/components/skipping-rope.png"
 import bottle from "../../assets/components/water-bottle.png"
 import barbell from "../../assets/components/barbell.png"
 import ActivityCard from '../../components/ActivityCard'
+import { useNavigation } from '@react-navigation/native'
 
 export default function ActivityDescription({route}) {
     const themeColors = theme("blue")
     const {text} = route.params;
+    const navigation = useNavigation();
 
-    const [exercises1, setExercises1] = useState([
-        { id: 0, title: 'Warm Up', text: '5:00' },
-        { id: 1, title: 'Jumping Jacks', text: '12x' },
-        { id: 2, title: 'Skippings', text: '15x' },
-        { id: 3, title: 'Squats', text: '20x' },
-        { id: 4, title: 'Arm Raises', text: '0:53' },
-        { id: 5, title: 'Rest & Drinks', text: '2:00' },
-    ]);
+    const [currentAct, setCurrentAct] = useState(0);
+    const [currentSet, setCurrentSet] = useState(0);
 
-    const [exercises2, setExercises2] = useState([
-        { id: 0, title: 'Incline Push-Ups', text: '12x' },
-        { id: 1, title: 'Push-Ups', text: '15x' },
+    const [exercises, setExercises] = useState([
+        //Set 1 (i = 0)
+        [ 
+            { id: 0, title: 'Warm Up', text: '5:00' },
+            { id: 1, title: 'Jumping Jacks', text: '12x' },
+            { id: 2, title: 'Skippings', text: '15x' },
+            { id: 3, title: 'Squats', text: '20x' },
+            { id: 4, title: 'Arm Raises', text: '0:53' },
+            { id: 5, title: 'Rest & Drinks', text: '2:00' },
+        ], 
+        
+        //Set 2 (i = 1)
+        [
+            { id: 0, title: 'Incline Push-Ups', text: '12x' },
+            { id: 1, title: 'Push-Ups', text: '15x' },
+        ]
     ]);
 
     const [showUndo1, setShowUndo1] = useState(false);
@@ -33,24 +42,30 @@ export default function ActivityDescription({route}) {
     const [backupScreen2, setBackupScreen2] = useState([])
 
     const removeExercise2 = (exerciseId) => {
-        setBackupScreen2(exercises2);
-        setExercises2(exercises2.filter(exercise => exercise.id !== exerciseId));
+        setBackupScreen2(exercises[1]);
+        setExercises(exercises[1].filter(exercise => exercise.id !== exerciseId));
         setShowUndo2(true);
     };
 
     const undo1 = () => {
-        setExercises1(backupScreen1)
-        setShowUndo1(false)
+        let temp = exercises;
+        temp[0] = backupScreen1;
+        setExercises(temp);
+        setShowUndo1(false);
     }
 
     const undo2 = () => {
-        setExercises2(backupScreen2)
+        let temp = exercises;
+        temp[1] = backupScreen2;
+        setExercises(temp)
         setShowUndo2(false)
     }
 
     const removeExercise1 = (exerciseId) => {
-        setBackupScreen1(exercises1);
-        setExercises1(exercises1.filter(exercise => exercise.id !== exerciseId));
+        setBackupScreen1(exercises[0]);
+        let newExercises = exercises;
+        newExercises[0] = exercises[0].filter(exercise => exercise.id !== exerciseId);
+        setExercises(newExercises);
         setShowUndo1(true);
     };
 
@@ -138,7 +153,7 @@ export default function ActivityDescription({route}) {
                     marginBottom: 3, marginTop: 3}}>Undo</Text>
                 </TouchableOpacity>}
             </View>
-            {exercises1.map(exercise => (
+            {exercises[0].map(exercise => (
                 <ActivityCard key={exercise.id} title={exercise.title} text={exercise.text} onDelete={() => removeExercise1(exercise.id)} />
             ))}
             
@@ -154,12 +169,23 @@ export default function ActivityDescription({route}) {
                     marginBottom: 3, marginTop: 3}}>Undo</Text>
                 </TouchableOpacity>}
             </View>
-            {exercises2.map(exercise => (
-                <ActivityCard key={exercise.id} title={exercise.title} text={exercise.text} onDelete={() => removeExercise2(exercise.id)} />
+            {exercises[1].map(exercise => (
+                <ActivityCard key={exercise.id} title={exercise.title} 
+                text={exercise.text} onDelete={() => removeExercise2(exercise.id)} />
             ))}
         </View>
 
-        <TouchableOpacity style={{backgroundColor: themeColors.bgColor(1), borderRadius: 15,
+        <TouchableOpacity onPress={() => 
+        {   
+            let curS = exercises[currentSet];
+            let curA = curS[currentAct];
+            let act = curA.title;
+            navigation.navigate("ActivityInstruction", 
+                {text: act, exercises: exercises, currentAct: currentAct, 
+                    currentSet: currentSet, timer: 10000}
+                )}
+        }
+         style={{backgroundColor: themeColors.bgColor(1), borderRadius: 15,
             marginLeft: 30, marginRight: 30, marginBottom: 300}}>
             <Text style={{color: 'white', fontWeight: 900, fontSize: 22, alignSelf: 'center', marginTop: 10, marginBottom: 10
             }}>Start Work Out</Text>

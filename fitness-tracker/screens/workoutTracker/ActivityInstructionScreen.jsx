@@ -1,5 +1,5 @@
 import { View, Text, Image, TouchableOpacity, ScrollView } from 'react-native'
-import React from 'react'
+import React, { useState } from 'react'
 import Header from '../../components/Header'
 import video from "../../assets/components/video_instruction.png"
 import { theme } from '../../theme';
@@ -7,9 +7,33 @@ import { useNavigation } from '@react-navigation/native';
 import StepCard from '../../components/StepCard';
 
 export default function ActivityInstructionScreen({route}) {
-  const {text} = route.params;
+  const {exercises} = route.params;
+  const [text, setText] = useState(route.params.text)
+  const [currentSet, setCurrentSet] = useState(route.params.currentSet)
+  const [currentAct, setCurrentAct] = useState(route.params.currentAct)
+  const {timer} = route.params;
   const themeColors = theme("purple")
   const navigation = useNavigation();
+
+  const startActivity = () => {
+    //jump to the next activity instruction
+    if (currentAct < exercises[currentSet].length){
+      setCurrentAct(currentAct+1)
+    }
+    else {
+      if(currentSet < exercises.length){
+        setCurrentAct(0)
+        setCurrentSet(currentSet+1)
+        console.log("cur set: ", currentSet)
+      }
+      else {navigation.navigate("DoneWorkout")}
+    }
+    let curS = exercises[currentSet];
+    let curA = curS[currentAct];
+    let act = curA.title;
+    setText(act)
+    console.log("Act: ", act);
+  }
 
   return (
     <View>
@@ -52,7 +76,8 @@ export default function ActivityInstructionScreen({route}) {
         Ideally, timer would start to count down and when it is done, the final done screen pops up
         For now, the transition is immediate
         */}
-        <TouchableOpacity onPress={() => navigation.navigate("DoneWorkout")}
+        <TouchableOpacity //onPress={() => navigation.navigate("DoneWorkout", {timer: 30000})}
+         onPress={startActivity}
          style={{marginLeft: 20, marginRight: 20, marginTop: 20, marginBottom: 30, 
           backgroundColor: themeColors.bgColor(1), borderRadius: 15}}>
           <Text style={{fontSize: 20, fontWeight: 700, alignSelf: 'center', marginTop: 5, marginBottom: 5, color: 'white'}}>Start Timer</Text>

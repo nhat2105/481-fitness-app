@@ -72,7 +72,7 @@ export default function AddWorkoutScheduleScreen({route}) {
         </TouchableOpacity>
 
         <Text style={{ marginTop: 20, fontWeight: 800, fontSize: 20 }}>Your Availability</Text>
-        {time.map((t, timeIndex) => <TouchableOpacity onPress={() => setChosenTime(timeIndex)}
+        {time.map((t, timeIndex) => <TouchableOpacity key={t} onPress={() => setChosenTime(timeIndex)}
         style={{backgroundColor: timeIndex===chosenTime? themeColors.bgColor(1):
         themeColors.bgColor(0.3), marginTop: 20, borderRadius: 7, marginRight: 20}}> 
           <Text style={{marginTop: 5, marginBottom: 5, fontSize: 15, fontWeight: 700, alignSelf: 'center'}} >{t}</Text>
