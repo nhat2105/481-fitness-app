@@ -17,14 +17,14 @@ export default function ActivityInstructionScreen({route}) {
 
   const startActivity = () => {
     //jump to the next activity instruction
-    if (currentAct < exercises[currentSet].length){
+    if (currentAct < exercises[currentSet].length - 1){
       setCurrentAct(currentAct+1)
+      console.log("Current act: ", currentAct)
     }
     else {
-      if(currentSet < exercises.length){
+      if(currentSet < exercises.length - 1){
         setCurrentAct(0)
-        setCurrentSet(currentSet+1)
-        console.log("cur set: ", currentSet)
+        setCurrentSet(currentSet+1) 
       }
       else {navigation.navigate("DoneWorkout")}
     }

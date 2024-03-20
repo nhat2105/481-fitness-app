@@ -43,7 +43,9 @@ export default function ActivityDescription({route}) {
 
     const removeExercise2 = (exerciseId) => {
         setBackupScreen2(exercises[1]);
-        setExercises(exercises[1].filter(exercise => exercise.id !== exerciseId));
+        let newExercises = exercises;
+        newExercises[1] = exercises[1].filter(exercise => exercise.id !== exerciseId)
+        setExercises(newExercises);
         setShowUndo2(true);
     };
 
