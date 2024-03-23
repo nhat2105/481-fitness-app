@@ -156,7 +156,10 @@ export default function ActivityDescription({route}) {
                 </TouchableOpacity>}
             </View>
             {exercises[0].map(exercise => (
-                <ActivityCard key={exercise.id} title={exercise.title} text={exercise.text} onDelete={() => removeExercise1(exercise.id)} />
+                <ActivityCard  currentAct={currentAct} currentSet={currentSet} timer={1000}
+                viewOnly={exercise.id !== 0} exercises={exercises} 
+                key={exercise.id} title={exercise.title} text={exercise.text} 
+                onDelete={() => removeExercise1(exercise.id)} />
             ))}
             
         </View>
@@ -172,7 +175,8 @@ export default function ActivityDescription({route}) {
                 </TouchableOpacity>}
             </View>
             {exercises[1].map(exercise => (
-                <ActivityCard key={exercise.id} title={exercise.title} 
+                <ActivityCard key={exercise.id} title={exercise.title} currentAct={currentAct} currentSet={currentSet}
+                exercises={exercise} timer={1000}
                 text={exercise.text} onDelete={() => removeExercise2(exercise.id)} />
             ))}
         </View>
@@ -183,8 +187,10 @@ export default function ActivityDescription({route}) {
             let curA = curS[currentAct];
             let act = curA.title;
             navigation.navigate("ActivityInstruction", 
-                {text: act, exercises: exercises, currentAct: currentAct, 
-                    currentSet: currentSet, timer: 10000}
+                {   
+                    
+                    text: act, exercises: exercises, currentAct: currentAct, 
+                    currentSet: currentSet, timer: 10000, viewOnly: false}
                 )}
         }
          style={{backgroundColor: themeColors.bgColor(1), borderRadius: 15,

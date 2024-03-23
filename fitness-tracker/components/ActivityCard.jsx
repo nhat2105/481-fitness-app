@@ -1,5 +1,5 @@
 import { View, Text, Image, TouchableOpacity, Sa } from 'react-native'
-import React from 'react'
+import React, { useState } from 'react'
 import pic from "../assets/components/Workout-Pic.png"
 import { ChevronRight } from 'react-native-feather'
 import { useNavigation } from '@react-navigation/native'
@@ -7,9 +7,14 @@ import Swipeable from "react-native-gesture-handler/Swipeable"
 import { theme } from '../theme'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
 
-export default function ActivityCard({title, text, onDelete}) {
+//param to determine whether this is the current action, if it is, then show the start timer button
+//otherwise, lock
+
+export default ActivityCard = ({title, text, onDelete, viewOnly, exercises, currentAct, currentSet, timer}) => {
     const themeColors = theme("blue")
     const navigation = useNavigation();
+    console.log("Receving set: ", currentSet)
+    
     const removeCurrentCard = () => {
       onDelete();
     }
@@ -28,16 +33,22 @@ export default function ActivityCard({title, text, onDelete}) {
     <GestureHandlerRootView style={{flex: 1}}>
       <Swipeable renderLeftActions={showDelete}>
         <View style={{marginRight: 20, marginLeft: 20}} >
-          <TouchableOpacity onPress={()=> navigation.navigate("ActivityInstruction", {text: title})}
-            style={{flexDirection: 'row', justifyContent: 'space-between', borderRadius: 10,
-            marginTop: 20, backgroundColor:'lightgrey'}}>
-            <Image source={pic}/>
-            <View marginTop={5} >
-                <Text style={{fontSize: 16, fontWeight: 700, alignSelf: 'center' }}>{title}</Text>
-                <Text alignSelf="center" fontWeight={600}>{text}</Text>
-            </View>
-            <ChevronRight stroke={"grey"} strokeWidth={3} marginTop={9}/>
-          </TouchableOpacity>
+            <TouchableOpacity onPress={()=> {
+              console.log("Passing set: ", currentSet, "act: ", currentAct)
+              navigation.navigate("ActivityInstruction", {text: title,
+            exercises: exercises, currentAct: currentAct, viewOnly: viewOnly,
+            currentSet: currentSet, timer: timer,
+            })}
+        }
+              style={{flexDirection: 'row', justifyContent: 'space-between', borderRadius: 10,
+              marginTop: 20, backgroundColor:'lightgrey'}}>
+              <Image source={pic}/>
+              <View marginTop={5} >
+                  <Text style={{fontSize: 16, fontWeight: 700, alignSelf: 'center' }}>{title}</Text>
+                  <Text alignSelf="center" fontWeight={600}>{text}</Text>
+              </View>
+              <ChevronRight stroke={"grey"} strokeWidth={3} marginTop={9}/>
+            </TouchableOpacity>
         </View>
       </Swipeable>
     </GestureHandlerRootView>

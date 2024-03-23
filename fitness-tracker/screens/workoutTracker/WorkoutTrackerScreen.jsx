@@ -12,6 +12,8 @@ export default function WorkoutTrackerScreen({route}) {
     //console.log("First time in workout tracker: ", firstTime);
     themeBlue = theme('blue')
     //console.log("NO USE STATE ON WORKOUT TRACKER: ", schedule)
+
+    //RECOMMENDING SESSION SHOULDN'T HAVE ADD OPTION, more like exercise cards
    
     useEffect(() => {
       // Update local state when the 'schedule' prop changes

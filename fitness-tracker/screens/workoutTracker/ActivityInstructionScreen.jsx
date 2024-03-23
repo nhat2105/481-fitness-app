@@ -11,11 +11,16 @@ export default function ActivityInstructionScreen({route}) {
   const [text, setText] = useState(route.params.text)
   const [currentSet, setCurrentSet] = useState(route.params.currentSet)
   const [currentAct, setCurrentAct] = useState(route.params.currentAct)
-  const {timer} = route.params;
+  const {timer, viewOnly} = route.params;
   const themeColors = theme("purple")
   const navigation = useNavigation();
 
+  //CANCEL BUTTON halfway, this way it won't add to history schedule
+
   const startActivity = () => {
+    //console.log("Current set: ", currentSet)
+    //console.log("Current act: ", currentAct)
+
     //jump to the next activity instruction
     if (currentAct < exercises[currentSet].length - 1){
       setCurrentAct(currentAct+1)
@@ -76,12 +81,14 @@ export default function ActivityInstructionScreen({route}) {
         Ideally, timer would start to count down and when it is done, the final done screen pops up
         For now, the transition is immediate
         */}
-        <TouchableOpacity //onPress={() => navigation.navigate("DoneWorkout", {timer: 30000})}
-         onPress={startActivity}
-         style={{marginLeft: 20, marginRight: 20, marginTop: 20, marginBottom: 30, 
-          backgroundColor: themeColors.bgColor(1), borderRadius: 15}}>
-          <Text style={{fontSize: 20, fontWeight: 700, alignSelf: 'center', marginTop: 5, marginBottom: 5, color: 'white'}}>Start Timer</Text>
-        </TouchableOpacity>     
+        { viewOnly == false &&
+          <TouchableOpacity //onPress={() => navigation.navigate("DoneWorkout", {timer: 30000})}
+          onPress={startActivity}
+          style={{marginLeft: 20, marginRight: 20, marginTop: 20, marginBottom: 30, 
+            backgroundColor: themeColors.bgColor(1), borderRadius: 15}}>
+            <Text style={{fontSize: 20, fontWeight: 700, alignSelf: 'center', marginTop: 5, marginBottom: 5, color: 'white'}}>Start Timer</Text>
+          </TouchableOpacity> 
+        }           
 
       </ScrollView>
     </View>
