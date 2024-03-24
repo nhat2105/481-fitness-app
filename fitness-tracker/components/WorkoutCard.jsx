@@ -37,13 +37,16 @@ export default function WorkoutCard({title, text, action}) {
               <Text style={{fontSize: 18, fontWeight: 700, alignSelf: 'center', left: 30}} >{text}</Text>
           </View>
 
-          {action === "Start" &&
-            <TouchableOpacity onPress={() => {navigation.navigate("ActivityDescription", {text: text})}} 
+          
+            <TouchableOpacity onPress={() => 
+            { if (action === "Start")navigation.navigate("ActivityDescription", {text: text})
+              else navigation.navigate("ActivityDescription", {text: text, lookOnly: true})
+            }} 
             style={{backgroundColor:  themeColors.bgColor(1), position: 'absolute', right: 40, top: 10, marginLeft: 10,
               borderRadius: 20, boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.1)'}}>
               <Text style={{color: 'black', marginRight: 5, marginBottom: 5, marginLeft: 5, marginRight: 5,
               marginTop: 5, fontSize: 17, fontWeight: 700}}>{action}</Text>
-          </TouchableOpacity> }
+          </TouchableOpacity> 
 
       </View>
   </View>

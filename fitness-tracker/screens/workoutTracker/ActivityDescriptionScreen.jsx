@@ -12,7 +12,7 @@ import { useNavigation } from '@react-navigation/native'
 
 export default function ActivityDescription({route}) {
     const themeColors = theme("blue")
-    const {text} = route.params;
+    const {text, lookOnly} = route.params;
     const navigation = useNavigation();
 
     const [currentAct, setCurrentAct] = useState(0);
@@ -157,7 +157,7 @@ export default function ActivityDescription({route}) {
             </View>
             {exercises[0].map(exercise => (
                 <ActivityCard  currentAct={currentAct} currentSet={currentSet} timer={1000}
-                viewOnly={exercise.id !== 0} exercises={exercises} 
+                viewOnly={ lookOnly? true : (exercise.id !== 0)} exercises={exercises} 
                 key={exercise.id} title={exercise.title} text={exercise.text} 
                 onDelete={() => removeExercise1(exercise.id)} />
             ))}
@@ -180,7 +180,7 @@ export default function ActivityDescription({route}) {
                 text={exercise.text} onDelete={() => removeExercise2(exercise.id)} />
             ))}
         </View>
-
+        {lookOnly? <></> :
         <TouchableOpacity onPress={() => 
         {   
             let curS = exercises[currentSet];
@@ -198,6 +198,7 @@ export default function ActivityDescription({route}) {
             <Text style={{color: 'white', fontWeight: 900, fontSize: 22, alignSelf: 'center', marginTop: 10, marginBottom: 10
             }}>Start Work Out</Text>
         </TouchableOpacity>
+        }
       </ScrollView>
     </View>
   )

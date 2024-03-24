@@ -30,7 +30,7 @@ export default ActivityCard = ({title, text, onDelete, viewOnly, exercises, curr
       <Swipeable renderLeftActions={showDelete}>
         <View style={{marginRight: 20, marginLeft: 20}} >
             <TouchableOpacity onPress={()=> {
-              console.log("Passing set: ", currentSet, "act: ", currentAct)
+              //console.log("Passing set: ", currentSet, "act: ", currentAct)
               navigation.navigate("ActivityInstruction", {text: title,
             exercises: exercises, currentAct: currentAct, viewOnly: viewOnly,
             currentSet: currentSet, timer: timer,
