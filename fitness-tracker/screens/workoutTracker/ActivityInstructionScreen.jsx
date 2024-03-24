@@ -18,9 +18,6 @@ export default function ActivityInstructionScreen({route}) {
   //CANCEL BUTTON halfway, this way it won't add to history schedule
 
   const startActivity = () => {
-    //console.log("Current set: ", currentSet)
-    //console.log("Current act: ", currentAct)
-
     //jump to the next activity instruction
     if (currentAct < exercises[currentSet].length - 1){
       setCurrentAct(currentAct+1)

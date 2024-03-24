@@ -1,4 +1,4 @@
-import { View, Text, Image, TouchableOpacity, Sa } from 'react-native'
+import { View, Text, Image, TouchableOpacity } from 'react-native'
 import React, { useState } from 'react'
 import pic from "../assets/components/Workout-Pic.png"
 import { ChevronRight } from 'react-native-feather'
@@ -7,14 +7,10 @@ import Swipeable from "react-native-gesture-handler/Swipeable"
 import { theme } from '../theme'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
 
-//param to determine whether this is the current action, if it is, then show the start timer button
-//otherwise, lock
-
 export default ActivityCard = ({title, text, onDelete, viewOnly, exercises, currentAct, currentSet, timer}) => {
     const themeColors = theme("blue")
     const navigation = useNavigation();
-    console.log("Receving set: ", currentSet)
-    
+
     const removeCurrentCard = () => {
       onDelete();
     }

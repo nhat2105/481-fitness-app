@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, ScrollView, Modal, FlatList } from 'react-native';
 import Header from '../../components/Header';
-import BackButton from '../../components/BackButton';
 import { Calendar, ChevronRight, Heart, Menu } from 'react-native-feather';
 import { theme } from '../../theme';
 import { useNavigation } from '@react-navigation/native';
@@ -11,7 +10,7 @@ export default function AddWorkoutScheduleScreen({route}) {
   const themeColors = theme("purple");
   const navigation = useNavigation();
   const [schedule, setSchedule] = useState(route.params.schedule)
-  const [selectedWorkout, setSelectedWorkout] = useState("");
+  const [selectedWorkout, setSelectedWorkout] = useState(route.params.chosenAct? route.params.chosenAct : "");
   const [selectedDifficulty, setSelectedDifficulty] = useState("");
   const [workoutModalVisible, setWorkoutModalVisible] = useState(false);
   const [difficultyModalVisible, setDifficultyModalVisible] = useState(false);

@@ -51,9 +51,9 @@ export default function WorkoutTrackerScreen({route}) {
         
         <Text style={{fontSize: 20, fontWeight: 700, marginLeft: 20,
             color: 'white', marginTop: 20, marginBottom: 5}}>Recommended Activities</Text>
-        <WorkoutCard title= {"abs"} text={"Abs Workout"}  action={"Add"} />
-        <WorkoutCard title= {"lower"} text={"Lowerbody Train"}  action={"Add"} />
-        <WorkoutCard title= {"upper"} action={"Add"} text={"Weight Training"}/>
+        <WorkoutCard title= {"abs"} text={"Abs Workout"}  />
+        <WorkoutCard title= {"lower"} text={"Lowerbody Train"}  />
+        <WorkoutCard title= {"upper"} text={"Weight Training"}/>
         <TouchableOpacity onPress={() => navigation.goBack()}
         style={{backgroundColor: 'white', marginLeft: 30, borderRadius: 8,
         marginRight: 30, marginTop: 20, marginBottom: 80}}>
@@ -83,9 +83,9 @@ export default function WorkoutTrackerScreen({route}) {
           
           <Text style={{fontSize: 20, fontWeight: 700, marginLeft: 20,
               color: 'white', marginTop: 20, marginBottom: 5}}>Recommended Activities</Text>
-          <WorkoutCard title= {"abs"} text={"Abs Workout"}  action={"Add"} />
-          <WorkoutCard title= {"lower"} text={"Lowerbody Train"}  action={"Add"} />
-          <WorkoutCard title= {"upper"} action={"Add"} text={"Weight Training"}/>
+          <WorkoutCard title= {"abs"} text={"Abs Workout"}  />
+          <WorkoutCard title= {"lower"} text={"Lowerbody Train"} />
+          <WorkoutCard title= {"upper"} text={"Weight Training"}/>
         </View> 
         
         }

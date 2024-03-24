@@ -122,11 +122,11 @@ export default function HistoryWorkoutcreen() {
                         {  activities.map((a, i) =>{
                             if (i == index){
                                 return (
-                                    <TouchableOpacity key={i} style={{borderRadius: 15, marginLeft: 100, marginRight: 100,
-                                    backgroundColor: themeColors.bgColor(0.7)}}>
+                                    <View key={i} style={{borderRadius: 9, marginLeft: 100, marginRight: 100,
+                                    backgroundColor: themeColors.bgColor(1)}}>
                                         <Text style={{marginTop: 10, fontWeight: 500, color: 'white', 
                                             alignSelf: 'center', fontSize: 17, marginBottom: 10}} >{a}</Text>
-                                    </TouchableOpacity>
+                                    </View>
                                 )
                             }    
                         })
