@@ -9,11 +9,7 @@ import { useNavigation } from '@react-navigation/native'
 
 export default function WorkoutTrackerScreen({route}) {
     let {firstTime, schedule, height, weight, name} = route.params;
-    //console.log("First time in workout tracker: ", firstTime);
     themeBlue = theme('blue')
-    //console.log("NO USE STATE ON WORKOUT TRACKER: ", schedule)
-
-    //RECOMMENDING SESSION SHOULDN'T HAVE ADD OPTION, more like exercise cards
    
     useEffect(() => {
       // Update local state when the 'schedule' prop changes
@@ -24,9 +20,6 @@ export default function WorkoutTrackerScreen({route}) {
 
     const navigation = useNavigation()
     const saveSchedule = () => {
-      //console.log("GOD HELP ME WHAT IS WRONG?")
-      //console.log(schedule)
-      //console.log("WHAT I AM TRYING TO SEND BACK IS: ", schedule)
       navigation.navigate("Dashboard", {firstTime: false, name: name, height: height, weight: weight, sched: schedule})
     }
     
@@ -40,7 +33,6 @@ export default function WorkoutTrackerScreen({route}) {
         <View style ={{backgroundColor: themeBlue.bgColor(1), borderTopLeftRadius: 15,  borderTopEndRadius: 15, marginTop: 30}}>
           
         <TouchableOpacity onPress={() => {
-           //console.log("WHAT I AM TRYING TO SEND FORTH IS: ", schedule)
           navigation.navigate("WorkoutSchedule", {sched: schedule, height: height, weight: weight, name: name, firstTime: true})
         }}
         style={{backgroundColor: 'white', marginTop: 30, borderRadius: 15,
@@ -66,7 +58,6 @@ export default function WorkoutTrackerScreen({route}) {
         {firstTime === false && 
         <View style ={{backgroundColor: themeBlue.bgColor(1), borderTopLeftRadius: 15,  borderTopEndRadius: 15, marginTop: 30}}>
           <TouchableOpacity onPress={() => {
-            //console.log("WHAT I AM TRYING TO SEND FORTH IS: ", schedule)
             navigation.navigate("WorkoutSchedule", {firstTime: firstTime, sched: schedule,
           height: height, weight: weight, name: name})}}
           style={{backgroundColor: 'white', marginTop: 30, borderRadius: 15,

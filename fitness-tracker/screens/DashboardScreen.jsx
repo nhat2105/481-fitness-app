@@ -18,7 +18,7 @@ export default function DashboardScreen({route}) {
     let { sched }  = route.params; 
     //console.log("First time: ", firstTime);
     let [schedule, setSchedule] = useState(sched);
-    let [history, setHistory] = useState(route.params.history)
+    let [history, setHistory] = useState(route.params.history? route.params.history: [])
 
     useEffect(() => {
         // Update local state when the 'schedule' prop changes

@@ -7,7 +7,7 @@ import Swipeable from "react-native-gesture-handler/Swipeable"
 import { theme } from '../theme'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
 
-export default ActivityCard = ({title, text, onDelete, viewOnly, exercises, currentAct, currentSet, timer}) => {
+export default ActivityCard = ({title, text, onDelete, viewOnly, exercises, currentAct, currentSet, timer, routine}) => {
     const themeColors = theme("blue")
     const navigation = useNavigation();
 
@@ -31,7 +31,7 @@ export default ActivityCard = ({title, text, onDelete, viewOnly, exercises, curr
         <View style={{marginRight: 20, marginLeft: 20}} >
             <TouchableOpacity onPress={()=> {
               //console.log("Passing set: ", currentSet, "act: ", currentAct)
-              navigation.navigate("ActivityInstruction", {text: title,
+              navigation.navigate("ActivityInstruction", {text: title, routine: routine,
             exercises: exercises, currentAct: currentAct, viewOnly: viewOnly,
             currentSet: currentSet, timer: timer,
             })}

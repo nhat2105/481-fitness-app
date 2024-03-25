@@ -116,7 +116,7 @@ export default function ActivityDescription({route}) {
                 <Text style={{fontSize: 17, fontWeight: 800, marginLeft: 8, marginTop: 10, marginBottom: 10}}>Schedule Workout</Text>
                 <Text style={{ position: 'absolute', right: 35,
                     fontSize: 14, fontWeight: 500, marginTop: 12, marginBottom: 10}}>2/24 9:00am</Text>
-                <ChevronRight strokeWidth={1} stroke={"black"} style={{marginTop: 12, right: 10, position: 'absolute'}}/>
+                {/**<ChevronRight strokeWidth={1} stroke={"black"} style={{marginTop: 12, right: 10, position: 'absolute'}}/>*/}
             </View>
         </View>
 
@@ -126,7 +126,7 @@ export default function ActivityDescription({route}) {
                 <Text style={{fontSize: 17, fontWeight: 800, marginLeft: 8, marginTop: 10, marginBottom: 10}}>Difficulty</Text>
                 <Text style={{ position: 'absolute', right: 35, color: 'black',
                     fontSize: 14, fontWeight: 500, marginTop: 12, marginBottom: 10}}>Beginner</Text>
-                <ChevronDown strokeWidth={1} stroke={"black"} style={{marginTop: 12, right: 10, position: 'absolute'}}/>
+                {/**<ChevronDown strokeWidth={1} stroke={"black"} style={{marginTop: 12, right: 10, position: 'absolute'}}/>*/}
             </View>
         </View>
 
@@ -157,7 +157,7 @@ export default function ActivityDescription({route}) {
             </View>
             {exercises[0].map(exercise => (
                 <ActivityCard  currentAct={currentAct} currentSet={currentSet} timer={1000}
-                viewOnly={ lookOnly? true : (exercise.id !== 0)} exercises={exercises} 
+                viewOnly={ lookOnly? true : (exercise.id !== 0)} exercises={exercises} routine={text}
                 key={exercise.id} title={exercise.title} text={exercise.text} 
                 onDelete={() => removeExercise1(exercise.id)} />
             ))}
@@ -176,7 +176,7 @@ export default function ActivityDescription({route}) {
             </View>
             {exercises[1].map(exercise => (
                 <ActivityCard key={exercise.id} title={exercise.title} currentAct={currentAct} currentSet={currentSet}
-                exercises={exercise} timer={1000}
+                exercises={exercise} timer={1000} routine={text}
                 text={exercise.text} onDelete={() => removeExercise2(exercise.id)} />
             ))}
         </View>
@@ -189,7 +189,7 @@ export default function ActivityDescription({route}) {
             navigation.navigate("ActivityInstruction", 
                 {   
                     
-                    text: act, exercises: exercises, currentAct: currentAct, 
+                    text: act, exercises: exercises, currentAct: currentAct, routine: text,
                     currentSet: currentSet, timer: 10000, viewOnly: false}
                 )}
         }

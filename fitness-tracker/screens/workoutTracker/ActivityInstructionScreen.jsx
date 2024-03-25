@@ -7,7 +7,7 @@ import { useNavigation } from '@react-navigation/native';
 import StepCard from '../../components/StepCard';
 
 export default function ActivityInstructionScreen({route}) {
-  const {exercises} = route.params;
+  const {exercises, routine} = route.params;
   const [text, setText] = useState(route.params.text)
   const [currentSet, setCurrentSet] = useState(route.params.currentSet)
   const [currentAct, setCurrentAct] = useState(route.params.currentAct)
@@ -28,7 +28,7 @@ export default function ActivityInstructionScreen({route}) {
         setCurrentAct(0)
         setCurrentSet(currentSet+1) 
       }
-      else {navigation.navigate("DoneWorkout")}
+      else {navigation.navigate("DoneWorkout", {routine: routine})}
     }
     let curS = exercises[currentSet];
     let curA = curS[currentAct];
