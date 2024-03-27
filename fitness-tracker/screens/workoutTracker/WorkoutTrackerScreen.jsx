@@ -58,7 +58,7 @@ export default function WorkoutTrackerScreen({route}) {
         {firstTime === false && 
         <View style ={{backgroundColor: themeBlue.bgColor(1), borderTopLeftRadius: 15,  borderTopEndRadius: 15, marginTop: 30}}>
           <TouchableOpacity onPress={() => {
-            navigation.navigate("WorkoutSchedule", {firstTime: firstTime, sched: schedule,
+            navigation.navigate("WorkoutSchedule", {firstTime: firstTime, sched: schedule, 
           height: height, weight: weight, name: name})}}
           style={{backgroundColor: 'white', marginTop: 30, borderRadius: 15,
           marginRight: 20, marginLeft: 20}} >

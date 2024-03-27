@@ -18,7 +18,9 @@ export default function DashboardScreen({route}) {
     let { sched }  = route.params; 
     //console.log("First time: ", firstTime);
     let [schedule, setSchedule] = useState(sched);
-    let [history, setHistory] = useState(route.params.history? route.params.history: [])
+
+    //easier way: only pass the one with [timeIndex][day] = routineName, pass it to history, let history update itself
+    const {historyTimeIndex, dayHistory, routine} = route.params;
 
     useEffect(() => {
         // Update local state when the 'schedule' prop changes
@@ -67,7 +69,7 @@ export default function DashboardScreen({route}) {
 
     const viewMenu = () =>{
         //temporarily make it workout history
-        navigation.navigate("WorkoutHistory", {history: history})
+        navigation.navigate("WorkoutHistory", {timeIndex: historyTimeIndex, day: dayHistory, routine: routine})
     }
 
     const goToSleepTracker = () =>{
