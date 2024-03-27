@@ -54,8 +54,10 @@ export default function AddWorkoutScheduleScreen({route}) {
       const updatedSchedule = [...schedule];
       updatedSchedule[timeIndex][chosenDay] = activity;
       setSchedule(updatedSchedule); 
+      return true;
     } else {
       setErrorMsg("Occupied, please choose another time slot")
+      return false;
     }
   }
 
@@ -115,14 +117,15 @@ export default function AddWorkoutScheduleScreen({route}) {
         <TouchableOpacity onPress={()=>{
           if (chosenTime > 0 && selectedWorkout && selectedDifficulty)
           {
-            updateSchedule({activity: selectedWorkout, timeIndex: chosenTime})
-            navigation.navigate("WorkoutSchedule", {sched: schedule, height: height, weight: weight, name: name, firstTime: false})
-          } else{
-            if (!selectedWorkout)setErrorMsg("Please choose a workout routine")
-            else if (chosenTime < 0)setErrorMsg("Please choose a time slot ")
-            else if (!selectedDifficulty)setErrorMsg("Please choose a level of difficulty")
-            else setErrorMsg("Occupied, please choose another time slot")
-          }
+            let res = updateSchedule({activity: selectedWorkout, timeIndex: chosenTime})
+            if (res)navigation.navigate("WorkoutSchedule", {sched: schedule, height: height, weight: weight, name: name, firstTime: false})
+            else{
+              if (!selectedWorkout)setErrorMsg("Please choose a workout routine")
+              else if (chosenTime < 0)setErrorMsg("Please choose a time slot ")
+              else if (!selectedDifficulty)setErrorMsg("Please choose a level of difficulty")
+              else setErrorMsg("Occupied, please choose another time slot")
+            }
+          } 
         }}
           style={{backgroundColor: themeColors.bgColor(1), justifyContent: 'center', marginTop: 30,
             alignItems: 'center', borderRadius: 20, marginLeft: 20, marginRight: 20, marginBottom: 50}}>
