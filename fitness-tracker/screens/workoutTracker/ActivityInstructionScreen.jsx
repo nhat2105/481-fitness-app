@@ -28,7 +28,11 @@ export default function ActivityInstructionScreen({route}) {
         setCurrentAct(0)
         setCurrentSet(currentSet+1) 
       }
-      else {navigation.navigate("DoneWorkout", {routine: routine})}
+      else {
+        let timeIndex = 3;
+        if (routine === "Upperbody Train")timeIndex = 4
+        navigation.navigate("DoneWorkout", {routine: routine, timeIndex: timeIndex})
+      }
     }
     let curS = exercises[currentSet];
     let curA = curS[currentAct];

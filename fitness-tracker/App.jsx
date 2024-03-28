@@ -5,6 +5,14 @@ export default function App() {
     <Navigation />
   );
 }
+// Feedback + TODO:
+// Too much info on steps walked, rather being simple like calories
+// Units on register page
+// Footer on other pages
+// workout tracker actually based on user schedule 
+// Change the descriptions/ instructions for all acts
+// TIMER
+
 
 //Extra
 
@@ -12,5 +20,3 @@ export default function App() {
 //instruction (guide first-time users to navigate the options)
 //User can change difficulty, day set in the description
 //from schedule, user can click on and navigate to the activity description
-//workout tracker actually based on user schedule 
-//Change the descriptions/ instructions for all acts

@@ -10,9 +10,10 @@ export default function DoneWorkoutScreen({route}) {
   //Timer + After done is clicked, also add it to the finished history screen
   //console.log("Timer passed: " , timer, " ms")
 
+  
   const goToDashboard = () =>{
     //hardcode chosenday = 0
-    navigation.navigate("Dashboard", {historyTimeIndex: 3, dayHistory: 0, routine: routine})
+    navigation.navigate("Dashboard", {historyTimeIndex: timeIndex, dayHistory: 0, routine: routine})
   }
   
   return (

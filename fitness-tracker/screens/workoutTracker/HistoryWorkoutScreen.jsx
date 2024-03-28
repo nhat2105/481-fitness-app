@@ -1,43 +1,36 @@
-import { View, Text, ScrollView, TouchableOpacity} from 'react-native'
-import React, {useState, useEffect} from 'react'
-import Header from '../../components/Header'
-import { theme } from '../../theme'
-import { useNavigation } from '@react-navigation/native'
-import BackButton from '../../components/BackButton'
-import { ChevronLeft, ChevronRight } from 'react-native-feather'
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import Header from '../../components/Header';
+import { theme } from '../../theme';
+import { useNavigation } from '@react-navigation/native';
+import BackButton from '../../components/BackButton';
+import { ChevronLeft, ChevronRight } from 'react-native-feather';
 
-export default function HistoryWorkoutcreen({route}) {
-    
-    const {timeIndex, day, routine} = route.params
-    
-    useEffect(() => {
-        if (day && timeIndex !== undefined && routine) {
-            completeActivity(day, timeIndex, routine);
-        }
-    }, [day, timeIndex, routine]);
+export default function HistoryWorkoutScreen({ route }) {
+    const { timeIndex, day, routine } = route.params;
 
-    const [startDate, setStartDate] = useState(11)
+    const [startDate, setStartDate] = useState(11);
     const [startMonth, setStartMonth] = useState(3);
     const [chosenDay, setChosenDay] = useState(0);
 
-    useEffect(() => {
-        AsyncStorage.getItem('schedule').then((storedSchedule) => {
-            if (storedSchedule) {
-                setSchedule(JSON.parse(storedSchedule));
-            }
-        });
-    }, []);
+    const [history, setHistory] = useState([   
+        { id:0, day: "Monday", activities: ["Fullbody Workout", "Upperbody Workout", "", "", "", "", ""] },
+        { id:1, day: "Tuesday", activities: ["", "", "Cardio Workout", "", "", "", ""] },
+        { id:2, day: "Wednesday", activities: ["Lowerbody Workout", "", "", "", "", "", ""] },
+        { id:3, day: "Thursday", activities: ["", "", "", "", "", "", ""] },
+        { id:4, day: "Friday", activities: ["", "", "", "", "", "", ""] },
+        { id:5, day: "Saturday", activities: ["", "", "", "", "", "", ""] },
+        { id:6, day: "Sunday", activities: ["", "", "", "", "", "", ""] }
+    ]);
 
-    useEffect(() => {
-        if (day && timeIndex !== undefined && routine) {
-            completeActivity(day, timeIndex, routine);
-        }
-    }, [day, timeIndex, routine]);
-
-    useEffect(() => {
-        AsyncStorage.setItem('schedule', JSON.stringify(schedule));
-    }, [schedule]);
+    if (day && timeIndex && routine){
+        const updatedHistory = history;
+        const activities = updatedHistory[day].activities; // Make a copy of activities
+        activities[timeIndex] = routine; // Update the activity at the specified time index
+        updatedHistory[day] = { ...updatedHistory[day], activities }; // Update the day's activities
+        setHistory(updatedHistory)
+        return updatedHistory;
+    }
 
 
     const months = ["January", "February", "March", "April", "May", "June", "July", "August", 
@@ -84,27 +77,13 @@ export default function HistoryWorkoutcreen({route}) {
         }
     };
 
-    // Initialize the history schedule
-    const initialSchedule = [
-        { id:0, day: "Monday", activities: ["", "", "", "", "", "", ""] },
-        { id:1, day: "Tuesday", activities: ["", "", "", "", "", "", ""] },
-        { id:2, day: "Wednesday", activities: ["", "", "", "", "", "", ""] },
-        { id:3, day: "Thursday", activities: ["", "", "", "", "", "", ""] },
-        { id:4, day: "Friday", activities: ["", "", "", "", "", "", ""] },
-        { id:5, day: "Saturday", activities: ["", "", "", "", "", "", ""] },
-        { id:6, day: "Sunday", activities: ["", "", "", "", "", "", ""] }
-    ];
-
-    const [schedule, setSchedule] = useState(initialSchedule);
-
     // Function to update the schedule with the completed activity
-    function completeActivity (day, timeIndex, routine) {
-        const updatedSchedule = [...schedule];
-        const dayIndex = updatedSchedule.findIndex(item => item.id === day);
+    function completeActivity ({day, timeIndex, routine}) {
+        const updatedHistory = [...history];
+        const dayIndex = updatedHistory.findIndex(item => item.id === day);
         if (dayIndex !== -1) {
-            updatedSchedule[dayIndex].activities[timeIndex] = routine;
-            setSchedule(updatedSchedule);
-            console.log("Schedule set: ", schedule)
+            updatedHistory[dayIndex].activities[timeIndex] = routine;
+            setHistory(updatedHistory);
         }
     };
 
@@ -123,23 +102,38 @@ export default function HistoryWorkoutcreen({route}) {
             curDate -= maxDate;
         }
         return(
-           <TouchableOpacity onPress={() => {setChosenDay(curDate)}}
-            activeOpacity={0.3}
-            style={{borderRadius: 15, width: 100, height: 80, marginLeft: 20, marginTop: 30,
-            backgroundColor: curDate===chosenDay? themeColors.bgColor(0.2) : 'white', alignItems: 'center'}}>
+           <TouchableOpacity onPress={() => {setChosenDay(curDate);}}
+                activeOpacity={0.3}
+                style={{borderRadius: 15, width: 100, height: 80, marginLeft: 20, marginTop: 30,
+                backgroundColor: curDate===chosenDay? themeColors.bgColor(0.2) : 'white', alignItems: 'center'}}>
+                
                 {/* Day */}
                 <Text style={{fontSize: 16, fontWeight: 600, marginTop: 20}}>{day}</Text>
                 
                 {/* Date */}
-                { 
-                    <Text style={{color: themeColors.text, fontWeight: 500, marginBottom: 20}}>{curDate}</Text>
-                }
-
-           </TouchableOpacity>
+                <Text style={{color: themeColors.text, fontWeight: 500, marginBottom: 20}}>{curDate}</Text>
+            </TouchableOpacity>
         )
     }
 
     //TODO: hard code to make the calendar not overshoot the current day
+
+    const mapActivity = ({day, timeIndex}) => {
+        if (day < 0)return;
+        //console.log("Received day, timeIndex: ", day, " ,", timeIndex)
+        let activities = history[day].activities;
+        let a;
+        if (activities[timeIndex] !== "")a = activities[timeIndex]
+        else return;
+
+        return (
+            <View style={{ borderRadius: 9, marginLeft: 100, marginRight: 100, backgroundColor: themeColors.bgColor(1) }}>
+                <Text style={{ marginTop: 10, fontWeight: 500, color: 'white', alignSelf: 'center', fontSize: 17, marginBottom: 10 }}>
+                    {a}
+                </Text>
+            </View>
+        )
+    } 
 
   return (
     <View>
@@ -166,18 +160,21 @@ export default function HistoryWorkoutcreen({route}) {
                     {return (<DayCard day={day} startDate={startDate} index={index} key={index} />)})
                 }
             </ScrollView>
-            { time.map((t, index) =>{
-                return (
-                    <View key={index}>    
-                        <Text style={{ marginLeft: 20, marginTop: 20, fontWeight: 600, fontSize: 17 }}>{t}</Text>
-                        {chosenDay !== null && (chosenDay -11) === day && index == timeIndex && (
-                            <View style={{ borderRadius: 9, marginLeft: 100, marginRight: 100, backgroundColor: themeColors.bgColor(1) }}>
-                                <Text style={{ marginTop: 10, fontWeight: 500, color: 'white', alignSelf: 'center', fontSize: 17, marginBottom: 10 }}>
-                                    {routine}</Text>
-                            </View>
-                        )}
-                    </View>)
-                })
+            { 
+                time.map((t, index) =>{
+                    return (
+                        <View key={index}>    
+                            <Text style={{ marginLeft: 20, marginTop: 20, fontWeight: 600, fontSize: 17 }}>{t}</Text>
+                            {chosenDay !== null && mapActivity({day: chosenDay - 11, timeIndex: index})}
+                        
+                            {chosenDay !== null && (chosenDay -11) === day && index == timeIndex && (
+                                <View style={{ borderRadius: 9, marginLeft: 100, marginRight: 100, backgroundColor: themeColors.bgColor(1) }}>
+                                    <Text style={{ marginTop: 10, fontWeight: 500, color: 'white', alignSelf: 'center', fontSize: 17, marginBottom: 10 }}>
+                                        {routine}</Text>
+                                </View>
+                            )}
+                        </View>)
+                    })
             }
         <BackButton text={"Done"} color={"blue"} />
       </ScrollView>
