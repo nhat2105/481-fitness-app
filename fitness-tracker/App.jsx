@@ -11,8 +11,6 @@ export default function App() {
 // Footer on other pages
 // workout tracker actually based on user schedule 
 // Change the descriptions/ instructions for all acts
-// TIMER
-
 
 //Extra
 
