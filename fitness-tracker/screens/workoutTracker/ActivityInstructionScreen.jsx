@@ -5,6 +5,7 @@ import video from "../../assets/components/video_instruction.png"
 import { theme } from '../../theme';
 import { useNavigation } from '@react-navigation/native';
 import StepCard from '../../components/StepCard';
+import CountDown from 'react-native-countdown-fixed';
 
 export default function ActivityInstructionScreen({route}) {
   const {exercises, routine} = route.params;
@@ -12,12 +13,17 @@ export default function ActivityInstructionScreen({route}) {
   const [currentSet, setCurrentSet] = useState(route.params.currentSet)
   const [currentAct, setCurrentAct] = useState(route.params.currentAct)
   const {timer, viewOnly} = route.params;
+  const [timerOn, setTimerOn] = useState(false)
   const themeColors = theme("purple")
   const navigation = useNavigation();
 
   //CANCEL BUTTON halfway, this way it won't add to history schedule
+  const startTimer = () =>{
+    setTimerOn(true)
+  }
 
   const startActivity = () => {
+    setTimerOn(false)
     //jump to the next activity instruction
     if (currentAct < exercises[currentSet].length - 1){
       setCurrentAct(currentAct+1)
@@ -82,15 +88,39 @@ export default function ActivityInstructionScreen({route}) {
         Ideally, timer would start to count down and when it is done, the final done screen pops up
         For now, the transition is immediate
         */}
-        { viewOnly == false &&
-          <TouchableOpacity //onPress={() => navigation.navigate("DoneWorkout", {timer: 30000})}
-          onPress={startActivity}
+        { viewOnly == false && !timerOn &&
+          <TouchableOpacity //onPress={startActivity}
+          onPress={startTimer}
           style={{marginLeft: 20, marginRight: 20, marginTop: 20, marginBottom: 30, 
             backgroundColor: themeColors.bgColor(1), borderRadius: 15}}>
             <Text style={{fontSize: 20, fontWeight: 700, alignSelf: 'center', marginTop: 5, marginBottom: 5, color: 'white'}}>Start Timer</Text>
           </TouchableOpacity> 
-        }           
+        }
 
+        { timerOn &&
+          <CountDown
+            until={10}
+            size={25}
+            onFinish={() => {
+              alert("Weldone! Let's move on to the next exercise")
+              startActivity()
+            }}
+            
+            digitStyle={{backgroundColor: '#FFF'}}
+            digitTxtStyle={{color: themeColors.text}}
+            timeToShow={['M', 'S']}
+            timeLabels={{m: 'Min(s)', s: 'Sec(s)'}}
+            style={{marginBottom: 20, marginTop: 20}}
+          />  
+        }      
+        { timerOn && 
+          /**Skip button for those who are fast */
+          <TouchableOpacity onPress={startActivity}
+          style={{backgroundColor: themeColors.bgColor(1), borderRadius: 8, marginLeft: 40, marginRight: 40, marginBottom: 40,
+          }}>
+            <Text style={{color: 'white', alignSelf: 'center', fontSize: 20, fontWeight: 600}}>Start Next Activity</Text>
+          </TouchableOpacity>
+        }
       </ScrollView>
     </View>
   )
