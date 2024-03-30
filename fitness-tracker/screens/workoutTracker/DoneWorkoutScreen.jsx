@@ -13,7 +13,7 @@ export default function DoneWorkoutScreen({route}) {
   
   const goToDashboard = () =>{
     //hardcode chosenday = 0
-    navigation.navigate("Dashboard", {historyTimeIndex: timeIndex, dayHistory: 3, routine: routine})
+    navigation.navigate("Dashboard", {historyTimeIndex: timeIndex, dayHistory: 0, routine: routine})
   }
   
   return (
