@@ -33,6 +33,7 @@ export default function ActivityDescription({route}) {
         [
             { id: 0, title: 'Incline Push-Ups', text: '12x' },
             { id: 1, title: 'Push-Ups', text: '15x' },
+            {id: 2, title: 'Sit-Ups', text: '20x' }
         ]
     ]);
 
