@@ -107,7 +107,16 @@ function Register_3_Screen() {
 
     return (
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: themeColors.bgColor(1) }}>
-            <InputField input="Name" placeholder="i.e. John Doe" />
+            <View>
+                <Text style={{ fontSize: 24, fontWeight: 'bold', color: 'white' }}>Name</Text>
+                <TextInput
+                    placeholder="i.e. John Doe"
+                    placeholderTextColor={'lightgrey'}
+                    onChangeText={(text) => handleInputChange("Name", text)}
+                    value={name}
+                    style={{ height: 40, width: 200, borderColor: 'white', marginVertical: 12, borderWidth: 3, padding: 10, borderRadius: 10 }}
+                />
+            </View>
             <View>
                 <Text style={{ fontSize: 24, fontWeight: 'bold', color: 'white' }}>{metricSystem === 'metric' ? 'Height (cm)' : 'Height (in)'}</Text>
                 <TextInput
