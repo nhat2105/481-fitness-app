@@ -37,11 +37,11 @@ export default function ActivityInstructionScreen({route}) {
     //}
     if (currentAct < exercises[currentSet].length - 1){
       setCurrentAct(currentAct+1)
-      console.log("Current act: ", currentAct)
+      //console.log("Current act: ", currentAct)
     }
     else {
       if(currentSet < exercises.length - 1){
-        setCurrentAct(1)
+        setCurrentAct(0)
         setCurrentSet(currentSet+1) 
       }
       else {
@@ -55,8 +55,8 @@ export default function ActivityInstructionScreen({route}) {
     let act = curA.title;
     
     setText(act)
-    console.log("Act: ", act);
-    console.log(routine);
+    //console.log("Act: ", act);
+    //console.log(routine);
     
   }
 
