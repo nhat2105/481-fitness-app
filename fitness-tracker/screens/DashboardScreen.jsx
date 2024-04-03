@@ -13,11 +13,16 @@ import sample1 from "../assets/components/photo_sample1.png"
 import sample3 from "../assets/components/photo_sample3.png"
 import sample2 from "../assets/components/photo_sample2.png"
 
+//if viewMode on, disable all buttons
+
 export default function DashboardScreen({route}) {
+    let infoTheme = theme("blue");
     let [firstTime, setFirstTime] = useState(route.params === false ? false: true)
     let { sched }  = route.params; 
     //console.log("First time: ", firstTime);
     let [schedule, setSchedule] = useState(sched);
+    const [viewInfo, setViewInfo] = useState(false);
+    const [infoStep, setInfoStep] = useState(0);
 
     //easier way: only pass the one with [timeIndex][day] = routineName, pass it to history, let history update itself
     const {historyTimeIndex, dayHistory, routine} = route.params;
@@ -29,6 +34,10 @@ export default function DashboardScreen({route}) {
         }
     }, [route.params]);
 
+    const viewInstruction = () => {
+        setViewInfo(true)
+        setInfoStep(1)
+    }
 
     let gallery = [
         { 
@@ -67,7 +76,7 @@ export default function DashboardScreen({route}) {
         SetNotif(false);
     }
 
-    const viewMenu = () =>{
+    const viewHistory = () =>{
         //temporarily make it workout history
         navigation.navigate("WorkoutHistory", {timeIndex: historyTimeIndex, day: dayHistory, routine: routine})
     }
@@ -75,8 +84,45 @@ export default function DashboardScreen({route}) {
     const goToSleepTracker = () =>{
         navigation.navigate('SleepTracker');
     }
+
+    const SkipAndNextButton = () =>{
+        return(
+            <View style={{display: 'flex', flexDirection: 'row', marginLeft: 30, alignSelf: 'center'}}>
+                <TouchableOpacity onPress={() =>{
+                    setInfoStep(0);
+                    setViewInfo(false);
+                }}
+                 style={{backgroundColor: infoTheme.bgColor(0.5), 
+                    borderRadius: 6, marginTop: 20}}>
+                    <Text style={{marginBottom: 5, marginTop: 5, marginLeft: 5, marginRight: 5, fontWeight:600}}>Skip</Text>
+                </TouchableOpacity>
+                
+                <TouchableOpacity onPress={()=>{
+                    setInfoStep(infoStep - 1)
+                }}
+                style={{backgroundColor: infoTheme.bgColor(0.5), marginLeft: 15,
+                    borderRadius: 6, marginTop: 20}}>
+                    <Text style={{marginBottom: 5, marginTop: 5, marginLeft: 5, marginRight: 5, fontWeight: 500}}>Prev</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity onPress={()=>{
+                    setInfoStep(infoStep + 1)
+                    if (infoStep == 6){
+                        setInfoStep(0);
+                        setViewInfo(false)
+                    }
+                }}
+                style={{backgroundColor: infoTheme.bgColor(0.5), marginLeft: 15,
+                    borderRadius: 6, marginTop: 20}}>
+                    <Text style={{marginBottom: 5, marginTop: 5, marginLeft: 5, marginRight: 5, fontWeight: 500}}>Next</Text>
+                </TouchableOpacity>
+
+                <Text style={{marginBottom: 5, marginTop: 25, marginLeft: 15, marginRight: 5}}>{infoStep}/6</Text>
+            </View>
+        )
+    }
   return (
-    <View style={{ justifyContent: 'center', flex: 1}}>
+    <View style={{ justifyContent: 'center', flex: 1, backgroundColor: viewInfo? infoTheme.bgColor(0.2) : "transparent"}}>
         <ScrollView>
             <View style={{display: 'flex', flexDirection: 'row', marginLeft: 30}}>
                 <View>
@@ -100,47 +146,94 @@ export default function DashboardScreen({route}) {
                     <Icon.Bell strokeWidth={3} stroke={themeColors.bgColor(1)}/>
                 </TouchableOpacity>
                 )}
-                <TouchableOpacity onPress={viewMenu}
+                {/**
+                <TouchableOpacity onPress={viewHistory}
                     style={{ marginTop: 40, position: 'absolute', right: 30,
                     backgroundColor: 'white', padding: 2, 
                     boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.1)'}}>
                     <Icon.Menu strokeWidth={3} stroke={themeColors.bgColor(1)}/>
                 </TouchableOpacity>
+                */}
+
+                <TouchableOpacity onPress={viewInstruction}
+                    style={{ marginTop: 40, position: 'absolute', right: 30,
+                    backgroundColor: 'white', padding: 2, 
+                    boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.1)'}}>
+                    <Icon.Info strokeWidth={3} stroke={themeColors.bgColor(1)}/>
+                </TouchableOpacity>
+
             </View>
+            {infoStep == 1 && 
+                <View>
+                    <Text style={{color: 'red', fontSize: 15, alignSelf: 'center', marginLeft: 15, marginRight: 15,
+                    fontWeight: 500}}>The box below provides your BMI status.</Text>
+                </View>
+            }
+
             <View style={{backgroundColor: themeColors.bgColor(1), justifyContent: 'center', display: 'flex', marginTop: 20,
-                alignItems: 'center', borderRadius: 15, marginLeft: 20, marginRight: 20, flexDirection: 'row'}}>
+                alignItems: 'center', borderRadius: 15, marginLeft: 20, marginRight: 20, flexDirection: 'row',
+                
+                borderWidth: (infoStep == 1)? 2 : 0, borderColor: 'red'}}>
+                
                 <View>
                     <Text style={{color: 'white', fontSize: 18, fontWeight: 700, alignSelf: 'center'}}>BMI (Body Mass Index):  {BMI}</Text>
                     <Text style={{color: 'white', fontSize: 18, fontWeight: 300, alignSelf: 'center'}}>{bmiStatus}</Text>
-                    <View style={{display: 'flex', flexDirection: 'row', marginBottom: 20}} >
-                        <TouchableOpacity onPress={() => navigation.navigate("SetWeight", {weight: weight, name: name, height: height})}
+                    <View style={{display: 'flex', flexDirection: 'row', marginBottom: 20, alignSelf: 'center'}} >
+                        <TouchableOpacity disabled={viewInfo}
+                        onPress={() => navigation.navigate("SetWeight", {weight: weight, name: name, height: height})}
                         style={{backgroundColor: 'white', borderRadius: 5, marginTop: 10}} >
                             <Text style={{alignSelf:'center', color: themeColors.text, marginLeft: 10, marginRight: 10,
                             fontSize: 16, fontWeight: 700}} >Update Weight</Text>
                         </TouchableOpacity>
+                        { /** 
                         <TouchableOpacity onPress={() => navigation.navigate("MealPlanner")}
                         style={{backgroundColor: 'white', borderRadius: 5, marginTop: 10, marginLeft: 20}} >
                             <Text style={{alignSelf: 'center', color: themeColors.text, marginLeft: 10, marginRight: 10,
                             fontSize: 16, fontWeight: 700}}>View Meals Plans</Text>
                         </TouchableOpacity>
+                        */
+                        }
+                        
                     </View>
                 </View>
             </View>
-            <View style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between'}}>
-                <TouchableOpacity onPress={()=> {
-                   // console.log("CHECKING WHAT I'M PASSING FROM DASHBOARD: ", schedule)
+            {infoStep == 1 && 
+                <View>
+                     <Icon.ArrowDown strokeWidth={3} stroke={'red'} style={{alignSelf: 'center'}}/>
+                    <Text style={{color: 'red', fontSize: 15, alignSelf: 'center', marginLeft: 15, marginRight: 15,
+                    fontWeight: 500}}>
+                    It is recommended that you keep your information up to date using `Update Weight` feature
+                    to get the best suited workout plans provided by our service</Text>
+
+                    <SkipAndNextButton/>
+                </View>
+                }
+            { (infoStep == 2 || infoStep == 3) && 
+                <View>
+                    <Text style={{color: 'red', fontSize: 15, alignSelf: 'center', marginLeft: 15, marginRight: 15,
+                    fontWeight: 500}}>
+                    The below are shortcuts to 2 features </Text>
+                </View>
+            }
+            <View style={{borderWidth: (infoStep == 3|| infoStep == 2)? 2 : 0, borderColor: 'red',
+                display: 'flex', flexDirection: 'row', justifyContent: 'space-between'}}>
+                <TouchableOpacity disabled={viewInfo} onPress={()=> {
                 navigation.navigate("WorkoutTracker", {firstTime: firstTime, schedule: schedule})
                 setFirstTime(false);}}
                 style={{backgroundColor: themeColors.bgColor(1), justifyContent: 'center', display: 'flex', marginTop: 20,
-                    alignItems: 'center', borderRadius: 30, width: 170, height: 55,
+                    alignItems: 'center', borderRadius: 30, width: 170, height: 55, borderWidth: infoStep == 2? 2: 0,
+                    borderColor: 'red',
                     marginLeft: 20, marginRight: 5, flexDirection: 'row'}}>
                     <View style={{justifyContent: 'center', alignItems:'center'}}>
                         <Text style={{color: 'white', fontSize: 18, marginTop: 3, marginLeft: 2,
                           marginRight: 5, fontWeight: 700}}>Workout Schedule</Text>
                     </View>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => navigation.navigate("PhotoComparer", gallery)}
-                    style={{backgroundColor: themeColors.bgColor(1), justifyContent: 'center', display: 'flex', marginTop: 20,
+                <TouchableOpacity disabled={viewInfo}
+                     onPress={() => navigation.navigate("PhotoComparer", gallery)}
+                    style={{borderWidth: infoStep == 3? 2: 0, borderColor: 'red',
+                    
+                    backgroundColor: themeColors.bgColor(1), justifyContent: 'center', display: 'flex', marginTop: 20,
                     alignItems: 'center', borderRadius: 30, marginRight: 20, width: 170, height: 55,
                     flexDirection: 'row'}}>
                     <View style={{justifyContent: 'center', alignItems:'center'}}>
@@ -148,18 +241,51 @@ export default function DashboardScreen({route}) {
                     </View>
                 </TouchableOpacity>
             </View>
+            { viewInfo && (infoStep == 3 || infoStep == 2) && 
+               <View>
+                    <View style={{display: 'flex', flexDirection: 'row'}}>
+                        {infoStep == 2 && <Icon.ArrowDown strokeWidth={3} stroke={'red'} style={{marginLeft: 100}}/>}
+                        {infoStep == 3 &&
+                            <Icon.ArrowDown strokeWidth={3} stroke={'red'} style={{marginLeft: 270}}/>
+                        }
+                    </View>
+                    
+                    {infoStep == 2 && <Text style={{color: 'red', fontSize: 15, alignSelf: 'center', marginLeft: 15, marginRight: 15,
+                    fontWeight: 500}}>`WorkOut Schedule` - where you can plan your schedule and start your workout</Text>}
+                    {infoStep == 3 && <Text style={{color: 'red', fontSize: 15, alignSelf: 'center', marginLeft: 15, marginRight: 15,
+                    fontWeight: 500}}>`Photo Comparer` - where you can upload your photo to track your progress</Text>}
+                    <SkipAndNextButton/>
+                </View>
+            }
+
             <View className= 'ActivityStatus' style={{marginTop: 20}}>
                 <Text style={{color: 'black', fontSize: 25, fontWeight: 700, marginLeft: 30}}>Activity Status</Text>
                 <View>
                     <Image source={heart_status} style={{width: '100%'}} />
                 </View>
             </View>
+            {(infoStep == 4 || infoStep == 5 || infoStep == 6) && 
+                <View style={{marginBottom: 15}}>
+                    <Text style={{color: 'red', fontSize: 15, fontWeight: 600, marginLeft: 20}}>
+                        The following buttons are shortcuts for 3 features</Text>
 
+                    {infoStep == 5 && 
+                        <View>
+                            <SkipAndNextButton />
+                            <Text style={{marginLeft: 10, marginRight: 10, fontSize: 15, fontWeight: 600, marginTop: 10,
+                                color: 'red'}}>`Calories` - Tracking real-time how much calories you've burnt via our plan</Text>
+                            <Icon.ArrowUp strokeWidth={3} stroke={'red'} style={{marginLeft: 300, marginTop: 10}}/>
+                        </View>
+                    }
+                </View>
+            }
 
             <View className="Activity-Card" style={{display: 'flex', flexDirection: 'row'}}>
                 {/**Shall have a chart later */}
-                <TouchableOpacity onPress={() => navigation.navigate("StepsReport")}
-                className="Steps-Walked" style={{backgroundColor: 'white', borderRadius: 40, marginLeft: 30}}>
+                <TouchableOpacity disabled={viewInfo}
+                 onPress={() => navigation.navigate("StepsReport")}
+                className="Steps-Walked" style={{backgroundColor: 'white', borderRadius: 40, marginLeft: 30,
+                borderWidth: infoStep == 4? 2: 0, borderColor: 'red'}}>
                     <View style={{flexDirection: 'row'}}>
                         <Image source={walking_bar} marginLeft={15} marginTop={20} marginBottom={20} />
                         <View>
@@ -168,7 +294,7 @@ export default function DashboardScreen({route}) {
                             <Text style={{marginLeft: 15, color: theme('gray').text, fontSize: 15, fontWeight: 700, marginTop: 5, marginRight: 10}}>Real-time updates</Text>
                             <View style={{display:'flex', flexDirection: 'row'}}>
                                 <Image source={real_time} marginTop={30}/>
-                                <View marginTop={10} marginLeft={15}>
+                                <View marginTop={10} marginLeft={5}>
                                     <Text>6:00am-8:00am</Text>
                                     <Text style={{color: themeColors.text, fontWeight: 700}}>100 steps</Text>
                                     <Text marginTop={5}>8:00am-10:00am</Text>
@@ -186,8 +312,10 @@ export default function DashboardScreen({route}) {
                 </TouchableOpacity>
                
                 <View style ={{position: 'absolute', right: 30}}>
-                    <TouchableOpacity onPress={() => navigation.navigate("CaloriesReport")}
-                        className="Calories-Burnt" style={{backgroundColor: 'white', borderRadius: 20}} >
+                    <TouchableOpacity disabled={viewInfo}
+                    onPress={() => navigation.navigate("CaloriesReport")}
+                         style={{borderWidth: infoStep == 5? 2 : 0, borderColor: 'red',
+                         backgroundColor: 'white', borderRadius: 20}} >
                         <Text style={{alignSelf: 'center', color: 'black', fontSize: 18, fontWeight: 600, marginTop: 4}}>
                             Calories
                         </Text>
@@ -196,32 +324,56 @@ export default function DashboardScreen({route}) {
                         </Text>
                         <Image source={calories_pie} style={{alignSelf: 'center', marginTop: 5}}/>
                     </TouchableOpacity>
-                    <TouchableOpacity className="Slept-Hours"  onPress={goToSleepTracker}
-                    style={{backgroundColor: 'white', borderRadius: 20, marginTop: 20}} >
+
+                    <TouchableOpacity //onPress={goToSleepTracker}
+                    onPress={viewHistory}
+                    disabled={viewInfo}
+                    style={{borderColor: 'red', borderWidth: infoStep == 6? 2: 0,
+                        backgroundColor: 'white', borderRadius: 20, marginTop: 20}} >
+                        <Text style={{alignSelf: 'center', color: themeColors.text, fontSize: 18, fontWeight: 600, marginTop: 4}}>
+                            Workout
+                        </Text>
+                        <Text style={{alignSelf: 'center', color: themeColors.text, fontSize: 18, fontWeight: 600, marginTop: 4}}>
+                            History
+                        </Text>
+                        {/**
                         <Text style={{alignSelf: 'center', color: 'black', fontSize: 18, fontWeight: 600, marginTop: 4}}>
                             Sleep
                         </Text>
+                        
                         <Text style={{alignSelf: 'center', color: themeColors.text, fontSize: 20, fontWeight: 700, marginTop: 7}}>
                             7h 20m
                         </Text>
+                         */}
                         <Image source={sleep_graph} />
-                    </TouchableOpacity>
-                </View>     
+                    </TouchableOpacity>   
+                </View>    
             </View>
+            {infoStep == 4 && 
+                <View>
+                    <Icon.ArrowDown strokeWidth={3} stroke={'red'} style={{marginLeft: 120, marginTop: 10}}/>
+                    <Text style={{marginLeft: 10, marginRight: 10, fontSize: 15, fontWeight: 600,
+                        color: 'red'}}>`Steps Walked` - Tracking real-time how many steps you've walked</Text>
+                    <SkipAndNextButton />
+                </View>
+            }
+
+            {infoStep == 6 && 
+                <View>
+                    <Icon.ArrowDown strokeWidth={3} stroke={'red'} style={{marginLeft: 290, marginTop: 10}}/>
+                    <Text style={{marginLeft: 10, marginRight: 10, fontSize: 15, fontWeight: 600,
+                        color: 'red'}}>`Workout History` - Tracking your workout history - exercises you did in the past</Text>
+                    <SkipAndNextButton />
+                </View>
+            }
+
+
             <View className='WorkOut-Progress' marginBottom={60}>
                 <Text style={{color: 'black', fontSize: 25, fontWeight: 700, marginLeft: 30, marginTop: 20}}>Workout Progress</Text>
                 <Image source={workout_graph} style={{alignSelf:'center'}} />
             </View>
             
         </ScrollView>
-        {
-        <View style={{position: 'absolute', bottom: 0, flexDirection: 'row', 
-            backgroundColor: "white", width: "100%", height: 40, justifyContent: 'space-between'}}>
-            <Icon.Home strokeWidth={3} width={35} height={35} style={{marginLeft: 20, color: themeColors.bgColor(1)}}/>
-            <Icon.User strokeWidth={3} width={35} height={35} style={{color: themeColors.bgColor(1)}}/>
-            <Icon.Settings strokeWidth={3} width={35} height={35} style={{color: themeColors.bgColor(1), marginRight: 20}}/>
-        </View> 
-        }
        
     </View>
   )

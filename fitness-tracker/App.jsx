@@ -6,15 +6,15 @@ export default function App() {
   );
 }
 // Feedback + TODO:
-// Too much info on steps walked, rather being simple like calories
 // Units on register page
-// Footer on other pages
 // workout tracker actually based on user schedule 
 // Change the descriptions/ instructions for all acts
+// Error handler
+// Calories Screen fix
+// User can change difficulty, day set in the description
 
-//Extra
+// Extra
+// from schedule, user can click on and navigate to the activity description
 
-//logo animated loading screen
-//instruction (guide first-time users to navigate the options)
-//User can change difficulty, day set in the description
-//from schedule, user can click on and navigate to the activity description
+
+
