@@ -3,7 +3,6 @@ import React, { useState } from 'react'
 import { theme } from '../theme'
 import { useNavigation } from '@react-navigation/native'
 import * as Icon from 'react-native-feather'
-import { Picker } from '@react-native-picker/picker';
 
 
 function Register_1_Screen() { 
@@ -80,8 +79,8 @@ function Register_3_Screen() {
     const [weight, setWeight] = useState("");
     const [metricSystem, setMetricSystem] = useState('metric');
 
-    const goToDashboard= () => {
-        navigation.navigate('Dashboard', {name: name, height: height, weight: weight});
+    const goToDashboard = () => {
+        navigation.navigate('Dashboard', { name: name, height: height, weight: weight, metricSystem: metricSystem });
     }
 
     const handleInputChange = (input, text) => {
@@ -93,7 +92,7 @@ function Register_3_Screen() {
             setWeight(text);
         }
     }
-    
+
     const InputField = ({ input, placeholder }) => {
         return (
             <View>
@@ -106,24 +105,15 @@ function Register_3_Screen() {
         );
     }
 
-    return(
+    return (
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: themeColors.bgColor(1) }}>
-            <View>
-                <Text style={{ fontSize: 24, fontWeight: 'bold', color: 'white' }}>Name</Text>
-                <TextInput
-                    placeholder="Enter your name"
-                    placeholderTextColor={'lightgrey'}
-                    onChangeText={(text) => setName(text)}
-                    value={name}
-                    style={{ height: 40, width: 200, borderColor: 'white', marginVertical: 12, borderWidth: 3, padding: 10, borderRadius: 10 }}
-                />
-            </View>
+            <InputField input="Name" placeholder="i.e. John Doe" />
             <View>
                 <Text style={{ fontSize: 24, fontWeight: 'bold', color: 'white' }}>{metricSystem === 'metric' ? 'Height (cm)' : 'Height (in)'}</Text>
                 <TextInput
-                    placeholder="Enter your height"
+                    placeholder={`i.e. 163 cm or 5.4 ft`}
                     placeholderTextColor={'lightgrey'}
-                    onChangeText={(text) => setHeight(text)}
+                    onChangeText={(text) => handleInputChange("Height", text)}
                     value={height}
                     style={{ height: 40, width: 200, borderColor: 'white', marginVertical: 12, borderWidth: 3, padding: 10, borderRadius: 10 }}
                 />
@@ -131,9 +121,9 @@ function Register_3_Screen() {
             <View>
                 <Text style={{ fontSize: 24, fontWeight: 'bold', color: 'white' }}>{metricSystem === 'metric' ? 'Weight (kg)' : 'Weight (lbs)'}</Text>
                 <TextInput
-                    placeholder="Enter your weight"
+                    placeholder={`i.e. 50 kgs or 160 lbs`}
                     placeholderTextColor={'lightgrey'}
-                    onChangeText={(text) => setWeight(text)}
+                    onChangeText={(text) => handleInputChange("Weight", text)}
                     value={weight}
                     style={{ height: 40, width: 200, borderColor: 'white', marginVertical: 12, borderWidth: 3, padding: 10, borderRadius: 10 }}
                 />
@@ -147,7 +137,7 @@ function Register_3_Screen() {
                 <TouchableOpacity
                     onPress={() => setMetricSystem('imperial')}
                     style={{ backgroundColor: metricSystem === 'imperial' ? 'lightgrey' : 'white', padding: 10, borderRadius: 5 }}>
-                    <Text style={{ color: metricSystem === 'imperial' ? 'black' : 'grey' }}>Imperial (in, lbs)</Text>
+                    <Text style={{ color: metricSystem === 'imperial' ? 'black' : 'grey' }}>Imperial (ft.in, lbs)</Text>
                 </TouchableOpacity>
             </View>
             <View className='buttons' style={{display: 'flex', flexDirection: 'row'}}>
