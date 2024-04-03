@@ -101,7 +101,9 @@ export default function WorkoutScheduleScreen({route}) {
             <View key={timeIndex}>
                 <Text style={{ marginLeft: 20, marginTop: 50, fontWeight: 600, fontSize: 17 }}>{time[timeIndex]}</Text>
                 {timeSlot[chosenDay] && (
-                    <Draggable shouldReverse={reverse} onReverse={() => {x: 0; y: 0}}
+                    <Draggable shouldReverse={reverse} onReverse={() => 
+                        {x: 0; y: 0}
+                    }
                         key={timeIndex} style={{ marginTop: 10 }} 
                         onDragRelease={({ nativeEvent }) => {
                             const { pageY } = nativeEvent;

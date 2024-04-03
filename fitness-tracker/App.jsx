@@ -10,6 +10,7 @@ export default function App() {
 // Units on register page
 // workout tracker actually based on user schedule 
 // Error handler - (registration screen) + schedule
+// Schedule includes months
 // Calories Screen fix
 // User can change difficulty, day set in the description
 // footer -> only home button, (potentially adding image, workout schedule, compare img) useEff?

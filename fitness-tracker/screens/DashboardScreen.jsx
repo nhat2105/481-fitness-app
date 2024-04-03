@@ -269,12 +269,18 @@ export default function DashboardScreen({route}) {
                     <Text style={{color: 'red', fontSize: 15, fontWeight: 600, marginLeft: 20}}>
                         The following buttons are shortcuts for 3 features</Text>
 
-                    {infoStep == 5 && 
+                    {(infoStep == 5 || infoStep == 4) && 
                         <View>
                             <SkipAndNextButton />
-                            <Text style={{marginLeft: 10, marginRight: 10, fontSize: 15, fontWeight: 600, marginTop: 10,
-                                color: 'red'}}>`Calories` - Tracking real-time how much calories you've burnt via our plan</Text>
-                            <Icon.ArrowUp strokeWidth={3} stroke={'red'} style={{marginLeft: 300, marginTop: 10}}/>
+                            {infoStep == 5 &&
+                                <Text style={{marginLeft: 10, marginRight: 10, fontSize: 15, fontWeight: 600, marginTop: 10,
+                                color: 'red'}}>`Calories` - Tracking real-time how much calories you've burnt via our plan</Text>}
+                            {infoStep == 4 &&
+                                <Text style={{marginLeft: 10, marginRight: 10, fontSize: 15, fontWeight: 600, marginTop: 10,
+                            color: 'red'}}>`Steps Walked` - Tracking real-time how many steps you've walked</Text>}
+
+                            <Icon.ArrowUp strokeWidth={3} stroke={'red'} style={{marginLeft: infoStep == 5? 300: 
+                                120, marginTop: 10}}/>
                         </View>
                     }
                 </View>
@@ -349,14 +355,6 @@ export default function DashboardScreen({route}) {
                     </TouchableOpacity>   
                 </View>    
             </View>
-            {infoStep == 4 && 
-                <View>
-                    <Icon.ArrowDown strokeWidth={3} stroke={'red'} style={{marginLeft: 120, marginTop: 10}}/>
-                    <Text style={{marginLeft: 10, marginRight: 10, fontSize: 15, fontWeight: 600,
-                        color: 'red'}}>`Steps Walked` - Tracking real-time how many steps you've walked</Text>
-                    <SkipAndNextButton />
-                </View>
-            }
 
             {infoStep == 6 && 
                 <View>
