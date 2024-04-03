@@ -12,6 +12,7 @@ export default function WorkoutScheduleScreen({route}) {
     const [firstTime, setFirstTime] = useState(route.params.firstTime);
     const [chosenDay, setChosenDay] = useState(0);
     let {name, height, weight} = route.params;
+    const [errorMsg, setErrorMsg] = useState(null)
 
     const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
     const time = ["6:00 AM", "7:00 AM", "8:00 AM", "9:00 AM", "10:00 AM", "11:00 AM", "12:00 PM"]
@@ -97,19 +98,20 @@ export default function WorkoutScheduleScreen({route}) {
                     {return (<DayCard day={day} startDate={20} index={index} key={index} />)})
                 }
             </ScrollView>
+            {errorMsg ?
+                <Text style={{color: 'red', fontSize: 16, fontWeight: 700, marginLeft: 30, marginTop: 9}}>{errorMsg}</Text>
+                : <View style={{marginTop: 23}}/>
+            }
             {schedule.map((timeSlot, timeIndex) => (
             <View key={timeIndex}>
                 <Text style={{ marginLeft: 20, marginTop: 50, fontWeight: 600, fontSize: 17 }}>{time[timeIndex]}</Text>
                 {timeSlot[chosenDay] && (
-                    <Draggable shouldReverse={reverse} onReverse={() => 
-                        {x: 0; y: 0}
-                    }
+                    <Draggable shouldReverse={reverse} onReverse={() => {x: 0; y: 0}}
                         key={timeIndex} style={{ marginTop: 10 }} 
                         onDragRelease={({ nativeEvent }) => {
                             const { pageY } = nativeEvent;
                             //console.log ("Current range: " + pageY/50);
                             const range = pageY/50; // based on height of timeslot
-                            let newTimeIndex;
                             if (range <= 6.2)newTimeIndex = 0;
                             else if (range > 6.2 && range <= 7.5)newTimeIndex = 1;
                             else if (range > 7.5 && range <= 8.95)newTimeIndex = 2;
@@ -121,8 +123,10 @@ export default function WorkoutScheduleScreen({route}) {
 
                             if (isTimeSlotAvailable(newTimeIndex, chosenDay)) {
                                 handleDropActivity(newTimeIndex, chosenDay, timeSlot[chosenDay], timeIndex);
+                                setErrorMsg(null)
                             } else {
                                 setReverse(true)
+                                setErrorMsg("Cannot set 2 routines at the same time!")
                             }  
                         }}
                     >
@@ -151,6 +155,7 @@ export default function WorkoutScheduleScreen({route}) {
                         style={{ borderRadius: 9999, backgroundColor: themeColors.bgColor(1), marginTop: 20, marginLeft: 20, marginRight: 20 }}>
                         <Text style={{ marginTop: 5, marginBottom: 5, alignSelf: 'center', fontSize: 18, fontWeight: 700, color: 'white' }}>Add to Schedule</Text>
                     </TouchableOpacity>}
+                    
       </ScrollView>
     </View>
   )
