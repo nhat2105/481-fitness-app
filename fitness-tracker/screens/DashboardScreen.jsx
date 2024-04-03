@@ -365,14 +365,15 @@ export default function DashboardScreen({route}) {
                 </View>
             }
 
-
+            
+            {
             <View className='WorkOut-Progress' marginBottom={60}>
                 <Text style={{color: 'black', fontSize: 25, fontWeight: 700, marginLeft: 30, marginTop: 20}}>Workout Progress</Text>
                 <Image source={workout_graph} style={{alignSelf:'center'}} />
             </View>
+        }
             
         </ScrollView>
-       
     </View>
   )
 }

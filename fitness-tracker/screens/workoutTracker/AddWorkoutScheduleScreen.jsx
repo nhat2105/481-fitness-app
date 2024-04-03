@@ -10,8 +10,8 @@ export default function AddWorkoutScheduleScreen({route}) {
   const themeColors = theme("purple");
   const navigation = useNavigation();
   const [schedule, setSchedule] = useState(route.params.schedule)
-  const [selectedWorkout, setSelectedWorkout] = useState(route.params.chosenAct? route.params.chosenAct : "");
-  const [selectedDifficulty, setSelectedDifficulty] = useState("");
+  const [selectedWorkout, setSelectedWorkout] = useState(route.params.chosenAct? route.params.chosenAct : null);
+  const [selectedDifficulty, setSelectedDifficulty] = useState(null);
   const [workoutModalVisible, setWorkoutModalVisible] = useState(false);
   const [difficultyModalVisible, setDifficultyModalVisible] = useState(false);
   const [chosenTime, setChosenTime] = useState(-1);
@@ -118,14 +118,17 @@ export default function AddWorkoutScheduleScreen({route}) {
           if (chosenTime > 0 && selectedWorkout && selectedDifficulty)
           {
             let res = updateSchedule({activity: selectedWorkout, timeIndex: chosenTime})
-            if (res)navigation.navigate("WorkoutSchedule", {sched: schedule, height: height, weight: weight, name: name, firstTime: false})
-            else{
-              if (!selectedWorkout)setErrorMsg("Please choose a workout routine")
-              else if (chosenTime < 0)setErrorMsg("Please choose a time slot ")
-              else if (!selectedDifficulty)setErrorMsg("Please choose a level of difficulty")
-              else setErrorMsg("Occupied, please choose another time slot")
+            if (res === true){
+              navigation.navigate("WorkoutSchedule", {sched: schedule, height: height, weight: weight, name: name, firstTime: false})
             }
+  
           } 
+          else{
+            if (!selectedWorkout)setErrorMsg("Please choose a workout routine")
+            else if (chosenTime < 0)setErrorMsg("Please choose a time slot ")
+            else if (!selectedDifficulty)setErrorMsg("Please choose a level of difficulty")
+            else setErrorMsg("Occupied, please choose another time slot")
+          }
         }}
           style={{backgroundColor: themeColors.bgColor(1), justifyContent: 'center', marginTop: 30,
             alignItems: 'center', borderRadius: 20, marginLeft: 20, marginRight: 20, marginBottom: 50}}>
