@@ -20,12 +20,21 @@ export default function ActivityInstructionScreen({route}) {
 
   //CANCEL BUTTON halfway, this way it won't add to history schedule
   const startTimer = () =>{
+
+    //attempting to skip duplicate warm up
+    if (currentAct == 0 && currentSet == 0){
+      setCurrentAct(currentAct+1)
+    }
     setTimerOn(true)
+    
   }
 
   const startActivity = () => {
     setTimerOn(false)
     //jump to the next activity instruction
+    //if (currentAct == 0 && currentSet == 1){
+
+    //}
     if (currentAct < exercises[currentSet].length - 1){
       setCurrentAct(currentAct+1)
       console.log("Current act: ", currentAct)
@@ -45,11 +54,9 @@ export default function ActivityInstructionScreen({route}) {
     let curA = curS[currentAct];
     let act = curA.title;
     
-    
     setText(act)
     console.log("Act: ", act);
     console.log(routine);
-    
     
   }
 
@@ -397,6 +404,13 @@ description={"Lower your torso back down to the starting position with control, 
             <Text style={{fontSize: 20, fontWeight: 700, alignSelf: 'center', marginTop: 5, marginBottom: 5, color: 'white'}}>Start Timer</Text>
           </TouchableOpacity> 
         }
+        { viewOnly && 
+        <View>
+            <Text style={{fontSize: 18, color: 'red', marginTop: 20, marginLeft: 30, marginRight: 30, marginBottom: 20,
+            fontWeight: 600}}
+            >View Only Instruction - Please either add the activity to your schedule, or start with "Warm Up" first</Text>
+          </View>
+          }
 
         { timerOn &&
           <CountDown

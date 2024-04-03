@@ -5,6 +5,7 @@ import { Calendar } from 'react-native-feather'
 import { theme } from '../../theme'
 import { useNavigation } from '@react-navigation/native'
 import { Picker }  from '@react-native-picker/picker'
+import Footer from '../../components/Footer'
 
 export default function ComparePhotoScreen({route}) {
     const themeColors = theme('purple')
@@ -70,6 +71,10 @@ export default function ComparePhotoScreen({route}) {
           alignItems: 'center', borderRadius: 20, marginLeft: 20, marginRight: 20, marginBottom: 50}}>
         <Text style={{color: 'white', fontSize: 18, marginTop: 10, fontWeight: 700, height: 40, alignSelf: "center"}}>Compare Photos</Text>
       </TouchableOpacity>
+      
+      <View style={{marginTop: 270}}>
+        <Footer params={gallery}/>
+      </View>
     </View>
   )
 }
