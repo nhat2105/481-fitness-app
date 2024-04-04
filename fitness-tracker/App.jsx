@@ -6,8 +6,6 @@ export default function App() {
   );
 }
 // TODO:
-
-// Units on register page 
 // Error handler - (registration screen)
 // Calories Screen fix
 
