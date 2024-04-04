@@ -62,6 +62,14 @@ export default function WorkoutScheduleScreen({route}) {
         return !schedule[timeIndex][dayIndex];
     };
 
+    // Function to check if a specific time slot is available
+    const removeActivity = (timeIndex, dayIndex) => {//day index can be chosen day
+        let updatedSched = [...schedule];
+        updatedSched[timeIndex][dayIndex] = null;
+        setSchedule(updatedSched);
+    };
+    
+
     // Function to handle dropping activity into a time slot
     const handleDropActivity = (timeIndex, dayIndex, activity, oldTimeIndex) => {
         if (isTimeSlotAvailable(timeIndex, dayIndex)) {
@@ -72,6 +80,7 @@ export default function WorkoutScheduleScreen({route}) {
             
         }
     };    
+    
 
     const DayCard = ({day, startDate, index}) => {
         return(
@@ -100,16 +109,21 @@ export default function WorkoutScheduleScreen({route}) {
             </ScrollView>
             {errorMsg ?
                 <Text style={{color: 'red', fontSize: 16, fontWeight: 700, marginLeft: 30, marginTop: 9}}>{errorMsg}</Text>
-                : <View style={{marginTop: 23}}/>
+                : 
+                <Text style={{color: themeColors.text, fontSize: 16, fontWeight: 700, marginLeft: 20, marginRight: 10, marginTop: 9}}>
+                    To remove an activity, drag the exercise card out of the left/right margin
+                </Text>
             }
+    
             {schedule.map((timeSlot, timeIndex) => (
             <View key={timeIndex}>
                 <Text style={{ marginLeft: 20, marginTop: 50, fontWeight: 600, fontSize: 17 }}>{time[timeIndex]}</Text>
                 {timeSlot[chosenDay] && (
-                    <Draggable shouldReverse={reverse} onReverse={() => {x: 0; y: 0}}
+                    <Draggable 
+                        shouldReverse={reverse} onReverse={() => {x: 0; y: 0}}
                         key={timeIndex} style={{ marginTop: 10 }} 
                         onDragRelease={({ nativeEvent }) => {
-                            const { pageY } = nativeEvent;
+                            const { pageY, pageX } = nativeEvent;
                             //console.log ("Current range: " + pageY/50);
                             const range = pageY/50; // based on height of timeslot
                             if (range <= 6.2)newTimeIndex = 0;
@@ -120,6 +134,12 @@ export default function WorkoutScheduleScreen({route}) {
                             else if (range > 11.4 && range <= 13.74)newTimeIndex = 5;
                             else if (range > 13.74)newTimeIndex = 6;
                             //console.log("Time now: ", time[newTimeIndex])
+                            //console.log("PageX: ", pageX)
+
+                            if (pageX == 0 || pageX >= 392){
+                                removeActivity(timeIndex, chosenDay)
+                               // console.log("HERE")
+                            }
 
                             if (isTimeSlotAvailable(newTimeIndex, chosenDay)) {
                                 handleDropActivity(newTimeIndex, chosenDay, timeSlot[chosenDay], timeIndex);
