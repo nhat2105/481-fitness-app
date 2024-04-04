@@ -23,6 +23,35 @@ export default function WorkoutTrackerScreen({route}) {
       navigation.navigate("Dashboard", {firstTime: false, name: name, height: height, weight: weight, sched: schedule})
     }
     
+    const [upcomingWorkout, setUpcomingWorkout] = useState(() => {
+      const a = [];
+      if (schedule) {
+        for (let time = 0; time < 7; time++) {
+          if (schedule[time] && schedule[time][0]){
+            const workouts = schedule[time][0];
+            if (a.length <= 3) a.push(workouts);
+            else break;
+          }
+        }
+      }
+      return a;
+    });    
+
+    console.log("Upcoming workout", upcomingWorkout)
+    useEffect(() => {
+      if (schedule) {
+        const a = [];
+        for (let time = 0; time < 7; time++) {
+          if (schedule[time] && schedule[time][0]){
+            const workouts = schedule[time][0];
+            if (a.length <= 3) a.push(workouts);
+            else break;
+          }
+        }
+        setUpcomingWorkout(a);
+      }
+    }, [schedule]);
+
   return (
     <View style={{backgroundColor: 'white'}}>
       <ScrollView>
@@ -69,8 +98,18 @@ export default function WorkoutTrackerScreen({route}) {
              
           <Text style={{fontSize: 20, fontWeight: 700, marginLeft: 20,
               color: 'white', marginTop: 20, marginBottom: 5}}>Upcoming Workout</Text>
+              
+          {upcomingWorkout && upcomingWorkout.map((act, index) => {
+            return (
+              <WorkoutCard text={act} action= {"Start"} key={index}/>
+            )
+          
+          })}
+          
+          {/** 
           <WorkoutCard text={"Fullbody Workout"} action={"Start"}  />
           <WorkoutCard title= {"upper"} action={"Start"} text={"Upperbody Train"}/> 
+          */}
           
           <Text style={{fontSize: 20, fontWeight: 700, marginLeft: 20,
               color: 'white', marginTop: 20, marginBottom: 5}}>Recommended Activities</Text>

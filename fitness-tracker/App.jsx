@@ -5,14 +5,13 @@ export default function App() {
     <Navigation />
   );
 }
-// Feedback + TODO:
+// TODO:
 
 // Units on register page 
-
-// workout tracker actually based on user schedule 
-// Error handler - (registration screen) + schedule (drag drop) + remove workout
-// Schedule includes months
+// Error handler - (registration screen)
 // Calories Screen fix
+
+// Schedule includes months
 // User can change difficulty, day set in the description
 
 // Extra
