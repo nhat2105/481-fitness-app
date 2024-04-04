@@ -71,49 +71,84 @@ function Register_2_Screen() {
   )
 }
 
-function Register_3_Screen(){
+function Register_3_Screen() {
     const navigation = useNavigation();
     const themeColors = theme('purple');
-    let name = ""; 
-    let weight = "";
-    //const [gender, setGender] = useState("");
-    let height = "";
+    const [name, setName] = useState("");
+    const [height, setHeight] = useState("");
+    const [weight, setWeight] = useState("");
+    const [metricSystem, setMetricSystem] = useState('metric');
 
-    const goToDashboard= () => {
-        navigation.navigate('Dashboard', {name: name, height: height, weight: weight});
+    const goToDashboard = () => {
+        navigation.navigate('Dashboard', { name: name, height: height, weight: weight, metricSystem: metricSystem });
     }
 
-    function handleInputChange({code, text}){
-        if (code === "Name"){
-            name = text;
-        } else if (code === "Height (cm)"){
-           height = text;
-        } else {
-            weight = text;
+    const handleInputChange = (input, text) => {
+        if (input === "Name") {
+            setName(text);
+        } else if (input === "Height") {
+            setHeight(text);
+        } else if (input === "Weight") {
+            setWeight(text);
         }
     }
-    
-    const InputField = ({input, placeholder}) =>{
-        return(
+
+    const InputField = ({ input, placeholder }) => {
+        return (
             <View>
-                <Text style ={{fontSize: 34, fontWeight: 600, color: 'white', textAlign: "center", marginLeft: 20, marginRight: 20}}>{input}</Text>
+                <Text style={{ fontSize: 34, fontWeight: 600, color: 'white', textAlign: "center", marginLeft: 20, marginRight: 20 }}>{input}</Text>
                 <TextInput type={input} placeholderTextColor={'lightgrey'} placeholder={placeholder}
-                    onChangeText={(text) => handleInputChange({code: input, text: text})}
-                    style={{height: 40, width: 200, borderColor: 'white',
-                    margin: 12, borderWidth: 3, padding: 10, borderRadius: 10}}/>
+                    onChangeText={(text) => handleInputChange(input, text)}
+                    value={input === "Name" ? name : input === "Height" ? height : weight}
+                    style={{ height: 40, width: 200, borderColor: 'white', margin: 12, borderWidth: 3, padding: 10, borderRadius: 10 }} />
             </View>
-                
         );
     }
 
-    return(
-        <View style={{flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: themeColors.bgColor(1)}}>
-            <InputField input={"Name"} placeholder={"i.e. John Doe"}/>
-            
-            <InputField input={"Height (cm)"} placeholder={"i.e. 163"}/> 
-             
-            <InputField input={"Weight (kg)"} placeholder={"i.e. 50"}/>
-
+    return (
+        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: themeColors.bgColor(1) }}>
+            <View>
+                <Text style={{ fontSize: 24, fontWeight: 'bold', color: 'white' }}>Name</Text>
+                <TextInput
+                    placeholder="i.e. John Doe"
+                    placeholderTextColor={'lightgrey'}
+                    onChangeText={(text) => handleInputChange("Name", text)}
+                    value={name}
+                    style={{ height: 40, width: 200, borderColor: 'white', marginVertical: 12, borderWidth: 3, padding: 10, borderRadius: 10 }}
+                />
+            </View>
+            <View>
+                <Text style={{ fontSize: 24, fontWeight: 'bold', color: 'white' }}>{metricSystem === 'metric' ? 'Height (cm)' : 'Height (in)'}</Text>
+                <TextInput
+                    placeholder={`i.e. 163 cm or 5.4 ft`}
+                    placeholderTextColor={'lightgrey'}
+                    onChangeText={(text) => handleInputChange("Height", text)}
+                    value={height}
+                    style={{ height: 40, width: 200, borderColor: 'white', marginVertical: 12, borderWidth: 3, padding: 10, borderRadius: 10 }}
+                />
+            </View>
+            <View>
+                <Text style={{ fontSize: 24, fontWeight: 'bold', color: 'white' }}>{metricSystem === 'metric' ? 'Weight (kg)' : 'Weight (lbs)'}</Text>
+                <TextInput
+                    placeholder={`i.e. 50 kgs or 160 lbs`}
+                    placeholderTextColor={'lightgrey'}
+                    onChangeText={(text) => handleInputChange("Weight", text)}
+                    value={weight}
+                    style={{ height: 40, width: 200, borderColor: 'white', marginVertical: 12, borderWidth: 3, padding: 10, borderRadius: 10 }}
+                />
+            </View>
+            <View className='buttons' style={{ display: 'flex', flexDirection: 'row', marginTop: 20 }}>
+                <TouchableOpacity
+                    onPress={() => setMetricSystem('metric')}
+                    style={{ backgroundColor: metricSystem === 'metric' ? 'lightgrey' : 'white', padding: 10, borderRadius: 5, marginRight: 10 }}>
+                    <Text style={{ color: metricSystem === 'metric' ? 'black' : 'grey' }}>Metric (cm, kg)</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                    onPress={() => setMetricSystem('imperial')}
+                    style={{ backgroundColor: metricSystem === 'imperial' ? 'lightgrey' : 'white', padding: 10, borderRadius: 5 }}>
+                    <Text style={{ color: metricSystem === 'imperial' ? 'black' : 'grey' }}>Imperial (ft.in, lbs)</Text>
+                </TouchableOpacity>
+            </View>
             <View className='buttons' style={{display: 'flex', flexDirection: 'row'}}>
                 <TouchableOpacity onPress={()=>navigation.goBack()} 
                     style={{ marginTop: 40, marginLeft: 4, backgroundColor: 'white', padding: 2,
@@ -123,7 +158,7 @@ function Register_3_Screen(){
                         </View>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={goToDashboard} 
-                    style={{ marginTop: 40, marginLeft: 200, backgroundColor: 'white', padding: 2,
+                   style={{ marginTop: 40, marginLeft: 200, backgroundColor: 'white', padding: 2,
                     borderRadius: 9999, boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.1)'}}>
                         <View style={{display: 'flex', flexDirection: 'row'}}>
                             <Icon.ArrowRight strokeWidth={3} stroke={themeColors.bgColor(1)} />

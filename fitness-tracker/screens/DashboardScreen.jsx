@@ -57,11 +57,31 @@ export default function DashboardScreen({route}) {
         },
     ]
 
-    let {name, weight, height} = route.params;
-    var BMI = Number(Number(weight)/(Number(height) * Number(height)) * 10000).toFixed(1);;
-    let bmiStatus = ("You have a normal weight status");
-    if (BMI >= 25) bmiStatus = ("You have an overweight status");
-    else if (BMI < 18.5) bmiStatus = ("You have an underweight status");
+    let { name, weight, height, metricSystem } = route.params;
+
+    // Convert height and weight to metric units if the imperial system is chosen
+    if (metricSystem === 'imperial') {
+        // Split height into feet and inches
+        const [feet, inches] = height.split('.'); // Assuming height is provided in the format "5.4" for 5 feet 4 inches
+    
+        // Convert feet and inches to inches
+        const totalInches = (Number(feet) * 12) + Number(inches);
+    
+        // Convert height from inches to centimeters (1 inch = 2.54 cm)
+        height = totalInches * 2.54;
+    
+        // Convert weight from pounds to kilograms (1 pound = 0.453592 kg)
+        weight = Number(weight) * 0.453592;
+    }
+    
+    // Calculate BMI
+    var BMI = Number(weight) / (Number(height) * Number(height)) * 10000;
+    BMI = Number(BMI.toFixed(1)); // Round to one decimal place
+    
+    // Determine BMI status
+    let bmiStatus = "You have a normal weight status";
+    if (BMI >= 25) bmiStatus = "You have an overweight status";
+    else if (BMI < 18.5) bmiStatus = "You have an underweight status";
 
     const themeColors = theme('purple');
     const navigation = useNavigation();
