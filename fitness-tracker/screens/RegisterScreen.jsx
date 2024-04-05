@@ -74,13 +74,22 @@ function Register_2_Screen() {
 function Register_3_Screen() {
     const navigation = useNavigation();
     const themeColors = theme('purple');
-    const [name, setName] = useState("");
-    const [height, setHeight] = useState("");
-    const [weight, setWeight] = useState("");
+    const [name, setName] = useState(null);
+    const [height, setHeight] = useState(null);
+    const [weight, setWeight] = useState(null);
     const [metricSystem, setMetricSystem] = useState('metric');
+    const [errorMsg, setErrorMsg] = useState(null)
 
     const goToDashboard = () => {
-        navigation.navigate('Dashboard', { name: name, height: height, weight: weight, metricSystem: metricSystem });
+        {/**Error handler, for testing purpose, can comment it out */}
+        if (!height){
+            setErrorMsg("Please enter your height, this is for us to tailor the best suitable plan based on your body build")
+        }
+        else if (!weight){
+            setErrorMsg("Please enter your weight, this is for us to tailor the best suitable plan based on your body build")
+        }
+        
+        else navigation.navigate('Dashboard', { name: name, height: height, weight: weight, metricSystem: metricSystem });
     }
 
     const handleInputChange = (input, text) => {
@@ -107,7 +116,15 @@ function Register_3_Screen() {
 
     return (
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: themeColors.bgColor(1) }}>
-            <View>
+           { !errorMsg &&
+            <Text style={{marginLeft: 30, marginRight: 30, alignSelf: 'center',
+           fontSize: 20, fontWeight: 700, marginBottom: 10}}
+           >Your name input is optional, but the others are required</Text>}
+            {errorMsg &&
+            <Text style={{marginLeft: 30, marginRight: 30, alignSelf: 'center', color: 'red',
+           fontSize: 20, fontWeight: 700, marginBottom: 10}}
+           >{errorMsg}</Text>}
+            <View>   
                 <Text style={{ fontSize: 24, fontWeight: 'bold', color: 'white' }}>Name</Text>
                 <TextInput
                     placeholder="i.e. John Doe"
