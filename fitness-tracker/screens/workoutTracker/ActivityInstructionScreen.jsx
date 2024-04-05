@@ -6,6 +6,7 @@ import { theme } from '../../theme';
 import { useNavigation } from '@react-navigation/native';
 import StepCard from '../../components/StepCard';
 import CountDown from 'react-native-countdown-fixed';
+import WebView from 'react-native-webview';
 
 
 export default function ActivityInstructionScreen({route}) {
@@ -71,7 +72,13 @@ export default function ActivityInstructionScreen({route}) {
         
         <>
          {/**Video */}
-         <Image source={video} style={{alignSelf: 'center', marginTop: 20, marginBottom: 20}} />
+         {/**<Image source={video} style={{alignSelf: 'center', marginTop: 20, marginBottom: 20}} /> */}
+         <WebView
+          style={{ marginLeft: 20, marginRight: 20, alignSelf: 'center', marginTop: 20, width: 320, height: 220, marginBottom: 20}}
+          javaScriptEnabled={true}
+          allowsFullscreenVideo={true}
+          source={{uri: "https://www.youtube.com/embed/CSrBaHX3HxQ"}}
+        />
 
             {/**Title */}
     <Text style={{fontSize: 20, fontWeight: 800, marginLeft: 20, color: themeColors.text}}>{text}</Text>
@@ -107,7 +114,13 @@ export default function ActivityInstructionScreen({route}) {
         
         <>
          {/**Video */}
-         <Image source={video} style={{alignSelf: 'center', marginTop: 20, marginBottom: 20}} />
+         {/**<Image source={video} style={{alignSelf: 'center', marginTop: 20, marginBottom: 20}} /> */}
+         <WebView
+          style={{ marginLeft: 20, marginRight: 20, alignSelf: 'center', marginTop: 20, width: 320, height: 220, marginBottom: 20}}
+          javaScriptEnabled={true}
+          allowsFullscreenVideo={true}
+          source={{uri: "https://www.youtube.com/embed/iSSAk4XCsRA"}}
+        />
 
         {/**Title */}
         <Text style={{fontSize: 20, fontWeight: 800, marginLeft: 20, color: themeColors.text}}>{text}</Text>
@@ -146,7 +159,13 @@ export default function ActivityInstructionScreen({route}) {
         
         <>
          {/**Video */}
-         <Image source={video} style={{alignSelf: 'center', marginTop: 20, marginBottom: 20}} />
+         {/**<Image source={video} style={{alignSelf: 'center', marginTop: 20, marginBottom: 20}} /> */}
+         <WebView
+          style={{ marginLeft: 20, marginRight: 20, alignSelf: 'center', marginTop: 20, width: 320, height: 220, marginBottom: 20}}
+          javaScriptEnabled={true}
+          allowsFullscreenVideo={true}
+          source={{uri: "https://www.youtube.com/embed/u3zgHI8QnqE"}}
+        />
 
          {/**Title */}
     <Text style={{fontSize: 20, fontWeight: 800, marginLeft: 20, color: themeColors.text}}>{text}</Text>
@@ -182,7 +201,14 @@ export default function ActivityInstructionScreen({route}) {
         
         <>
          {/**Video */}
-         <Image source={video} style={{alignSelf: 'center', marginTop: 20, marginBottom: 20}} />
+        {/**<Image source={video} style={{alignSelf: 'center', marginTop: 20, marginBottom: 20}} /> */}
+        <WebView
+          style={{ marginLeft: 20, marginRight: 20, alignSelf: 'center', marginTop: 20, width: 320, height: 220, marginBottom: 20}}
+          javaScriptEnabled={true}
+          allowsFullscreenVideo={true}
+          source={{uri: "https://www.youtube.com/embed/xqvCmoLULNY"}}
+        />
+
 
             {/**Title */}
       <Text style={{fontSize: 20, fontWeight: 800, marginLeft: 20, color: themeColors.text}}>Squats</Text>
@@ -219,7 +245,13 @@ export default function ActivityInstructionScreen({route}) {
         
         <>
          {/**Video */}
-         <Image source={video} style={{alignSelf: 'center', marginTop: 20, marginBottom: 20}} />
+         {/**<Image source={video} style={{alignSelf: 'center', marginTop: 20, marginBottom: 20}} /> */}
+         <WebView
+          style={{ marginLeft: 20, marginRight: 20, alignSelf: 'center', marginTop: 20, width: 320, height: 220, marginBottom: 20}}
+          javaScriptEnabled={true}
+          allowsFullscreenVideo={true}
+          source={{uri: "https://www.youtube.com/embed/sOcYlBI85hc"}}
+        />
 
           {/**Title */}
           <Text style={{fontSize: 20, fontWeight: 800, marginLeft: 20, color: themeColors.text}}>Arm Raises</Text>
@@ -254,6 +286,7 @@ export default function ActivityInstructionScreen({route}) {
         <>
          {/**Video */}
          <Image source={video} style={{alignSelf: 'center', marginTop: 20, marginBottom: 20}} />
+         
 
          {/**Title */}
     <Text style={{fontSize: 20, fontWeight: 800, marginLeft: 20, color: themeColors.text}}>Rest and Drink</Text>
@@ -284,7 +317,13 @@ export default function ActivityInstructionScreen({route}) {
         
         <>
          {/**Video */}
-         <Image source={video} style={{alignSelf: 'center', marginTop: 20, marginBottom: 20}} />
+         {/**<Image source={video} style={{alignSelf: 'center', marginTop: 20, marginBottom: 20}} />*/}
+         <WebView
+          style={{ marginLeft: 20, marginRight: 20, alignSelf: 'center', marginTop: 20, width: 320, height: 220, marginBottom: 20}}
+          javaScriptEnabled={true}
+          allowsFullscreenVideo={true}
+          source={{uri: "https://www.youtube.com/embed/cfns5VDVVvk"}}
+        />
 
         {/**Title */}
 <Text style={{fontSize: 20, fontWeight: 800, marginLeft: 20, color: themeColors.text}}>Incline Push-Ups</Text>
@@ -321,7 +360,13 @@ description={"Push through your palms to extend your arms and return to the star
         
         <>
          {/**Video */}
-         <Image source={video} style={{alignSelf: 'center', marginTop: 20, marginBottom: 20}} />
+         {/**<Image source={video} style={{alignSelf: 'center', marginTop: 20, marginBottom: 20}} /> */}
+         <WebView
+          style={{ marginLeft: 20, marginRight: 20, alignSelf: 'center', marginTop: 20, width: 320, height: 220, marginBottom: 20}}
+          javaScriptEnabled={true}
+          allowsFullscreenVideo={true}
+          source={{uri: "https://www.youtube.com/embed/IODxDxX7oi4"}}
+        />
 
         {/**Title */}
 <Text style={{fontSize: 20, fontWeight: 800, marginLeft: 20, color: themeColors.text}}>Push-Ups</Text>
@@ -358,7 +403,13 @@ description={"Continue performing push-ups for the desired number of repetitions
         
         <>
          {/**Video */}
-         <Image source={video} style={{alignSelf: 'center', marginTop: 20, marginBottom: 20}} />
+         {/**<Image source={video} style={{alignSelf: 'center', marginTop: 20, marginBottom: 20}} /> */}
+         <WebView
+          style={{ marginLeft: 20, marginRight: 20, alignSelf: 'center', marginTop: 20, width: 320, height: 220, marginBottom: 20}}
+          javaScriptEnabled={true}
+          allowsFullscreenVideo={true}
+          source={{uri: "https://www.youtube.com/embed/jDwoBqPH0jk"}}
+        />
 
        {/**Title */}
 <Text style={{fontSize: 20, fontWeight: 800, marginLeft: 20, color: themeColors.text}}>Sit-Ups</Text>

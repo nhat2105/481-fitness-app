@@ -1,7 +1,7 @@
 To run the project:
 1. cd to `fitness-tracker` directory
 2. use  `npx create-expo-app .` command, this will initialize a package of default expo app project
-3. use `npm install @react-navigation/native @react-navigation/native-stack react-native-feather @react-native-picker/picker @react-native-async-storage/async-storage react-native-countdown-fixed` to install the required library
+3. use `npm install @react-navigation/native @react-navigation/native-stack react-native-feather @react-native-picker/picker @react-native-async-storage/async-storage react-native-countdown-fixed react-native-webview react-native-paper` to install the required library
 4. use  `npx install expo-image-picker react-native-gesture-handler` to install the required library
 
 

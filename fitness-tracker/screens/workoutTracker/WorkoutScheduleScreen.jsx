@@ -120,6 +120,7 @@ export default function WorkoutScheduleScreen({route}) {
                 <Text style={{ marginLeft: 20, marginTop: 50, fontWeight: 600, fontSize: 17 }}>{time[timeIndex]}</Text>
                 {timeSlot[chosenDay] && (
                     <Draggable 
+                        
                         shouldReverse={reverse} onReverse={() => {x: 0; y: 0}}
                         key={timeIndex} style={{ marginTop: 10 }} 
                         onDragRelease={({ nativeEvent }) => {
@@ -151,7 +152,8 @@ export default function WorkoutScheduleScreen({route}) {
                         }}
                     >
                 <View style={{marginTop: 45}}>
-                    <TouchableOpacity style={{ borderRadius: 15, marginLeft: 100, marginRight: 100,
+                    <TouchableOpacity onPress={() => navigation.navigate("ActivityDescription", {text: timeSlot[chosenDay], lookOnly: false})}
+                     style={{ borderRadius: 15, marginLeft: 100, marginRight: 100,
                     backgroundColor: themeColors.bgColor(0.7)}}>
                         <Text style={{marginTop: 10, fontWeight: 500, color: 'white', alignSelf: 'center', fontSize: 17, marginBottom: 10}}>
                             {timeSlot[chosenDay]}
