@@ -120,7 +120,7 @@ function Register_3_Screen() {
             <View>
                 <Text style={{ fontSize: 24, fontWeight: 'bold', color: 'white' }}>{metricSystem === 'metric' ? 'Height (cm)' : 'Height (in)'}</Text>
                 <TextInput
-                    placeholder={`i.e. 163 cm or 5.4 ft`}
+                    placeholder={metricSystem === 'metric' ? `i.e. 163 ` : `i.e. 5.4`}
                     placeholderTextColor={'lightgrey'}
                     onChangeText={(text) => handleInputChange("Height", text)}
                     value={height}
@@ -130,7 +130,7 @@ function Register_3_Screen() {
             <View>
                 <Text style={{ fontSize: 24, fontWeight: 'bold', color: 'white' }}>{metricSystem === 'metric' ? 'Weight (kg)' : 'Weight (lbs)'}</Text>
                 <TextInput
-                    placeholder={`i.e. 50 kgs or 160 lbs`}
+                    placeholder={metricSystem === 'metric' ? `i.e. 50` : `160`}
                     placeholderTextColor={'lightgrey'}
                     onChangeText={(text) => handleInputChange("Weight", text)}
                     value={weight}
