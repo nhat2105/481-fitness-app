@@ -116,10 +116,6 @@ function Register_3_Screen() {
 
     return (
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: themeColors.bgColor(1) }}>
-           { !errorMsg &&
-            <Text style={{marginLeft: 30, marginRight: 30, alignSelf: 'center',
-           fontSize: 20, fontWeight: 700, marginBottom: 10}}
-           >Your name input is optional, but the others are required</Text>}
             {errorMsg &&
             <Text style={{marginLeft: 30, marginRight: 30, alignSelf: 'center', color: 'red',
            fontSize: 20, fontWeight: 700, marginBottom: 10}}
@@ -135,7 +131,7 @@ function Register_3_Screen() {
                 />
             </View>
             <View>
-                <Text style={{ fontSize: 24, fontWeight: 'bold', color: 'white' }}>{metricSystem === 'metric' ? 'Height (cm)' : 'Height (in)'}</Text>
+                <Text style={{ fontSize: 24, fontWeight: 'bold', color: 'white' }}>{metricSystem === 'metric' ? 'Height* (cm)' : 'Height* (in)'}</Text>
                 <TextInput
                     placeholder={metricSystem === 'metric' ? `i.e. 163 ` : `i.e. 5.4`}
                     placeholderTextColor={'lightgrey'}
@@ -145,7 +141,7 @@ function Register_3_Screen() {
                 />
             </View>
             <View>
-                <Text style={{ fontSize: 24, fontWeight: 'bold', color: 'white' }}>{metricSystem === 'metric' ? 'Weight (kg)' : 'Weight (lbs)'}</Text>
+                <Text style={{ fontSize: 24, fontWeight: 'bold', color: 'white' }}>{metricSystem === 'metric' ? 'Weight* (kg)' : 'Weight* (lbs)'}</Text>
                 <TextInput
                     placeholder={metricSystem === 'metric' ? `i.e. 50` : `160`}
                     placeholderTextColor={'lightgrey'}
