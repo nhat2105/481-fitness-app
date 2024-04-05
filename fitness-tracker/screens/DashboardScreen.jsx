@@ -89,10 +89,12 @@ export default function DashboardScreen({route}) {
 
 
     const turnOnNotification= () =>{
+        alert("You turned on notifications. From now on, you will receive time-sensitive reminders of scheduled exercises")
         SetNotif(true);
     }
     
     const turnOffNotification = () => {
+        alert("You have turned off notifications. You won't receive any reminders of scheduled exercises")
         SetNotif(false);
     }
 
