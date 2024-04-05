@@ -8,9 +8,4 @@ export default function App() {
 // TODO:
 // Schedule includes months
 // User can change difficulty, day set in the description
-
-// Extra
-// from schedule, user can click on and navigate to the activity description
-
-
-
+// Calories track works once (ie returning from the workout, it adds the activity in the set + dashboard)
