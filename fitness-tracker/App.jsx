@@ -7,7 +7,6 @@ export default function App() {
 }
 // TODO:
 // Error handler - (registration screen)
-// Calories Screen fix
 
 // Schedule includes months
 // User can change difficulty, day set in the description
