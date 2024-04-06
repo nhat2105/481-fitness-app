@@ -6,8 +6,9 @@ import BackButton from '../../components/BackButton'
 import { theme } from '../../theme'
 import { DataTable } from "react-native-paper"
 
-export default function CaloriesReportScreen() {
-  const themeColors = theme('purple')
+export default function CaloriesReportScreen({route}) {
+    const {firstTime} = route.params
+    const themeColors = theme('purple')
     const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
     const [startDate, setStartDate] = useState(11);
     const [startMonth, setStartMonth] = useState(3);
@@ -50,8 +51,15 @@ export default function CaloriesReportScreen() {
       <View style={{marginLeft: 30, marginRight: 30, marginTop: 30}}>
         <Text style={{color: themeColors.text, fontSize: 20, fontWeight: 600, alignSelf: 'center', marginBottom: 10,
       }}>Total calories burnt: </Text>
-      <Text style={{ fontSize: 20, fontWeight: 600, alignSelf: 'center', marginBottom: 40,
+      { firstTime &&
+        <Text style={{ fontSize: 20, fontWeight: 600, alignSelf: 'center', marginBottom: 40,
       }}>760 calories</Text>
+      }
+
+      { !firstTime &&
+        <Text style={{ fontSize: 20, fontWeight: 600, alignSelf: 'center', marginBottom: 40,
+      }}>1080 calories</Text>
+      }
       
         {/**Do table instead */}
         <DataTable style={{backgroundColor: 'white', display: 'flex'}}>
@@ -72,6 +80,14 @@ export default function CaloriesReportScreen() {
             <DataTable.Cell>Advanced</DataTable.Cell>
             <DataTable.Cell numeric>440</DataTable.Cell>
           </DataTable.Row>
+
+          { !firstTime &&
+            <DataTable.Row>
+              <DataTable.Cell>Fullbody</DataTable.Cell>
+              <DataTable.Cell>Beginner</DataTable.Cell>
+              <DataTable.Cell numeric>320</DataTable.Cell>
+            </DataTable.Row>
+          }
 
       </DataTable>
       </View>

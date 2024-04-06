@@ -341,15 +341,22 @@ export default function DashboardScreen({route}) {
                
                 <View style ={{position: 'absolute', right: 30}}>
                     <TouchableOpacity disabled={viewInfo}
-                    onPress={() => navigation.navigate("CaloriesReport")}
+                    onPress={() => navigation.navigate("CaloriesReport", {firstTime: firstTime})}
                          style={{borderWidth: infoStep == 5? 2 : 0, borderColor: 'red',
                          backgroundColor: 'white', borderRadius: 20}} >
                         <Text style={{alignSelf: 'center', color: 'black', fontSize: 18, fontWeight: 600, marginTop: 4}}>
                             Calories
                         </Text>
-                        <Text style={{alignSelf: 'center', color: themeColors.text, fontSize: 20, fontWeight: 700, marginTop: 5}}>
+                        {firstTime &&
+                            <Text style={{alignSelf: 'center', color: themeColors.text, fontSize: 20, fontWeight: 700, marginTop: 5}}>
                             760 kCal
                         </Text>
+                        }
+                        {!firstTime && 
+                        <Text style={{alignSelf: 'center', color: themeColors.text, fontSize: 20, fontWeight: 700, marginTop: 5}}>
+                        1080 kCal
+                        </Text>}
+                        
                         <Image source={calories_pie} style={{alignSelf: 'center', marginTop: 5}}/>
                     </TouchableOpacity>
 
