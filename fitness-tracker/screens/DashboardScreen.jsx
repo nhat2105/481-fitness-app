@@ -202,7 +202,10 @@ export default function DashboardScreen({route}) {
                     <Text style={{color: 'white', fontSize: 18, fontWeight: 300, alignSelf: 'center'}}>{bmiStatus}</Text>
                     <View style={{display: 'flex', flexDirection: 'row', marginBottom: 20, alignSelf: 'center'}} >
                         <TouchableOpacity disabled={viewInfo}
-                        onPress={() => navigation.navigate("SetWeight", {weight: weight, name: name, height: height})}
+                        onPress={() => navigation.navigate("SetWeight", {name: name,
+                            height: height,
+                            weight: weight,
+                            metricSystem: metricSystem})}
                         style={{backgroundColor: 'white', borderRadius: 5, marginTop: 10}} >
                             <Text style={{alignSelf:'center', color: themeColors.text, marginLeft: 10, marginRight: 10,
                             fontSize: 16, fontWeight: 700}} >Update Weight</Text>
