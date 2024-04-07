@@ -6,6 +6,7 @@ export default function App() {
   );
 }
 // TODO:
+
+// Fullybody in add sched 
 // Schedule includes months
 // User can change difficulty, day set in the description
-// Calories track works once (ie returning from the workout, it adds the activity in the set + dashboard)

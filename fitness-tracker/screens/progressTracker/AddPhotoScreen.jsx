@@ -11,6 +11,7 @@ export default function AddPhotoScreen({route}) {
   const themeColors = theme('purple')
   const navigation = useNavigation();
   const [image, setImage] = useState();
+  const [errMsg, setErrorMsg] = useState(null)
   let gallery = route.params
 
   const [selectedMonth, setSelectedMonth] = useState(null);
@@ -49,10 +50,20 @@ export default function AddPhotoScreen({route}) {
     if (index >= 0) {
       gallery[index].image = image;
       gallery[index].def = 'false';
+      
     } 
     else {
-      gallery.push({image: image, month: selectedMonth, def: 'false'})
+      if (!selectedMonth){
+        setErrorMsg("Please choose a valid month!")
+        return false
+      } if (!image){
+        setErrorMsg("Please choose an image from your library!")
+        return false
+      }
+      else gallery.push({image: image, month: selectedMonth, def: 'false'})
     }
+
+    return true;
   }
 
   return (
@@ -92,9 +103,11 @@ export default function AddPhotoScreen({route}) {
             ))}
         </Picker>
       </View>
+      {errMsg && <Text style={{marginTop: 10, alignSelf: 'center', fontSize: 18, fontWeight: 600, color: 'red'}}>{errMsg}
+        </Text>}
       <TouchableOpacity onPress= {()=> 
-       { updateGallery();
-         navigation.navigate("PhotoComparer", {gallery: gallery});
+       { if (updateGallery())navigation.navigate("PhotoComparer", {gallery: gallery});
+
         }}
         style={{backgroundColor: themeColors.bgColor(1), justifyContent: 'center', marginTop: 40,
           alignItems: 'center', borderRadius: 20, marginLeft: 20, marginRight: 20, marginBottom: 50}}>
