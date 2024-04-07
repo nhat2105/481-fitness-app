@@ -10,7 +10,7 @@ export default function SetWeightScreen({ route }) {
 
     const [currentWeight, setCurrentWeight] = useState(weight);
     const [updatedWeight, setUpdatedWeight] = useState('');
-    const [selectedUnit, setSelectedUnit] = useState(metricSystem); // Initialize selectedUnit with metricSystem from registration
+    const [selectedUnit, setSelectedUnit] = useState(metricSystem); 
     const themeBlue = theme('blue');
     const navigation = useNavigation();
 
@@ -19,9 +19,15 @@ export default function SetWeightScreen({ route }) {
         navigation.navigate("Dashboard", {
             name: name,
             height: height,
-            weight: updatedWeight, // Pass the updated weight
-            metricSystem: selectedUnit // Pass the selected unit
+            weight: updatedWeight,
+            metricSystem: selectedUnit
         });
+    };
+
+    // Function to convert weight to imperial if needed
+    const convertToImperial = (weightInKg) => {
+        // Conversion logic from kg to lbs
+        return (weightInKg * 2.20462).toFixed(1); 
     };
 
     return (
@@ -37,24 +43,30 @@ export default function SetWeightScreen({ route }) {
                             Current Weight
                         </Text>
                         <Text style={{ fontSize: 18, fontWeight: 600, color: 'black', textAlign: "center", marginTop: 10 }}>
-                            {currentWeight} {selectedUnit === 'metric' ? 'kgs' : 'lbs'}
+                            {selectedUnit === 'metric' ? parseFloat(currentWeight).toFixed(0) : convertToImperial(currentWeight)} {selectedUnit === 'metric' ? 'kgs' : 'lbs'}
                         </Text>
                     </View>
 
                     {/* Option to change units */}
                     <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', marginTop: 20 }}>
                         <TouchableOpacity
-                            onPress={() => setSelectedUnit('metric')} // Update selectedUnit to 'metric' when Metric is pressed
+                            onPress={() => {
+                                setSelectedUnit('metric');
+                                setCurrentWeight(weight); 
+                            }}
                             style={{ backgroundColor: selectedUnit === 'metric' ? 'lightgrey' : 'white', padding: 10, borderRadius: 5, marginRight: 10 }}
                         >
                             <Text style={{ color: selectedUnit === 'metric' ? 'black' : 'grey' }}>Metric (kg)</Text>
                         </TouchableOpacity>
                         <TouchableOpacity
-                            onPress={() => setSelectedUnit('imperial')} // Update selectedUnit to 'imperial' when Imperial is pressed
+                            onPress={() => {
+                                setSelectedUnit('imperial');
+                                setCurrentWeight(weight);
+
+                            }}
                             style={{ backgroundColor: selectedUnit === 'imperial' ? 'lightgrey' : 'white', padding: 10, borderRadius: 5 }}
                         >
                             <Text style={{ color: selectedUnit === 'imperial' ? 'black' : 'grey' }}>Imperial (lbs)</Text>
-                            
                         </TouchableOpacity>
                     </View>
 
@@ -64,7 +76,7 @@ export default function SetWeightScreen({ route }) {
                             type='text'
                             placeholder="Enter new weight"
                             placeholderTextColor={'lightgrey'}
-                            onChangeText={(text) => setUpdatedWeight(text)} // Update updated weight state
+                            onChangeText={(text) => setUpdatedWeight(text)} 
                             style={{
                                 height: 40, borderColor: themeBlue.bgColor(1),
                                 marginVertical: 12, borderWidth: 3, padding: 10, borderRadius: 10
