@@ -62,8 +62,7 @@ export default function DashboardScreen({route}) {
     // Convert height and weight to metric units if the imperial system is chosen
     if (metricSystem === 'imperial') {
         // Split height into feet and inches
-        const [feet, inches] = height.split('.'); // Assuming height is provided in the format "5.4" for 5 feet 4 inches
-    
+        const [feet, inches] = String(height).split('.');  
         // Convert feet and inches to inches
         const totalInches = (Number(feet) * 12) + Number(inches);
     

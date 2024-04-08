@@ -10,7 +10,7 @@ export default function SetWeightScreen({ route }) {
 
     const [currentWeight, setCurrentWeight] = useState(weight);
     const [updatedWeight, setUpdatedWeight] = useState('');
-    const [selectedUnit, setSelectedUnit] = useState(metricSystem); 
+    const selectedUnit = metricSystem;
     const themeBlue = theme('blue');
     const navigation = useNavigation();
 
@@ -18,70 +18,69 @@ export default function SetWeightScreen({ route }) {
     const onUpdateWeight = () => {
         navigation.navigate("Dashboard", {
             name: name,
-            height: height,
+            height: convertHeight(height),
             weight: updatedWeight,
             metricSystem: selectedUnit
         });
     };
 
-    // Function to convert weight to imperial if needed
-    const convertToImperial = (weightInKg) => {
-        // Conversion logic from kg to lbs
-        return (weightInKg * 2.20462).toFixed(1); 
+    // Function to convert weight to the appropriate unit
+    const convertWeight = (weightInKg) => {
+      weightInKg = Number(weightInKg); // Convert weightInKg to a number
+      if (selectedUnit === 'imperial') {
+          // Convert kg to lbs
+          return (weightInKg * 2.20462).toFixed(1);
+      } else {
+          // If metric, return weight in kg as is
+          return weightInKg.toFixed(1);
+      }
+    };
+
+    // Function to convert height to the appropriate unit
+    const convertHeight = (heightInCm) => {
+      heightInCm = Number(heightInCm); // Convert heightInCm to a number
+      if (selectedUnit === 'imperial') {
+          // Convert cm to feet and inches
+          const feet = Math.floor(heightInCm / 30.48);
+          const inches = ((heightInCm % 30.48) / 2.54).toFixed(1);
+          return parseFloat(feet + '.' + inches); // Convert to a float
+      } else {
+          // If metric, return height in cm as is
+          return heightInCm.toFixed(1);
+      }
     };
 
     return (
         <KeyboardAvoidingView style={{ flex: 1 }} behavior="padding" keyboardVerticalOffset={100}>
             <View style={{ backgroundColor: 'white', flex: 1 }}>
                 <ScrollView>
-                    <Header title={"Set Weight"} color={'blue'} />
+                    <Header title={"Update Weight"} color={'blue'} />
                     <Image source={frame} style={{ width: '100%' }} />
 
                     {/** Weight Setter */}
                     <View>
-                        <Text style={{ fontSize: 20, fontWeight: 600, color: 'black', textAlign: "center", marginTop: 20 }}>
+                        <Text style={{ fontSize: 20, fontWeight: '600', color: 'black', textAlign: "center", marginTop: 20 }}>
                             Current Weight
                         </Text>
-                        <Text style={{ fontSize: 18, fontWeight: 600, color: 'black', textAlign: "center", marginTop: 10 }}>
-                            {selectedUnit === 'metric' ? parseFloat(currentWeight).toFixed(0) : convertToImperial(currentWeight)} {selectedUnit === 'metric' ? 'kgs' : 'lbs'}
+                        <Text style={{ fontSize: 18, fontWeight: '600', color: 'black', textAlign: "center", marginTop: 10 }}>
+                            {convertWeight(currentWeight)} {selectedUnit === 'imperial' ? 'lbs' : 'kgs'}
                         </Text>
-                    </View>
-
-                    {/* Option to change units */}
-                    <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', marginTop: 20 }}>
-                        <TouchableOpacity
-                            onPress={() => {
-                                setSelectedUnit('metric');
-                                setCurrentWeight(weight); 
-                            }}
-                            style={{ backgroundColor: selectedUnit === 'metric' ? 'lightgrey' : 'white', padding: 10, borderRadius: 5, marginRight: 10 }}
-                        >
-                            <Text style={{ color: selectedUnit === 'metric' ? 'black' : 'grey' }}>Metric (kg)</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity
-                            onPress={() => {
-                                setSelectedUnit('imperial');
-                                setCurrentWeight(weight);
-
-                            }}
-                            style={{ backgroundColor: selectedUnit === 'imperial' ? 'lightgrey' : 'white', padding: 10, borderRadius: 5 }}
-                        >
-                            <Text style={{ color: selectedUnit === 'imperial' ? 'black' : 'grey' }}>Imperial (lbs)</Text>
-                        </TouchableOpacity>
                     </View>
 
                     {/** Text input field for updated weight */}
                     <View style={{ marginTop: 20, paddingHorizontal: 20 }}>
                         <TextInput
-                            type='text'
                             placeholder="Enter new weight"
                             placeholderTextColor={'lightgrey'}
-                            onChangeText={(text) => setUpdatedWeight(text)} 
+                            onChangeText={(text) => setUpdatedWeight(text)}
                             style={{
-                                height: 40, borderColor: themeBlue.bgColor(1),
-                                marginVertical: 12, borderWidth: 3, padding: 10, borderRadius: 10
+                                height: 40,
+                                borderColor: themeBlue.bgColor(1),
+                                marginVertical: 12,
+                                borderWidth: 3,
+                                padding: 10,
+                                borderRadius: 10
                             }}
-                            // Remove additional styling for border and padding
                             underlineColorAndroid="transparent"
                             selectionColor={themeBlue.bgColor(1)}
                         />
@@ -98,7 +97,7 @@ export default function SetWeightScreen({ route }) {
                             marginHorizontal: 20
                         }}
                     >
-                        <Text style={{ color: 'white', fontSize: 18, marginTop: 10, fontWeight: 700, height: 40, alignSelf: "center" }}>
+                        <Text style={{ color: 'white', fontSize: 18, marginTop: 10, fontWeight: '700', height: 40, alignSelf: "center" }}>
                             Set
                         </Text>
                     </TouchableOpacity>
