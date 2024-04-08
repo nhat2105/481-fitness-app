@@ -74,7 +74,7 @@ export default function WorkoutTrackerScreen({route}) {
             color: 'white', marginTop: 20, marginBottom: 5}}>Recommended Activities</Text>
         <WorkoutCard title= {"abs"} text={"Fullbody Workout"}  action={"View"} />
         <WorkoutCard title= {"lower"} text={"Lowerbody Train"} action={"View"} />
-        <WorkoutCard title= {"upper"} action={"View"} text={"Upperbody Training"}/>
+        <WorkoutCard title= {"upper"} action={"View"} text={"Upperbody Train"}/>
         <TouchableOpacity onPress={() => navigation.goBack()}
         style={{backgroundColor: 'white', marginLeft: 30, borderRadius: 8,
         marginRight: 30, marginTop: 20, marginBottom: 80}}>
