@@ -24,45 +24,32 @@ export default function ActivityDescription({route}) {
         switch(text){
             case "Lowerbody Train":
                 ex = [
-                [ 
-                    { id: 0, title: 'Welcome to the Renaissance', text: '0:10' },
-                    { id: 1, title: 'Mother of the House of Renaissance: "Beyoncé" ', text: '12x' },
-                    { id: 2, title: 'Opulence', text: '15x' },
-                    { id: 3, title: 'Kitty Cat', text: '20x' },
-                    { id: 4, title: 'Just playing here', text: '0:10' },
-                    { id: 5, title: 'Rest & Drinks', text: '0:10' },
-                ],
-                [ 
-                    { id: 0, title: 'Chill, no harm done', text: '0:10' },
-                    { id: 1, title: 'Control the Media', text: '12x' },
-                    { id: 2, title: 'Anointed', text: '15x' },
-                    { id: 3, title: 'Motherboard', text: '20x' },
-                    { id: 4, title: 'Annointed Part II', text: '0:10' },
-                    { id: 5, title: 'Encore', text: '0:10' },
-                ]     
-            ]   
+                    [
+                        { id: 0, title: 'Squats', text: '12x' },
+                        { id: 1, title: 'Lunges', text: '15x' },
+                        { id: 2, title: 'Deadlifts', text: '20x' },
+                        { id: 3, title: 'Rest & Drinks', text: '0:10' },
+                    ],
+                    [
+                        { id: 0, title: 'Step Ups', text: '12x' },
+                        { id: 1, title: 'Glute Bridges', text: '15x' },
+                        { id: 2, title: 'Plie Squats', text: '20x' },
+                    ]
+                ];
                 break;
             case "Upperbody Train":
                 ex = [
-                [ 
-                    { id: 0, title: 'Welcome to the Cowboy Carter Act II', text: '0:10' },
-                    { id: 1, title: 'YAYA', text: '12x' },
-                    { id: 2, title: 'RIIVERDANCE', text: '15x' },
-                    { id: 3, title: 'Cowboy Carter', text: '20x' },
-                    { id: 4, title: 'Alligator Tears', text: '0:10' },
-                    { id: 5, title: 'Rest & Drinks', text: '0:10' },
-                ],
-                [ 
-                    { id: 0, title: 'Chill, no harm done', text: '0:10' },
-                    { id: 1, title: 'Jumping Jacks', text: '12x' },
-                    { id: 2, title: 'Skippings', text: '15x' },
-                    { id: 3, title: 'Squats', text: '20x' },
-                    { id: 4, title: 'Arm Raises', text: '0:10' },
-                    { id: 5, title: 'Rest & Drinks', text: '0:10' },
-                ]    
-            ]
+                    [
+                        { id: 0, title: 'Push-Ups', text: '15x' },
+                        { id: 1, title: 'Pull-Ups', text: '15x' },
+                        { id: 2, title: 'Rest & Drinks', text: '0:10' },
+                    ],
+                    [
+                        { id: 0, title: 'Incline Bench Press', text: '12x' },
+                        { id: 1, title: 'Dumbbell Flys', text: '15x' },
+                    ]
+                ];
                 break;
-
             default:
                 ex = [
                 //Set 1 (i = 0)
@@ -85,6 +72,7 @@ export default function ActivityDescription({route}) {
             break;
         }
         console.log(ex)
+        console.log(text)
         return ex;
     });
 
@@ -149,6 +137,8 @@ export default function ActivityDescription({route}) {
     }
 
   return (
+
+
     
     <View style={{backgroundColor: themeColors.bgColor(1)}} >
       <Header color={"blue"} />
