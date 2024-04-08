@@ -18,24 +18,75 @@ export default function ActivityDescription({route}) {
     const [currentAct, setCurrentAct] = useState(0);
     const [currentSet, setCurrentSet] = useState(0);
 
-    const [exercises, setExercises] = useState([
-        //Set 1 (i = 0)
-        [ 
-            { id: 0, title: 'Warm Up', text: '5:00' },
-            { id: 1, title: 'Jumping Jacks', text: '12x' },
-            { id: 2, title: 'Skippings', text: '15x' },
-            { id: 3, title: 'Squats', text: '20x' },
-            { id: 4, title: 'Arm Raises', text: '0:53' },
-            { id: 5, title: 'Rest & Drinks', text: '2:00' },
-        ], 
-        
-        //Set 2 (i = 1)
-        [
-            { id: 0, title: 'Incline Push-Ups', text: '12x' },
-            { id: 1, title: 'Push-Ups', text: '15x' },
-            {id: 2, title: 'Sit-Ups', text: '20x' }
-        ]
-    ]);
+    //hard code it this way, easier to use switch key of `text` then choose the corresponding set
+    const [exercises, setExercises] = useState(() => {
+        let ex = [];
+        switch(text){
+            case "Lowerbody Train":
+                ex = [
+                [ 
+                    { id: 0, title: 'Welcome to the Renaissance', text: '0:10' },
+                    { id: 1, title: 'Mother of the House of Renaissance: "Beyoncé" ', text: '12x' },
+                    { id: 2, title: 'Opulence', text: '15x' },
+                    { id: 3, title: 'Kitty Cat', text: '20x' },
+                    { id: 4, title: 'Just playing here', text: '0:10' },
+                    { id: 5, title: 'Rest & Drinks', text: '0:10' },
+                ],
+                [ 
+                    { id: 0, title: 'Chill, no harm done', text: '0:10' },
+                    { id: 1, title: 'Control the Media', text: '12x' },
+                    { id: 2, title: 'Anointed', text: '15x' },
+                    { id: 3, title: 'Motherboard', text: '20x' },
+                    { id: 4, title: 'Annointed Part II', text: '0:10' },
+                    { id: 5, title: 'Encore', text: '0:10' },
+                ]     
+            ]   
+                break;
+            case "Upperbody Train":
+                ex = [
+                [ 
+                    { id: 0, title: 'Welcome to the Cowboy Carter Act II', text: '0:10' },
+                    { id: 1, title: 'YAYA', text: '12x' },
+                    { id: 2, title: 'RIIVERDANCE', text: '15x' },
+                    { id: 3, title: 'Cowboy Carter', text: '20x' },
+                    { id: 4, title: 'Alligator Tears', text: '0:10' },
+                    { id: 5, title: 'Rest & Drinks', text: '0:10' },
+                ],
+                [ 
+                    { id: 0, title: 'Chill, no harm done', text: '0:10' },
+                    { id: 1, title: 'Jumping Jacks', text: '12x' },
+                    { id: 2, title: 'Skippings', text: '15x' },
+                    { id: 3, title: 'Squats', text: '20x' },
+                    { id: 4, title: 'Arm Raises', text: '0:10' },
+                    { id: 5, title: 'Rest & Drinks', text: '0:10' },
+                ]    
+            ]
+                break;
+
+            default:
+                ex = [
+                //Set 1 (i = 0)
+                [ 
+                    { id: 0, title: 'Warm Up', text: '0:10' },
+                    { id: 1, title: 'Jumping Jacks', text: '12x' },
+                    { id: 2, title: 'Skippings', text: '15x' },
+                    { id: 3, title: 'Squats', text: '20x' },
+                    { id: 4, title: 'Arm Raises', text: '0:10' },
+                    { id: 5, title: 'Rest & Drinks', text: '0:10' },
+                ], 
+
+                //Set 2 (i = 1)
+                [
+                    { id: 0, title: 'Incline Push-Ups', text: '12x' },
+                    { id: 1, title: 'Push-Ups', text: '15x' },
+                    { id: 2, title: 'Sit-Ups', text: '20x' }
+                ]
+            ]
+            break;
+        }
+        console.log(ex)
+        return ex;
+    });
 
     const [showUndo1, setShowUndo1] = useState(false);
     const [showUndo2, setShowUndo2] = useState(false);
