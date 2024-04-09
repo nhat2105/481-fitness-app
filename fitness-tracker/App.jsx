@@ -6,8 +6,5 @@ export default function App() {
   );
 }
 // TODO:
-
-// Fullybody in add sched 
 // Schedule includes months
-// User can change difficulty, day set in the description
-// Are these done?
+// User can change day set in the description

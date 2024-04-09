@@ -72,9 +72,9 @@ export default function WorkoutTrackerScreen({route}) {
         
         <Text style={{fontSize: 20, fontWeight: 700, marginLeft: 20,
             color: 'white', marginTop: 20, marginBottom: 5}}>Recommended Activities</Text>
-        <WorkoutCard title= {"abs"} text={"Abs Workout"}  action={"View"} />
+        <WorkoutCard title= {"abs"} text={"Fullbody Workout"}  action={"View"} />
         <WorkoutCard title= {"lower"} text={"Lowerbody Train"} action={"View"} />
-        <WorkoutCard title= {"upper"} action={"View"} text={"Weight Training"}/>
+        <WorkoutCard title= {"upper"} action={"View"} text={"Upperbody Train"}/>
         <TouchableOpacity onPress={() => navigation.goBack()}
         style={{backgroundColor: 'white', marginLeft: 30, borderRadius: 8,
         marginRight: 30, marginTop: 20, marginBottom: 80}}>
@@ -100,8 +100,24 @@ export default function WorkoutTrackerScreen({route}) {
               color: 'white', marginTop: 20, marginBottom: 5}}>Upcoming Workout</Text>
               
           {upcomingWorkout && upcomingWorkout.map((act, index) => {
+            let key;
+            switch(act){
+              case "Lowerbody Train":
+                key = "lower";
+                break;
+              case "Abs Workout":
+                key = "abs";
+                break;
+              case "Upperbody Train":
+                key = "upper";
+                break;
+              default:
+                key = "full";
+                break;
+            }
             return (
-              <WorkoutCard text={act} action= {"Start"} key={index}/>
+
+              <WorkoutCard title={key} text={act} action= {"Start"} key={index}/>
             )
           
           })}
@@ -113,9 +129,9 @@ export default function WorkoutTrackerScreen({route}) {
           
           <Text style={{fontSize: 20, fontWeight: 700, marginLeft: 20,
               color: 'white', marginTop: 20, marginBottom: 5}}>Recommended Activities</Text>
-          <WorkoutCard title= {"abs"} text={"Abs Workout"}  action={"View"} />
+          <WorkoutCard title= {"abs"} text={"Fullbody Workout"}  action={"View"} />
           <WorkoutCard title= {"lower"} text={"Lowerbody Train"}  action={"View"} />
-          <WorkoutCard title= {"upper"} action={"View"} text={"Weight Training"}/>
+          <WorkoutCard title= {"upper"} action={"View"} text={"Upperbody Train"}/>
         </View> 
         
         }

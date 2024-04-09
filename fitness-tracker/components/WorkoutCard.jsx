@@ -23,6 +23,7 @@ export default function WorkoutCard({title, text, action}) {
     case 'lower':
         imageSource = pic3;
         break;
+        
     default:
         imageSource = pic;
         break;

@@ -1,4 +1,4 @@
-import { View, Text, Image, TouchableOpacity, ScrollView} from 'react-native'
+import { View, Text, Image, TouchableOpacity, ScrollView,  Modal, FlatList } from 'react-native'
 import React, {useState} from 'react'
 import Header from '../../components/Header'
 import banner from "../../assets/components/workout_banner.png"
@@ -10,6 +10,7 @@ import barbell from "../../assets/components/barbell.png"
 import ActivityCard from '../../components/ActivityCard'
 import { useNavigation } from '@react-navigation/native'
 
+
 export default function ActivityDescription({route}) {
     const themeColors = theme("blue")
     const {text, lookOnly} = route.params;
@@ -17,25 +18,168 @@ export default function ActivityDescription({route}) {
 
     const [currentAct, setCurrentAct] = useState(0);
     const [currentSet, setCurrentSet] = useState(0);
+    const [selectedDifficulty, setSelectedDifficulty] = useState("Beginner");
+    const [calories, setCalories] = useState("320");
+    const [time, setTime] = useState(32)
+    const difficulties = ["Beginner", "Intermediate", "Advanced"];
+    const [difficultyModalVisible, setDifficultyModalVisible] = useState(false);
+    const [mult, setMult] = useState(1)
 
-    const [exercises, setExercises] = useState([
-        //Set 1 (i = 0)
-        [ 
-            { id: 0, title: 'Warm Up', text: '5:00' },
-            { id: 1, title: 'Jumping Jacks', text: '12x' },
-            { id: 2, title: 'Skippings', text: '15x' },
-            { id: 3, title: 'Squats', text: '20x' },
-            { id: 4, title: 'Arm Raises', text: '0:53' },
-            { id: 5, title: 'Rest & Drinks', text: '2:00' },
-        ], 
-        
-        //Set 2 (i = 1)
-        [
-            { id: 0, title: 'Incline Push-Ups', text: '12x' },
-            { id: 1, title: 'Push-Ups', text: '15x' },
-            {id: 2, title: 'Sit-Ups', text: '20x' }
-        ]
-    ]);
+    //hard code it this way, easier to use switch key of `text` then choose the corresponding set
+    const [exercises, setExercises] = useState(() => {
+        let ex = [];
+        switch (selectedDifficulty){
+            case "Intermediate":
+                setMult(2)
+                break;
+            case "Advanced":
+                setMult(4)
+                break;
+            default:
+                setMult(1)
+                break;
+        }
+        switch(text){
+            case "Lowerbody Train":
+                ex = [
+                    [
+                        { id: 0, title: 'Squats', text: `${12 * mult}x` },
+                        { id: 1, title: 'Lunges', text: `${15 * mult}x` },
+                        { id: 2, title: 'Deadlifts', text: `${20 * mult}x` },
+                        { id: 3, title: 'Rest & Drinks', text: '0:10' },
+                    ],
+                    [
+                        { id: 0, title: 'Step Ups', text: `${12 * mult}x` },
+                        { id: 1, title: 'Glute Bridges', text: `${15 * mult}x` },
+                        { id: 2, title: 'Plie Squats', text: `${20 * mult}x`  },
+                    ]
+                ];
+                break;
+            case "Upperbody Train":
+                ex = [
+                    [
+                        { id: 0, title: 'Push-Ups',text: `${15 * mult}x`  },
+                        { id: 1, title: 'Pull-Ups', text: `${15 * mult}x`  },
+                        { id: 2, title: 'Rest & Drinks', text: '0:10' },
+                    ],
+                    [
+                        { id: 0, title: 'Incline Bench Press', text: `${12 * mult}x`  },
+                        { id: 1, title: 'Dumbbell Flys', text: `${15 * mult}x`  },
+                    ]
+                ];
+                break;
+            default:
+                ex = [
+                //Set 1 (i = 0)
+                [ 
+                    { id: 0, title: 'Warm Up', text: '0:10' },
+                    { id: 1, title: 'Jumping Jacks', text: `${12 * mult}x` },
+                    { id: 2, title: 'Skippings', text: `${15 * mult}x`  },
+                    { id: 3, title: 'Squats', text: `${20 * mult}x`  },
+                    { id: 4, title: 'Arm Raises', text: '0:10' },
+                    { id: 5, title: 'Rest & Drinks', text: '0:10' },
+                ], 
+
+                //Set 2 (i = 1)
+                [
+                    { id: 0, title: 'Incline Push-Ups', text: `${12 * mult}x`  },
+                    { id: 1, title: 'Push-Ups', text: `${15 * mult}x`  },
+                    { id: 2, title: 'Sit-Ups', text: `${20 * mult}x`  }
+                ]
+            ]
+            break;
+        }
+       // console.log(ex)
+       // console.log(text)
+        return ex;
+    });
+
+    const handleDifficultySelect = (difficulty) => {
+        setSelectedDifficulty(difficulty);
+    
+        let newMult = 1; // Initialize newMult
+    
+        switch(difficulty){
+            case "Intermediate":
+                setCalories("450");
+                setTime(45);
+                newMult = 2;
+                break;
+            case "Advanced":
+                setCalories("560");
+                setTime(56);
+                newMult = 4;
+                break;
+            default:
+                setCalories("320");
+                setTime(32);
+                newMult = 1;
+                break;
+        }
+    
+        // Update exercises with the new multiplier
+        let ex = [];
+        switch(text){
+            case "Lowerbody Train":
+                ex = [
+                    [
+                        { id: 0, title: 'Squats', text: `${12 * newMult}x` },
+                        { id: 1, title: 'Lunges', text: `${15 * newMult}x` },
+                        { id: 2, title: 'Deadlifts', text: `${20 * newMult}x` },
+                        { id: 3, title: 'Rest & Drinks', text: '0:10' },
+                    ],
+                    [
+                        { id: 0, title: 'Step Ups', text: `${12 * newMult}x` },
+                        { id: 1, title: 'Glute Bridges', text: `${15 * newMult}x` },
+                        { id: 2, title: 'Plie Squats', text: `${20 * newMult}x`  },
+                    ]
+                ];
+                break;
+            case "Upperbody Train":
+                ex = [
+                    [
+                        { id: 0, title: 'Push-Ups',text: `${15 * newMult}x`  },
+                        { id: 1, title: 'Pull-Ups', text: `${15 * newMult}x`  },
+                        { id: 2, title: 'Rest & Drinks', text: '0:10' },
+                    ],
+                    [
+                        { id: 0, title: 'Incline Bench Press', text: `${12 * newMult}x`  },
+                        { id: 1, title: 'Dumbbell Flys', text: `${15 * newMult}x`  },
+                    ]
+                ];
+                break;
+            default:
+                ex = [
+                    //Set 1 (i = 0)
+                    [ 
+                        { id: 0, title: 'Warm Up', text: '0:10' },
+                        { id: 1, title: 'Jumping Jacks', text: `${12 * newMult}x` },
+                        { id: 2, title: 'Skippings', text: `${15 * newMult}x`  },
+                        { id: 3, title: 'Squats', text: `${20 * newMult}x`  },
+                        { id: 4, title: 'Arm Raises', text: '0:10' },
+                        { id: 5, title: 'Rest & Drinks', text: '0:10' },
+                    ], 
+    
+                    //Set 2 (i = 1)
+                    [
+                        { id: 0, title: 'Incline Push-Ups', text: `${12 * newMult}x`  },
+                        { id: 1, title: 'Push-Ups', text: `${15 * newMult}x`  },
+                        { id: 2, title: 'Sit-Ups', text: `${20 * newMult}x`  }
+                    ]
+                ];
+                break;
+        }
+    
+        setMult(newMult); // Update mult state
+        setExercises(ex);
+        setDifficultyModalVisible(false);
+    };
+
+    const renderDifficultyItem = ({ item }) => (
+        <TouchableOpacity onPress={() => handleDifficultySelect(item)} style={{ padding: 10, marginVertical: 5, backgroundColor: 'white', borderRadius: 10 }}>
+          <Text>{item}</Text>
+        </TouchableOpacity>
+      );
 
     const [showUndo1, setShowUndo1] = useState(false);
     const [showUndo2, setShowUndo2] = useState(false);
@@ -98,6 +242,10 @@ export default function ActivityDescription({route}) {
     }
 
   return (
+
+
+
+
     
     <View style={{backgroundColor: themeColors.bgColor(1)}} >
       <Header color={"blue"} />
@@ -109,7 +257,7 @@ export default function ActivityDescription({route}) {
         <Text style={{fontSize: 20, fontWeight: 700, marginLeft: 20,
             marginTop: 15, marginBottom: 5,}}>{text}</Text>
         <Text style={{fontSize: 20, fontWeight: 700, alignSelf: 'center', marginLeft: 7, marginRight: 6, color: themeColors.text,
-            marginTop: 5, marginBottom: 5,}}>11 Exercises | 32 mins | 320 Calories Burn</Text>
+            marginTop: 5, marginBottom: 5,}}>11 Exercises | {time} mins | {calories} Calories Burn</Text>
 
         <View style={{backgroundColor: 'lightgray', borderRadius: 15, marginTop: 20, marginLeft: 30, marginRight: 30}}>
             <View style={{display: 'flex', flexDirection: 'row'}}>
@@ -121,15 +269,16 @@ export default function ActivityDescription({route}) {
             </View>
         </View>
 
-        <View style={{backgroundColor: 'lightgrey', borderRadius: 15, marginTop: 20, marginLeft: 30, marginRight: 30}}>
+        <TouchableOpacity onPress={() => setDifficultyModalVisible(true)}
+        style={{backgroundColor: 'lightgrey', borderRadius: 15, marginTop: 20, marginLeft: 30, marginRight: 30}}>
             <View style={{display: 'flex', flexDirection: 'row'}}>
                 <Menu strokeWidth={2} stroke={themeColors.bgColor(1)} style={{marginTop: 10, marginLeft: 15}}/>
                 <Text style={{fontSize: 17, fontWeight: 800, marginLeft: 8, marginTop: 10, marginBottom: 10}}>Difficulty</Text>
                 <Text style={{ position: 'absolute', right: 35, color: 'black',
-                    fontSize: 14, fontWeight: 500, marginTop: 12, marginBottom: 10}}>Beginner</Text>
+                    fontSize: 14, fontWeight: 500, marginTop: 12, marginBottom: 10}}>{selectedDifficulty}</Text>
                 {/**<ChevronDown strokeWidth={1} stroke={"black"} style={{marginTop: 12, right: 10, position: 'absolute'}}/>*/}
             </View>
-        </View>
+        </TouchableOpacity>
 
         <Text style={{fontSize: 20, fontWeight: 700, marginLeft: 20, color: 'black',
             marginTop: 15, marginBottom: 5,}}>Equipment You'll Need</Text>
@@ -176,12 +325,21 @@ export default function ActivityDescription({route}) {
                 </TouchableOpacity>}
             </View>
             {exercises[1].map(exercise => (
-                <ActivityCard key={exercise.id} title={exercise.title} currentAct={currentAct} currentSet={currentSet}
-                exercises={exercise} timer={1000} routine={text}
-                text={exercise.text} onDelete={() => removeExercise2(exercise.id)} />
+                <ActivityCard  currentAct={currentAct} currentSet={currentSet} timer={1000}
+                exercises={exercises} viewOnly={true} routine={text}
+                key={exercise.id} title={exercise.title} text={exercise.text} 
+                onDelete={() => removeExercise2(exercise.id)} />
             ))}
+            
         </View>
-        {lookOnly? <></> :
+        {lookOnly? <View>
+            {exercises[1].map(exercise => (
+                <ActivityCard  currentAct={currentAct} currentSet={currentSet} timer={1000}
+                exercises={exercises} routine={text}
+                key={exercise.id} title={exercise.title} text={exercise.text} 
+                onDelete={() => removeExercise2(exercise.id)} />
+            ))}
+        </View> :
         <TouchableOpacity onPress={() => 
         {   
             let curS = exercises[currentSet];
@@ -200,6 +358,26 @@ export default function ActivityDescription({route}) {
             }}>Start Work Out</Text>
         </TouchableOpacity>
         }
+
+        {/* Difficulty Level Selection Modal */}
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={difficultyModalVisible}
+          onRequestClose={() => {
+            setDifficultyModalVisible(false);
+          }}>
+          <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'rgba(0, 0, 0, 0.5)' }}>
+            <View style={{ backgroundColor: 'white', borderRadius: 15, padding: 20, width: '80%' }}>
+              <FlatList
+                data={difficulties}
+                renderItem={renderDifficultyItem}
+                keyExtractor={(item, index) => index.toString()}
+              />
+            </View>
+          </View>
+        </Modal>
+
       </ScrollView>
     </View>
   )
