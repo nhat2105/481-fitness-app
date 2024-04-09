@@ -532,7 +532,7 @@ description={"Lower your torso back down to the starting position with control, 
               style={{ marginLeft: 20, marginRight: 20, alignSelf: 'center', marginTop: 20, width: 320, height: 220, marginBottom: 20}}
               javaScriptEnabled={true}
               allowsFullscreenVideo={true}
-              source={{uri: "https://www.youtube.com/embed/jAjLQrHilOw"}}
+              source={{uri: "https://www.youtube.com/embed/WCFCdxzFBa4"}}
             />
 
             {/* Title */}
@@ -570,7 +570,7 @@ description={"Lower your torso back down to the starting position with control, 
               style={{ marginLeft: 20, marginRight: 20, alignSelf: 'center', marginTop: 20, width: 320, height: 220, marginBottom: 20}}
               javaScriptEnabled={true}
               allowsFullscreenVideo={true}
-              source={{uri: "https://www.youtube.com/embed/Mp2F0SfcDHU"}}
+              source={{uri: "https://www.youtube.com/embed/OUgsJ8-Vi0E"}}
             />
 
             {/* Title */}
@@ -610,7 +610,7 @@ description={"Lower your torso back down to the starting position with control, 
               style={{ marginLeft: 20, marginRight: 20, alignSelf: 'center', marginTop: 20, width: 320, height: 220, marginBottom: 20}}
               javaScriptEnabled={true}
               allowsFullscreenVideo={true}
-              source={{uri: "https://www.youtube.com/embed/vkF3e8aNXUc"}}
+              source={{uri: "https://www.youtube.com/embed/yNKVK2axeNI"}}
             />
 
             {/* Title */}
@@ -689,7 +689,7 @@ description={"Lower your torso back down to the starting position with control, 
               style={{ marginLeft: 20, marginRight: 20, alignSelf: 'center', marginTop: 20, width: 320, height: 220, marginBottom: 20}}
               javaScriptEnabled={true}
               allowsFullscreenVideo={true}
-              source={{uri: "https://www.youtube.com/embed/4fSb_FWe8kY"}}
+              source={{uri: "https://www.youtube.com/embed/5kyLUGVq_pk"}}
             />
 
             {/* Title */}
@@ -728,7 +728,7 @@ description={"Lower your torso back down to the starting position with control, 
               style={{ marginLeft: 20, marginRight: 20, alignSelf: 'center', marginTop: 20, width: 320, height: 220, marginBottom: 20}}
               javaScriptEnabled={true}
               allowsFullscreenVideo={true}
-              source={{uri: "https://www.youtube.com/embed/1vQ_FJ2i_FU"}}
+              source={{uri: "https://www.youtube.com/embed/eozdVDA78K0"}}
             />
 
             {/* Title */}
