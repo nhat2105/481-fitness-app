@@ -244,6 +244,8 @@ export default function ActivityDescription({route}) {
   return (
 
 
+
+
     
     <View style={{backgroundColor: themeColors.bgColor(1)}} >
       <Header color={"blue"} />
