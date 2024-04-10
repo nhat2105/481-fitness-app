@@ -59,6 +59,7 @@ export default function ActivityInstructionScreen({route}) {
     //console.log("Act: ", act);
     //console.log(routine);
     
+    
   }
 
   return (
@@ -68,7 +69,7 @@ export default function ActivityInstructionScreen({route}) {
 
 
        
-        {text == "Warm Up" &&  (
+        {text == "Warm Up" && (
         
         <>
          {/**Video */}
@@ -442,6 +443,325 @@ description={"Lower your torso back down to the starting position with control, 
         </>
         
       )}
+
+        {text === "Lunges" && (
+          <>
+            {/* Video */}
+            <WebView
+              style={{ marginLeft: 20, marginRight: 20, alignSelf: 'center', marginTop: 20, width: 320, height: 220, marginBottom: 20}}
+              javaScriptEnabled={true}
+              allowsFullscreenVideo={true}
+              source={{uri: "https://www.youtube.com/embed/QOVaHwm-Q6U"}}
+            />
+
+            {/* Title */}
+            <Text style={{fontSize: 20, fontWeight: 800, marginLeft: 20, color: themeColors.text}}>Lunges</Text>
+            <Text style={{color: 'grey', fontWeight: 600, marginLeft: 20, fontSize: 17}}>Intermediate | 150 Calories Burn</Text>
+
+            {/* Description */}
+            <Text style={{fontSize: 20, fontWeight: 800, marginLeft: 20, marginTop: 40, color: themeColors.text}}>Description</Text>
+            <Text style={{color: 'grey', fontWeight: 600, marginLeft: 20, fontSize: 16, marginTop: 10, marginRight: 20}}>Lunges are a lower body exercise that primarily targets the quadriceps, glutes, and hamstrings. They help improve lower body strength, stability, and balance.</Text>
+
+            {/* Instruction Header */}
+            <View style={{display: 'flex', flexDirection: "row", justifyContent: 'space-between', marginTop: 40, marginLeft: 20, marginRight: 20}}>
+              <Text style={{fontSize: 20, fontWeight: 800, color: themeColors.text}}>Instructions</Text>
+              <Text>4 steps</Text>
+            </View>
+
+            {/* Instruction Steps */}
+            <StepCard stepNum={"01"} title={"Starting Position"} 
+            description={"Stand tall with your feet shoulder-width apart. Keep your hands on your hips or by your sides for balance."} />
+            
+            <StepCard stepNum={"02"} title={"Lunge Movement"} 
+            description={"Take a large step forward with one leg and lower your body until both knees are bent at about a 90-degree angle. Your back knee should hover just above the ground."} />
+
+            <StepCard stepNum={"03"} title={"Return to Starting Position"} 
+            description={"Push through the heel of your front foot to return to the starting position. Repeat on the other side to complete one rep."} />
+            
+            <StepCard stepNum={"04"} title={"Repeat"} 
+            description={"Continue alternating legs and lunging forward to complete the desired number of repetitions."} />
+          </>
+        )}
+
+          {text === "Deadlifts" && (
+          <>
+            {/* Video */}
+            <WebView
+              style={{ marginLeft: 20, marginRight: 20, alignSelf: 'center', marginTop: 20, width: 320, height: 220, marginBottom: 20}}
+              javaScriptEnabled={true}
+              allowsFullscreenVideo={true}
+              source={{uri: "https://www.youtube.com/embed/op9kVnSso6Q"}}
+            />
+
+            {/* Title */}
+            <Text style={{fontSize: 20, fontWeight: 800, marginLeft: 20, color: themeColors.text}}>Deadlifts</Text>
+            <Text style={{color: 'grey', fontWeight: 600, marginLeft: 20, fontSize: 17}}>Advanced | 200 Calories Burn</Text>
+
+            {/* Description */}
+            <Text style={{fontSize: 20, fontWeight: 800, marginLeft: 20, marginTop: 40, color: themeColors.text}}>Description</Text>
+            <Text style={{color: 'grey', fontWeight: 600, marginLeft: 20, fontSize: 16, marginTop: 10, marginRight: 20}}>Deadlifts are a compound exercise that target multiple muscle groups including the lower back, glutes, hamstrings, and core. They help improve overall strength and posture when performed with proper form.</Text>
+
+            {/* Instruction Header */}
+            <View style={{display: 'flex', flexDirection: "row", justifyContent: 'space-between', marginTop: 40, marginLeft: 20, marginRight: 20}}>
+              <Text style={{fontSize: 20, fontWeight: 800, color: themeColors.text}}>Instructions</Text>
+              <Text>5 steps</Text>
+            </View>
+
+            {/* Instruction Steps */}
+            <StepCard stepNum={"01"} title={"Setup"} 
+            description={"Stand with your feet shoulder-width apart, toes pointing forward or slightly outward. Place a barbell in front of you on the ground, with the weights evenly distributed."} />
+            
+            <StepCard stepNum={"02"} title={"Grip the Barbell"} 
+            description={"Bend at your hips and knees, keeping your back straight. Grip the barbell with both hands, slightly wider than shoulder-width apart, using an overhand grip (palms facing down) or a mixed grip (one palm facing up, one palm facing down)."} />
+
+            <StepCard stepNum={"03"} title={"Lift the Barbell"} 
+            description={"Engage your core and drive through your heels as you lift the barbell, keeping it close to your body. Straighten your hips and knees simultaneously, extending your body fully."} />
+            
+            <StepCard stepNum={"04"} title={"Lower the Barbell"} 
+            description={"Lower the barbell back down by bending at your hips and knees, keeping your back straight. Control the descent of the barbell to the ground."} />
+
+            <StepCard stepNum={"05"} title={"Repeat"} 
+            description={"Repeat the movement for the desired number of repetitions, ensuring proper form and technique throughout."} />
+          </>
+        )}
+        
+        {text === "Step Ups" && (
+          <>
+            {/* Video */}
+            <WebView
+              style={{ marginLeft: 20, marginRight: 20, alignSelf: 'center', marginTop: 20, width: 320, height: 220, marginBottom: 20}}
+              javaScriptEnabled={true}
+              allowsFullscreenVideo={true}
+              source={{uri: "https://www.youtube.com/embed/WCFCdxzFBa4"}}
+            />
+
+            {/* Title */}
+            <Text style={{fontSize: 20, fontWeight: 800, marginLeft: 20, color: themeColors.text}}>Step Ups</Text>
+            <Text style={{color: 'grey', fontWeight: 600, marginLeft: 20, fontSize: 17}}>Intermediate | 150 Calories Burn</Text>
+
+            {/* Description */}
+            <Text style={{fontSize: 20, fontWeight: 800, marginLeft: 20, marginTop: 40, color: themeColors.text}}>Description</Text>
+            <Text style={{color: 'grey', fontWeight: 600, marginLeft: 20, fontSize: 16, marginTop: 10, marginRight: 20}}>Step Ups are a lower body exercise that target the quadriceps, hamstrings, and glutes. They help improve lower body strength, stability, and balance.</Text>
+
+            {/* Instruction Header */}
+            <View style={{display: 'flex', flexDirection: "row", justifyContent: 'space-between', marginTop: 40, marginLeft: 20, marginRight: 20}}>
+              <Text style={{fontSize: 20, fontWeight: 800, color: themeColors.text}}>Instructions</Text>
+              <Text>4 steps</Text>
+            </View>
+
+            {/* Instruction Steps */}
+            <StepCard stepNum={"01"} title={"Setup"} 
+            description={"Stand in front of a sturdy bench or step platform with your feet hip-width apart."} />
+            
+            <StepCard stepNum={"02"} title={"Step Up"} 
+            description={"Step onto the bench with one foot, ensuring your entire foot is planted securely on the surface. Push through the heel of your foot to lift your body up onto the bench."} />
+
+            <StepCard stepNum={"03"} title={"Extend Legs"} 
+            description={"Fully extend your legs at the top of the movement, standing tall on the bench with both feet."} />
+            
+            <StepCard stepNum={"04"} title={"Step Down"} 
+            description={"Step down from the bench with control, lowering your body back to the starting position. Alternate legs with each repetition."} />
+          </>
+        )}
+              {text === "Glute Bridges" && (
+          <>
+            {/* Video */}
+            <WebView
+              style={{ marginLeft: 20, marginRight: 20, alignSelf: 'center', marginTop: 20, width: 320, height: 220, marginBottom: 20}}
+              javaScriptEnabled={true}
+              allowsFullscreenVideo={true}
+              source={{uri: "https://www.youtube.com/embed/OUgsJ8-Vi0E"}}
+            />
+
+            {/* Title */}
+            <Text style={{fontSize: 20, fontWeight: 800, marginLeft: 20, color: themeColors.text}}>Glute Bridges</Text>
+            <Text style={{color: 'grey', fontWeight: 600, marginLeft: 20, fontSize: 17}}>Intermediate | 120 Calories Burn</Text>
+
+            {/* Description */}
+            <Text style={{fontSize: 20, fontWeight: 800, marginLeft: 20, marginTop: 40, color: themeColors.text}}>Description</Text>
+            <Text style={{color: 'grey', fontWeight: 600, marginLeft: 20, fontSize: 16, marginTop: 10, marginRight: 20}}>Glute Bridges are a lower body exercise that primarily target the glutes and hamstrings. They help improve lower body strength, stability, and posture.</Text>
+
+            {/* Instruction Header */}
+            <View style={{display: 'flex', flexDirection: "row", justifyContent: 'space-between', marginTop: 40, marginLeft: 20, marginRight: 20}}>
+              <Text style={{fontSize: 20, fontWeight: 800, color: themeColors.text}}>Instructions</Text>
+              <Text>4 steps</Text>
+            </View>
+
+            {/* Instruction Steps */}
+            <StepCard stepNum={"01"} title={"Setup"} 
+            description={"Lie on your back on a mat with your knees bent and feet flat on the ground. Keep your arms by your sides with palms facing down."} />
+            
+            <StepCard stepNum={"02"} title={"Lift Hips"} 
+            description={"Engage your core and press through your heels to lift your hips off the ground, forming a straight line from your shoulders to your knees at the top of the movement."} />
+
+            <StepCard stepNum={"03"} title={"Squeeze Glutes"} 
+            description={"Squeeze your glutes at the top of the movement, ensuring they are fully engaged. Avoid arching your lower back excessively."} />
+            
+            <StepCard stepNum={"04"} title={"Lower Hips"} 
+            description={"Lower your hips back down to the starting position with control, maintaining tension in your glutes throughout the exercise. Repeat for the desired number of repetitions."} />
+          </>
+        )}
+
+
+        {text === "Plie Squats" && (
+          <>
+            {/* Video */}
+            <WebView
+              style={{ marginLeft: 20, marginRight: 20, alignSelf: 'center', marginTop: 20, width: 320, height: 220, marginBottom: 20}}
+              javaScriptEnabled={true}
+              allowsFullscreenVideo={true}
+              source={{uri: "https://www.youtube.com/embed/yNKVK2axeNI"}}
+            />
+
+            {/* Title */}
+            <Text style={{fontSize: 20, fontWeight: 800, marginLeft: 20, color: themeColors.text}}>Plie Squats</Text>
+            <Text style={{color: 'grey', fontWeight: 600, marginLeft: 20, fontSize: 17}}>Intermediate | 140 Calories Burn</Text>
+
+            {/* Description */}
+            <Text style={{fontSize: 20, fontWeight: 800, marginLeft: 20, marginTop: 40, color: themeColors.text}}>Description</Text>
+            <Text style={{color: 'grey', fontWeight: 600, marginLeft: 20, fontSize: 16, marginTop: 10, marginRight: 20}}>Plie Squats are a lower body exercise that target the inner thighs, quads, and glutes. They help improve lower body strength, flexibility, and stability.</Text>
+
+            {/* Instruction Header */}
+            <View style={{display: 'flex', flexDirection: "row", justifyContent: 'space-between', marginTop: 40, marginLeft: 20, marginRight: 20}}>
+              <Text style={{fontSize: 20, fontWeight: 800, color: themeColors.text}}>Instructions</Text>
+              <Text>4 steps</Text>
+            </View>
+
+            {/* Instruction Steps */}
+            <StepCard stepNum={"01"} title={"Starting Position"} 
+            description={"Stand with your feet wider than shoulder-width apart, toes pointing outwards at a 45-degree angle. Keep your hands on your hips or clasped in front of your chest for balance."} />
+            
+            <StepCard stepNum={"02"} title={"Squat Down"} 
+            description={"Bend your knees and lower your body down into a squat, ensuring your knees track over your toes and your back remains straight. Keep your chest lifted throughout the movement."} />
+
+            <StepCard stepNum={"03"} title={"Engage Muscles"} 
+            description={"Engage your inner thigh muscles as you push through your heels to return to the starting position. Squeeze your glutes at the top of the movement."} />
+            
+            <StepCard stepNum={"04"} title={"Repeat"} 
+            description={"Repeat the movement for the desired number of repetitions, maintaining proper form and control throughout."} />
+          </>
+        )}
+
+
+                {text === "Pull-Ups" && (
+          <>
+            {/* Video */}
+            <WebView
+              style={{ marginLeft: 20, marginRight: 20, alignSelf: 'center', marginTop: 20, width: 320, height: 220, marginBottom: 20}}
+              javaScriptEnabled={true}
+              allowsFullscreenVideo={true}
+              source={{uri: "https://www.youtube.com/embed/eGo4IYlbE5g"}}
+            />
+
+            {/* Title */}
+            <Text style={{fontSize: 20, fontWeight: 800, marginLeft: 20, color: themeColors.text}}>Pull-Ups</Text>
+            <Text style={{color: 'grey', fontWeight: 600, marginLeft: 20, fontSize: 17}}>Advanced | 170 Calories Burn</Text>
+
+            {/* Description */}
+            <Text style={{fontSize: 20, fontWeight: 800, marginLeft: 20, marginTop: 40, color: themeColors.text}}>Description</Text>
+            <Text style={{color: 'grey', fontWeight: 600, marginLeft: 20, fontSize: 16, marginTop: 10, marginRight: 20}}>Pull-Ups are a compound upper body exercise that primarily target the back, shoulders, and arms. They help improve upper body strength, muscle definition, and grip strength.</Text>
+
+            {/* Instruction Header */}
+            <View style={{display: 'flex', flexDirection: "row", justifyContent: 'space-between', marginTop: 40, marginLeft: 20, marginRight: 20}}>
+              <Text style={{fontSize: 20, fontWeight: 800, color: themeColors.text}}>Instructions</Text>
+              <Text>4 steps</Text>
+            </View>
+
+            {/* Instruction Steps */}
+            <StepCard stepNum={"01"} title={"Grip the Bar"} 
+            description={"Hang from a pull-up bar with your hands slightly wider than shoulder-width apart, palms facing away from you. Keep your arms fully extended and engage your core."} />
+            
+            <StepCard stepNum={"02"} title={"Pull Up"} 
+            description={"Pull yourself up towards the bar by engaging your back muscles and squeezing your shoulder blades together. Keep your elbows close to your body as you pull yourself up."} />
+
+            <StepCard stepNum={"03"} title={"Lower Down"} 
+            description={"Lower yourself back down to the starting position with control, fully extending your arms. Avoid swinging or using momentum during the movement."} />
+            
+            <StepCard stepNum={"04"} title={"Repeat"} 
+            description={"Repeat the movement for the desired number of repetitions, focusing on maintaining proper form and controlled movements throughout."} />
+          </>
+        )}
+
+        {text === "Incline Bench Press" && (
+          <>
+            {/* Video */}
+            <WebView
+              style={{ marginLeft: 20, marginRight: 20, alignSelf: 'center', marginTop: 20, width: 320, height: 220, marginBottom: 20}}
+              javaScriptEnabled={true}
+              allowsFullscreenVideo={true}
+              source={{uri: "https://www.youtube.com/embed/5kyLUGVq_pk"}}
+            />
+
+            {/* Title */}
+            <Text style={{fontSize: 20, fontWeight: 800, marginLeft: 20, color: themeColors.text}}>Incline Bench Press</Text>
+            <Text style={{color: 'grey', fontWeight: 600, marginLeft: 20, fontSize: 17}}>Intermediate | 160 Calories Burn</Text>
+
+            {/* Description */}
+            <Text style={{fontSize: 20, fontWeight: 800, marginLeft: 20, marginTop: 40, color: themeColors.text}}>Description</Text>
+            <Text style={{color: 'grey', fontWeight: 600, marginLeft: 20, fontSize: 16, marginTop: 10, marginRight: 20}}>Incline Bench Press is a compound upper body exercise that primarily targets the upper chest, shoulders, and triceps. It helps build upper body strength, muscle mass, and definition.</Text>
+
+            {/* Instruction Header */}
+            <View style={{display: 'flex', flexDirection: "row", justifyContent: 'space-between', marginTop: 40, marginLeft: 20, marginRight: 20}}>
+              <Text style={{fontSize: 20, fontWeight: 800, color: themeColors.text}}>Instructions</Text>
+              <Text>4 steps</Text>
+            </View>
+
+            {/* Instruction Steps */}
+            <StepCard stepNum={"01"} title={"Setup"} 
+            description={"Lie on an incline bench set at a 45-degree angle with your feet flat on the floor. Grip the barbell with your hands slightly wider than shoulder-width apart, palms facing away from you."} />
+            
+            <StepCard stepNum={"02"} title={"Lower the Bar"} 
+            description={"Lower the barbell towards your upper chest in a controlled manner, keeping your elbows at a 45-degree angle to your body. Keep your core engaged and feet planted firmly on the floor."} />
+
+            <StepCard stepNum={"03"} title={"Press Up"} 
+            description={"Press the barbell back up to the starting position, extending your arms fully while keeping your chest lifted. Keep your elbows in line with your wrists throughout the movement."} />
+            
+            <StepCard stepNum={"04"} title={"Repeat"} 
+            description={"Repeat the movement for the desired number of repetitions, focusing on maintaining proper form and controlled movements throughout."} />
+          </>
+        )}
+
+        {text === "Dumbbell Flys" && (
+          <>
+            {/* Video */}
+            <WebView
+              style={{ marginLeft: 20, marginRight: 20, alignSelf: 'center', marginTop: 20, width: 320, height: 220, marginBottom: 20}}
+              javaScriptEnabled={true}
+              allowsFullscreenVideo={true}
+              source={{uri: "https://www.youtube.com/embed/eozdVDA78K0"}}
+            />
+
+            {/* Title */}
+            <Text style={{fontSize: 20, fontWeight: 800, marginLeft: 20, color: themeColors.text}}>Dumbbell Flys</Text>
+            <Text style={{color: 'grey', fontWeight: 600, marginLeft: 20, fontSize: 17}}>Intermediate | 150 Calories Burn</Text>
+
+            {/* Description */}
+            <Text style={{fontSize: 20, fontWeight: 800, marginLeft: 20, marginTop: 40, color: themeColors.text}}>Description</Text>
+            <Text style={{color: 'grey', fontWeight: 600, marginLeft: 20, fontSize: 16, marginTop: 10, marginRight: 20}}>Dumbbell Flys are an isolation exercise that target the chest muscles, primarily the pectoralis major. They help develop chest muscle definition, strength, and stability.</Text>
+
+            {/* Instruction Header */}
+            <View style={{display: 'flex', flexDirection: "row", justifyContent: 'space-between', marginTop: 40, marginLeft: 20, marginRight: 20}}>
+              <Text style={{fontSize: 20, fontWeight: 800, color: themeColors.text}}>Instructions</Text>
+              <Text>4 steps</Text>
+            </View>
+
+            {/* Instruction Steps */}
+            <StepCard stepNum={"01"} title={"Setup"} 
+            description={"Lie on a flat bench with a dumbbell in each hand, palms facing inward. Extend your arms straight above your chest, keeping a slight bend in your elbows."} />
+            
+            <StepCard stepNum={"02"} title={"Lower the Weights"} 
+            description={"Lower the dumbbells out to the sides in a wide arc, maintaining a slight bend in your elbows. Keep your elbows in line with your shoulders throughout the movement."} />
+
+            <StepCard stepNum={"03"} title={"Contract Chest Muscles"} 
+            description={"Contract your chest muscles to bring the dumbbells back up to the starting position, squeezing your pecs together at the top of the movement."} />
+            
+            <StepCard stepNum={"04"} title={"Repeat"} 
+            description={"Repeat the movement for the desired number of repetitions, focusing on maintaining proper form and controlled movements throughout."} />
+          </>
+        )}
+
+
+
 
         {/* Start Button 
         Ideally, timer would start to count down and when it is done, the final done screen pops up

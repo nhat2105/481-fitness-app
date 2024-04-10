@@ -29,11 +29,11 @@ export default function WorkoutScheduleScreen({route}) {
                 // Check the hardcoded schedule of exercises
                 let activity = null;
                 if (time[i] === "6:00 AM") {
-                    activity = "Abs Workout";
+                    activity = "Fullbody Train";
                 } else if (time[i] === "7:00 AM") {
-                    activity = "Lowerbody Workout";
+                    activity = "Lowerbody Train";
                 } else if (time[i] === "8:00 AM") {
-                    activity = "Upperbody Workout";
+                    activity = "Upperbody Train";
                 }
                 timeSlot.push(activity);
             }
